@@ -1,0 +1,26 @@
+<div class="column">
+    <div class="article-thumb">
+        <a href="{{ article.get_absolute_url }}">
+            <img src="{{ article.image_thumbnail.url }}" class="ui fluid image" />
+        </a>
+        <div class="dark-screen">
+            <h4 class="ui inverted header article-category">
+                <a href="{{ article.category.get_absolute_url }}">
+                    {{ article.category.slug }}
+                </a>
+            </h4>
+            {% with header=article.get_title_header %}
+            <{{ header }} class="ui inverted header article-title">
+                <a href="{{ article.get_absolute_url }}">
+                    {{ article.title }}
+                </a>
+                <div class="sub header">
+                    by {% for author in article.authors.all %}
+                    <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+            </{{ header }}>
+            {% endwith %}
+        </div>
+    </div>
+</div>

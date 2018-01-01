@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block mastheadclass %}photo{% endblock %}
+{% block mastheadbg %}{{ page.image.url }}{% endblock %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block content %}
+<div id="article-header" class="dark-screen">
+    <div class="ui container">
+        <h1 class="ui inverted centered header">
+            {{ page.title }}
+            <div class="sub header">
+                {{ page.subtitle }}
+            </div>
+        </h1>
+    </div>
+</div>
+<article class="page-content">
+    <div class="ui container">
+        {% block precontent %}
+        {% endblock %}
+        <div class="section">
+            {{ page.formatted_content|safe }}
+        </div>
+        {% block postcontent %}
+        {% endblock %}
+    </div>
+</article>
+{% endblock %}

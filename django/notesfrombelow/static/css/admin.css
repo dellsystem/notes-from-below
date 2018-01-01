@@ -1,0 +1,41 @@
+#content label {
+    font-size: 20px;
+}
+
+.ace_editor {
+    font-size: 18px !important;
+}
+
+.model-article .martor-field {
+    height: 500px !important;
+}
+
+#content td, th {
+    font-size: 20px;
+    line-height: 25px;
+}
+
+div.breadcrumbs {
+    font-size: 20px;
+    padding: 25px;
+    background: #976326;
+}
+
+#header {
+    padding: 25px;
+    background: #222;
+    font-size: 20px;
+    height: auto;
+}
+
+#user-tools {
+    font-size: 15px;
+}
+
+#branding h1, #branding h1 a:link, #branding h1 a:visited {
+    color: #fff;
+}
+
+.object-tools a {
+    font-size: 18px !important;
+}

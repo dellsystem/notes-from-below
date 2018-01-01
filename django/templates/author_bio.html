@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="two wide column author-image">
+        <img class="ui medium circular image"
+             src="{{ author.image.url }}" />
+    </div>
+    <div class="fourteen wide column">
+        <h3>
+            {{ author.name }}
+        </h3>
+        <div class="author-bio">
+            {{ author.formatted_bio|safe }}
+        </div>
+    </div>
+</div>
+

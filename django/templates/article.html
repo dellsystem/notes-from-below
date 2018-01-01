@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block mastheadclass %}photo{% endblock %}
+{% block mastheadbg %}{{ article.image.url }}{% endblock %}
+
+{% block content %}
+<div id="article-header" class="dark-screen">
+    <div class="ui container">
+        <h3 class="ui inverted header article-category">
+            <a href="{{ article.category.get_absolute_url }}">
+                {{ article.category.slug }}
+            </a>
+        </h3>
+        <h1 class="ui inverted header article-title">
+            {{ article.title }}
+            <div class="sub header">
+                by {% for author in article.authors.all %}
+                    <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                <span class="print-only">
+                / {{ article.date|date:"F j, Y" }}
+                </span>
+            </div>
+        </h1>
+    </div>
+</div>
+<article class="page-content">
+    <div class="ui container">
+        <p id="article-lead">
+            {{ article.subtitle }}
+        </p>
+        <hr />
+        <div class="ui three column grid" id="article-metadata">
+            <div class="column">
+                <p>{{ article.date|date:"F j, Y" }}</p>
+            </div>
+            <div class="center aligned column">
+                <p>{{ article.read_time }} min read</p>
+            </div>
+            <div class="right aligned column">
+                {% with url=request.build_absolute_uri|urlencode title=article.title|urlencode %}
+                <a href="mailto:?subject={{ title }}&amp;body={{ url }}"
+                   title="Send via email">
+                    <i class="large mail icon"></i>
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=&text={{ title }}%20{{ url }}">
+                    <i class="large twitter icon"></i>
+                </a>
+                <a href="http://www.facebook.com/sharer/sharer.php?u={{ url }}">
+                    <i class="large facebook icon"></i>
+                </a>
+                {% endwith %}
+                <a onclick="window.print()" href="#">
+                    <i class="large print icon"></i>
+                </a>
+            </div>
+        </div>
+        <div id="article-content" class="section">
+            <p>
+                {{ article.formatted_content|safe }}
+            </p>
+        </div>
+        <hr />
+        <div class="section">
+            {% with num_authors=article.authors.count %}
+            <h3 class="section-header">author{{ num_authors|pluralize }}</h3>
+            {% endwith %}
+            <div class="ui grid">
+                {% for author in article.authors.all %}
+                {% include 'author_bio.html' with author=author only %}
+                {% endfor %}
+            </div>
+        </div>
+        <hr id="related-hr" />
+        <div class="section" id="article-related">
+            <h3 class="section-header">related</h3>
+            <div class="ui two column grid">
+            {% for article in article.get_related %}
+            {% include 'article_thumb.html' with article=article only %}
+            {% endfor %}
+            </div>
+            </div>
+        </div>
+        {% if article.issue %}
+        <hr />
+        <div class="section">
+            <h3 class="section-header">issue</h3>
+            <div class="ui center aligned basic segment">
+                <h2>This article is part of {{ article.issue.title }}</h2>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</article>
+{% endblock %}

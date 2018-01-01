@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes From Below :: {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/semantic.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css" />
+</head>
+<body>
+<div id="masthead" class="{% block mastheadclass %}{% endblock %}"
+     style="background-image: url('{% block mastheadbg %}{% endblock %}')">
+    {% include 'header.html' %}
+</div>
+    {% include 'print.html' %}
+    {% block content %}
+    {% endblock %}
+    {% include 'footer.html' %}
+</body>
+</html>

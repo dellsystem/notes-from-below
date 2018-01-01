@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block mastheadclass %}photo{% endblock %}
+{% block mastheadbg %}{{ category.image.url }}{% endblock %}
+
+{% block content %}
+<div id="category-header" class="dark-screen">
+    <div class="ui container">
+        <h1 class="ui inverted header">
+            {{ category.name }}
+            <div class="sub header">
+                {{ category.description }}
+            </div>
+        </h1>
+    </div>
+</div>
+<div class="page-content">
+    <div class="ui container">
+        <h3 class="section-header">articles</h3>
+        <div class="ui two column grid">
+            {% for article in category.articles.all %}
+            {% include 'article_thumb.html' with article=article only %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

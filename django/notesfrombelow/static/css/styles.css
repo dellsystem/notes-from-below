@@ -1,0 +1,229 @@
+#masthead {
+    width: 100%;
+    height: 300px;
+}
+
+#masthead.photo {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    height: 450px;
+}
+
+#masthead.pattern {
+    background-repeat: repeat;
+}
+
+#header {
+    width: 100%;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.logo {
+    font-size: 1.5em !important;
+    text-transform: lowercase !important;
+}
+
+.dark-screen {
+    background: rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+}
+
+#category-header {
+    padding-top: 40px;
+    height: 150px;
+    margin-top: -150px;
+}
+
+#article-header {
+    padding-top: 40px;
+    height: 200px;
+    margin-top: -200px;
+}
+
+.article-category {
+    margin-bottom: 0 !important;
+}
+.article-title {
+    margin-top: 5px !important;
+}
+.article-title .sub.header {
+    padding-top: 10px !important;
+}
+
+#article-lead {
+    font-size: 1.1em;
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+#article-metadata {
+    font-size: 0.8em;
+}
+
+#article-content p {
+    line-height: 1.8em;
+}
+
+article {
+    padding-bottom: 50px;
+}
+
+hr {
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: 1px solid #aaa;
+    color: #777;
+    text-align: center;
+}
+hr:after {
+    content: "✐";
+    display: inline-block;
+    position: relative;
+    top: -0.3em;
+    font-size: 2em;
+    padding: 0 0.25em;
+    background: #fff;
+}
+.page-content .section {
+    padding: 50px 0;
+}
+
+#footer {
+    background: url('/static/tunnel.jpg');
+    background-attachment: fixed;
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+    background-position: top;
+    padding: 50px 0;
+    color: #fff;
+}
+
+.footnote hr {
+    margin-top: 50px 0;
+}
+.page-content {
+    padding: 50px 0;
+}
+
+.article-thumb {
+    position: relative;
+}
+.article-thumb .dark-screen {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 30px;
+}
+
+.inverted a {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.inverted a:hover {
+    color: #fff;
+}
+
+.page-content {
+    font-size: 1.2rem;
+}
+
+.print-only {
+    visibility: hidden;
+}
+#print-banner {
+    display: none;
+}
+
+@media print {
+    #masthead {
+        display: none;
+    }
+    #article-header {
+        margin-top: 0;
+        background: #fff;
+        height: auto;
+    }
+    .article-category {
+        font-size: 0.8em;
+    }
+    .article-title {
+        text-align: left;
+    }
+    .inverted a, .ui.inverted.header, .ui.inverted.header .sub.header {
+        color: #000;
+    }
+    .page-content {
+        font-size: 0.8rem;
+        padding: 0;
+    }
+    .page-content .section {
+        padding: 0;
+    }
+    .print-only {
+        visibility: visible;
+    }
+    #article-metadata {
+        display: none;
+    }
+    #article-lead {
+        padding: 30px;
+        text-align: left;
+    }
+    #article-content {
+        margin-top: 30px;
+         column-count: 2;
+         -webkit-column-count: 2;
+         -moz-column-count: 2;
+         column-gap: 25px;
+         -webkit-column-gap: 25px;
+         -moz-column-gap: 25px;
+    }
+    .author-image {
+        display: none !important;
+    }
+    #article-related {
+        display: none;
+    }
+    #footer {
+        display: none;
+    }
+    #print-banner {
+        display: block;
+        font-size: 0.8em;
+    }
+    #related-hr {
+        display: none;
+    }
+}
+
+blockquote::before {
+    content: "\201C";
+    font-weight: bold;
+    font-size: 60px;
+    font-family: Georgia, serif;
+    position: absolute;
+    left: -25px;
+    top: 15px;
+}
+
+blockquote::after {
+    content: "";
+}
+
+blockquote {
+    display: block;
+    position: relative;
+    padding: 10px;
+    margin: 0 0 20px;
+    text-indent: 35px;
+    color: #666;
+}
+
+.author-bio {
+    font-size: 0.8em;
+}

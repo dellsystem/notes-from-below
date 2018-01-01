@@ -1,0 +1,15 @@
+{% extends "admin/base.html" %}
+
+{% load i18n static %}
+
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static "css/semantic.min.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "css/admin.css" %}" />
+<script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/semantic.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/scripts.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block branding %}
+Notes From Below
+{% endblock %}

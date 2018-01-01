@@ -1,0 +1,25 @@
+{% extends 'page.html' %}
+
+{% block precontent %}
+{% endblock %}
+
+{% block postcontent %}
+<hr />
+<div class="section">
+    <h1>Editors</h1>
+    <div class="ui three column grid">
+    {% for editor in editors %}
+        {% include 'author_bio.html' with author=editor only %}
+    {% endfor %}
+    </div>
+</div>
+<hr />
+<div class="section">
+    <h1>Contributors</h1>
+    <div class="ui three column grid">
+    {% for contributor in contributors %}
+        {% include 'author_bio.html' with author=contributor only %}
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

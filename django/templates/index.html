@@ -1,0 +1,13 @@
+{% extends 'page.html' %}
+
+{% block precontent %}
+<div class="section">
+    <div class="ui two column grid">
+    {% for article in articles %}
+        {% include 'article_thumb.html' with article=article only %}
+    {% endfor %}
+    </div>
+</div>
+<hr />
+</div>
+{% endblock %}
