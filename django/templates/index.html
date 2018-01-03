@@ -10,3 +10,18 @@
 </div>
 <hr />
 {% endblock %}
+
+{% block postcontent %}
+<hr />
+<div class="section">
+    <h1 class="ui centered header">
+        <p>Some sort of visual goes here</p>
+        <a href="{{ LATEST_ISSUE.get_absolute_url }}">
+            {{ LATEST_ISSUE.title }} (#{{ LATEST_ISSUE.number }})
+        </a>
+        <div class="sub header">
+            View the latest issue ({{ LATEST_ISSUE.date|date:"F Y" }})
+        </div>
+    </h1>
+</div>
+{% endblock %}
