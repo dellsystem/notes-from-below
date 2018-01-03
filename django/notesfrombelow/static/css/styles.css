@@ -23,6 +23,7 @@
 .logo {
     font-size: 1.5em !important;
     text-transform: lowercase !important;
+    padding-bottom: 15px; /* only used for the footer */
 }
 
 .dark-screen {
@@ -100,6 +101,10 @@ hr:after {
     background-position: top;
     padding: 50px 0;
     color: #fff;
+}
+
+#footer p {
+    font-size: 0.8em;
 }
 
 .footnote hr {
