@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
@@ -21,6 +22,9 @@ class Page(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('page', args=[self.slug])
 
     def save(self, *args, **kwargs):
         self.formatted_content = markdownify(self.content)
