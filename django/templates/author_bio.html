@@ -5,7 +5,7 @@
     </div>
     <div class="fourteen wide column">
         <h3>
-            {{ author.name }}
+            <a href="{{ author.get_absolute_url }}">{{ author.name }}</a>
         </h3>
         <div class="author-bio">
             {{ author.formatted_bio|safe }}
