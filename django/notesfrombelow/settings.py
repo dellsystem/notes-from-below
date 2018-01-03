@@ -20,12 +20,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'temp'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'tmp')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+]
+hostname = os.environ.get('HOSTNAME')
+if hostname:
+    ALLOWED_HOSTS.append(hostname)
 
 
 # Application definition
@@ -80,11 +85,25 @@ WSGI_APPLICATION = 'notesfrombelow.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+DATABASES = {}
+postgres_password = os.environ.get('POSTGRES_PASSWORD')
+if postgres_password:
+    db = {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'notesfrombelow',
+        'USER': 'notesfrombelow',
+        'PASSWORD': postgres_password,
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+else:
+    db = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+
+DATABASES = {
+    'default': db,
 }
 
 
