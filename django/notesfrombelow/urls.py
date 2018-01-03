@@ -22,6 +22,7 @@ from notesfrombelow.admin import editor_site
 
 import journal.views
 import notesfrombelow.views
+import cms.views
 
 
 urlpatterns = [
@@ -33,5 +34,6 @@ urlpatterns = [
     path('editor/', editor_site.urls),
     path('author/<slug:slug>', journal.views.AuthorView.as_view(), name='author'),
     path('category/<slug:slug>', journal.views.CategoryView.as_view(), name='category'),
-    path('<slug:slug>', journal.views.ArticleView.as_view(), name='article'),
+    path('article/<slug:slug>', journal.views.ArticleView.as_view(), name='article'),
+    path('<slug:slug>', cms.views.PageView.as_view(), name='page'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
