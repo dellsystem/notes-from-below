@@ -165,7 +165,7 @@ MARTOR_IMGUR_CLIENT_ID = 'your-client-id'
 MARTOR_IMGUR_API_KEY   = 'your-api-key'
 
 # Safe Mode
-MARTOR_MARKDOWN_SAFE_MODE = True # default
+MARTOR_MARKDOWN_SAFE_MODE = False # default
 
 # Markdownify
 MARTOR_MARKDOWNIFY_FUNCTION = 'martor.utils.markdownify' # default
