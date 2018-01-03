@@ -19,6 +19,14 @@
                 by {% for author in article.authors.all %}
                     <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>{% if not forloop.last %}, {% endif %}
                 {% endfor %}
+                {% if article.issue %}
+                in
+                <strong>
+                <a href="{{ article.issue.get_absolute_url }}">
+                    {{ article.issue.title }} (#{{ article.issue.number }})
+                </a>
+                </strong>
+                {% endif %}
                 <span class="print-only">
                 / {{ article.date|date:"F j, Y" }}
                 </span>
@@ -87,7 +95,12 @@
         <div class="section">
             <h3 class="section-header">issue</h3>
             <div class="ui center aligned basic segment">
-                <h2>This article is part of {{ article.issue.title }}</h2>
+                <h2>
+                    This article is part of
+                    <a href="{{ article.issue.get_absolute_url }}">
+                        {{ article.issue.title }} (#{{ article.issue.number }})
+                    </a>
+                </h2>
             </div>
         </div>
         {% endif %}

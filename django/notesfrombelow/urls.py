@@ -35,5 +35,6 @@ urlpatterns = [
     path('author/<slug:slug>', journal.views.AuthorView.as_view(), name='author'),
     path('category/<slug:slug>', journal.views.CategoryView.as_view(), name='category'),
     path('article/<slug:slug>', journal.views.ArticleView.as_view(), name='article'),
+    path('issue/<slug:slug>', journal.views.IssueView.as_view(), name='issue'),
     path('<slug:slug>', cms.views.PageView.as_view(), name='page'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

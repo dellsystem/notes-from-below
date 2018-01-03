@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block mastheadclass %}pattern{% endblock %}
+{% block mastheadbg %}/static/triangles.png{% endblock %}
+
+{% block title %}{{ issue.title }} (#{{ issue.number }}){% endblock %}
+
+{% block content %}
+<div id="category-header" class="dark-screen">
+    <div class="ui container">
+        <h1 class="ui inverted header">
+            {{ issue.title }} (#{{ issue.number }})
+            <div class="sub header">
+                {{ issue.date|date:"F Y"}}
+            </div>
+        </h1>
+    </div>
+</div>
+<div class="page-content">
+    <div class="ui container">
+        <h1><a href="">Download the PDF</a></h1>
+        <h3 class="section-header">articles</h3>
+        <div class="ui two column grid">
+            {% for article in issue.articles.all %}
+            {% include 'article_thumb.html' with article=article only %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

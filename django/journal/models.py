@@ -48,9 +48,13 @@ class Issue(models.Model):
     number = models.PositiveSmallIntegerField(unique=True)
     title =  models.CharField(max_length=50)
     date = models.DateField(help_text='Day ignored')
+    slug = models.SlugField()
 
     class Meta:
         get_latest_by = 'number'
+
+    def get_absolute_url(self):
+        return reverse('issue', args=[self.slug])
 
     def __str__(self):
         return self.title

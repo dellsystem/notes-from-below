@@ -6,7 +6,8 @@ from . import models
 
 
 class IssueAdmin(admin.ModelAdmin):
-    list_display = ['number', 'title', 'date']
+    list_display = ['number', 'title', 'date', 'slug']
+    prepopulated_fields = {'slug': ('title',)}
 
 
 class CategoryAdmin(admin.ModelAdmin):
