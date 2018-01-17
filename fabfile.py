@@ -15,6 +15,12 @@ def up():
 def static():
     local('django/manage.py collectstatic --noinput')
 
+
+def md():
+    local('django/manage.py cms_remarkdown')
+    local('django/manage.py journal_remarkdown')
+
+
 def get_backup_filename(hostname):
     return 'backups/{}_{}.json'.format(
         hostname,
