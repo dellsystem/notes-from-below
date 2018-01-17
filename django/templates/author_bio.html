@@ -1,7 +1,11 @@
 <div class="row">
     <div class="two wide column author-image">
+        {% if author.image %}
         <img class="ui medium circular image"
              src="{{ author.image.url }}" />
+        {% else %}
+        <i class="large gray user icon"></i>
+        {% endif %}
     </div>
     <div class="fourteen wide column">
         <h3>
