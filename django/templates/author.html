@@ -5,14 +5,17 @@
 {% block mastheadclass %}pattern{% endblock %}
 {% block mastheadbg %}/static/triangles.png{% endblock %}
 
-{% block content %}
-<div id="category-header" class="dark-screen">
+{% block masthead %}
+<div class="dark-screen">
     <div class="ui container">
         <h1 class="ui inverted header">
             {{ author.name }}
         </h1>
     </div>
 </div>
+{% endblock %}
+
+{% block content %}
 <div class="page-content">
     <div class="ui container">
         <div class="section">

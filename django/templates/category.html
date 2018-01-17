@@ -5,8 +5,8 @@
 
 {% block title %}{{ category.name }}{% endblock %}
 
-{% block content %}
-<div id="category-header" class="dark-screen">
+{% block masthead %}
+<div class="dark-screen">
     <div class="ui container">
         <h1 class="ui inverted header">
             {{ category.name }}
@@ -16,6 +16,9 @@
         </h1>
     </div>
 </div>
+{% endblock %}
+
+{% block content %}
 <div class="page-content">
     <div class="ui container">
         <div class="section">

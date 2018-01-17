@@ -5,8 +5,8 @@
 
 {% block title %}{{ article.title }}{% endblock %}
 
-{% block content %}
-<div id="article-header" class="dark-screen">
+{% block masthead %}
+<div class="dark-screen">
     <div class="ui container">
         <h3 class="ui inverted header article-category">
             <a href="{{ article.category.get_absolute_url }}">
@@ -34,6 +34,9 @@
         </h1>
     </div>
 </div>
+{% endblock %}
+
+{% block content %}
 <article class="page-content">
     <div class="ui container">
         <p id="article-lead">
