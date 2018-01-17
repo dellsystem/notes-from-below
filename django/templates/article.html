@@ -8,6 +8,11 @@
 {% block masthead %}
 <div class="dark-screen">
     <div class="ui container">
+        {% if article.image_credit %}
+        <div class="image-credit">
+            <a href="{{ article.image_credit }}">Image credit</a>
+        </div>
+        {% endif %}
         <h3 class="ui inverted header article-category">
             <a href="{{ article.category.get_absolute_url }}">
                 {{ article.category.slug }}

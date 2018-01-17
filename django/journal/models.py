@@ -99,6 +99,7 @@ class Article(models.Model):
         format='JPEG',
         options={'quality': 90}
     )
+    image_credit = models.URLField(blank=True)
     related_1 = models.ForeignKey("self", related_name='related_1_articles',
         on_delete=models.CASCADE, blank=True, null=True)
     related_2 = models.ForeignKey("self", related_name='related_2_articles',

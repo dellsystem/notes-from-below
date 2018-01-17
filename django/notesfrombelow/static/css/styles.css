@@ -18,7 +18,7 @@
 #header {
     width: 100%;
     color: #fff;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(246, 40, 17, 0.9);
 }
 
 .logo {
@@ -237,4 +237,17 @@ blockquote {
 
 .author-bio {
     font-size: 0.8em;
+}
+
+.image-credit {
+    float: right;
+}
+
+.image-credit a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: underline;
+}
+
+.image-credit a:hover {
+    color: #fff;
 }
