@@ -18,6 +18,10 @@
 </div>
 <div class="page-content">
     <div class="ui container">
+        <div class="section">
+            {{ category.formatted_content|safe }}
+        </div>
+        <hr />
         <h3 class="section-header">articles</h3>
         <div class="ui two column grid">
             {% for article in category.articles.all %}

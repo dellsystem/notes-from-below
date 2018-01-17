@@ -12,6 +12,8 @@ class Category(models.Model):
     name = models.CharField(max_length=20)
     slug = models.SlugField(max_length=20)
     description = models.TextField()
+    content = MartorField()
+    formatted_content = models.TextField(editable=False)
     image = models.ImageField(upload_to='categories', blank=True, null=True)
 
     class Meta:
@@ -19,6 +21,11 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('category', args=[self.slug])
+
+    def save(self, *args, **kwargs):
+        # Parse markdown and cache it.
+        self.formatted_content = markdownify(self.content)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
