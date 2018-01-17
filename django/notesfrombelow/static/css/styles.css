@@ -22,9 +22,12 @@
 }
 
 .logo {
-    font-size: 1.5em !important;
-    text-transform: lowercase !important;
     padding-bottom: 15px; /* only used for the footer */
+}
+
+.logo img {
+    width: 250px !important;
+    padding: 10px 0;
 }
 
 .dark-screen {
