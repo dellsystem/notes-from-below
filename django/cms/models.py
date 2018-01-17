@@ -16,7 +16,7 @@ class Page(models.Model):
     )
     title = models.CharField(max_length=100, blank=True)
     subtitle = models.TextField(blank=True)
-    content = MartorField()
+    content = MartorField(blank=True)
     formatted_content = models.TextField(editable=False)
     slug = models.SlugField(blank=True, unique=True)
 

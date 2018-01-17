@@ -20,9 +20,11 @@
     <div class="ui container">
         {% block precontent %}
         {% endblock %}
+        {% if page.content %}
         <div class="section">
             {{ page.formatted_content|safe }}
         </div>
+        {% endif %}
         {% block postcontent %}
         {% endblock %}
     </div>
