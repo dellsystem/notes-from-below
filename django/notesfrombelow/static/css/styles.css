@@ -63,7 +63,7 @@
     font-size: 0.8em;
 }
 
-#article-content p {
+.article-content p {
     line-height: 1.8em;
 }
 
@@ -79,6 +79,7 @@ hr {
     color: #777;
     text-align: center;
 }
+
 hr:after {
     content: "✐";
     display: inline-block;
@@ -88,6 +89,7 @@ hr:after {
     padding: 0 0.25em;
     background: #fff;
 }
+
 .page-content .section {
     padding: 50px 0;
 }
@@ -110,6 +112,7 @@ hr:after {
 .footnote hr {
     margin-top: 50px 0;
 }
+
 .page-content {
     padding: 50px 0;
 }
@@ -148,6 +151,13 @@ hr:after {
     #masthead {
         display: none;
     }
+/*
+    body {
+      padding: 50mm 25mm !important;
+      margin: 0 !important;
+      margin-bottom: 20mm !important;
+      }
+*/
     #article-header {
         margin-top: 0;
         background: #fff;
@@ -179,14 +189,14 @@ hr:after {
         padding: 30px;
         text-align: left;
     }
-    #article-content {
+    .article-content {
         margin-top: 30px;
-         column-count: 2;
-         -webkit-column-count: 2;
-         -moz-column-count: 2;
-         column-gap: 25px;
-         -webkit-column-gap: 25px;
-         -moz-column-gap: 25px;
+        column-count: 2;
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-gap: 25px;
+        -webkit-column-gap: 25px;
+        -moz-column-gap: 25px;
     }
     .author-image {
         display: none !important;
