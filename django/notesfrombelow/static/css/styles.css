@@ -41,11 +41,7 @@
 #header {
     width: 100%;
     color: #fff;
-    background: rgba(246, 40, 17, 0.9);
-}
-
-.logo {
-    padding-bottom: 15px; /* only used for the footer */
+    background: #f62811;
 }
 
 .logo img {
@@ -140,20 +136,33 @@ hr:after {
     position: relative;
 }
 .article-thumb .dark-screen {
-    padding: 30px;
+    padding: 10px;
 }
 
 #hamburger {
     visibility: hidden;
+    position: absolute;
+    right: 10px;
 }
-@media only screen and (max-width: 767px) {
-    .article-thumb .dark-screen {
-        padding: 10px;
+
+@media only screen and (max-width: 1200px) and (min-width: 767px)  {
+    #header .stackable.secondary.menu {
+        flex-direction: column;
+    }
+    #header .right.menu.visible {
+        display: flex;
+    }
+    #header .ui.stackable.right.menu .item {
+        width: auto!important;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    #hamburger-item {
+        width: 100%;
     }
     #hamburger {
         visibility: visible;
-        position: absolute;
-        right: 10px;
     }
     #header .right.menu {
         display: none;
