@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block title %}{{ author.name }}{% endblock %}
+{% block description %}{{ author.name }}'s writing at Notes From Below.{% endblock %}
+{% block image %}{{ author.image.url }}{% endblock %}
+{% block twittercard %}summary{% endblock %}
 
 {% block mastheadclass %}pattern{% endblock %}
 {% block mastheadbg %}/static/img/triangles.png{% endblock %}

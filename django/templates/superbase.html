@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block fulltitle %}{% block title %}{% endblock %} // Notes From Below{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/semantic.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css" />
+    {% include 'favicon.html' %}
+    {% block meta %}
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>
