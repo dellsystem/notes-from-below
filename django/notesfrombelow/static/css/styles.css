@@ -41,11 +41,7 @@
 #header {
     width: 100%;
     color: #fff;
-    background: rgba(246, 40, 17, 0.9);
-}
-
-.logo {
-    padding-bottom: 15px; /* only used for the footer */
+    background: #f62811;
 }
 
 .logo img {
