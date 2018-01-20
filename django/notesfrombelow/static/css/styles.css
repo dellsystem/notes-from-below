@@ -15,6 +15,20 @@
     background-repeat: repeat;
 }
 
+@media only screen and (max-width: 767px) {
+    #masthead {
+        height: auto !important;
+    }
+
+    #masthead .dark-screen {
+        position: static;
+    }
+
+    #footer h2 {
+        margin-top: 0 !important;
+    }
+}
+
 #header {
     width: 100%;
     color: #fff;
@@ -117,11 +131,27 @@ hr:after {
     position: relative;
 }
 .article-thumb .dark-screen {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    box-sizing: border-box;
     padding: 30px;
+}
+
+#hamburger {
+    visibility: hidden;
+}
+@media only screen and (max-width: 767px) {
+    .article-thumb .dark-screen {
+        padding: 10px;
+    }
+    #hamburger {
+        visibility: visible;
+        position: absolute;
+        right: 10px;
+    }
+    #header .right.menu {
+        display: none;
+    }
+    #header .right.menu.visible {
+        display: flex;
+    }
 }
 
 .inverted a {

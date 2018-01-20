@@ -23,7 +23,7 @@
     <div class="ui container">
         <h1><a href="">Download the PDF</a></h1>
         <h3 class="section-header">articles</h3>
-        <div class="ui two column grid">
+        <div class="ui two column stackable grid">
             {% for article in issue.articles.all %}
             {% include 'article_thumb.html' with article=article only %}
             {% endfor %}
