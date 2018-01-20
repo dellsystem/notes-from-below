@@ -5,6 +5,12 @@
 
 {% block title %}{{ article.title }}{% endblock %}
 
+{% block description %}by {{ article.authors.all|join:", " }} // {{ article.subtitle }}{% endblock %}
+
+{% block image %}{{ article.image_thumbnail.url }}{% endblock %}
+
+{% block pagetype %}article{% endblock %}
+
 {% block masthead %}
 <div class="dark-screen">
     <div class="ui container">

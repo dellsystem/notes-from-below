@@ -1,34 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+{% extends 'superbase.html' %}
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes From Below :: {% block title %}{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/semantic.min.css" />
-    <link rel="stylesheet" type="text/css" href="/static/css/styles.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" href="/static/img/favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="/static/img/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/static/img/favicon-96x96.png" sizes="96x96">
-    <link rel="apple-touch-icon" sizes="120x120" href="/static/img/favicon-120x120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/static/img/favicon-152x152.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="/static/img/favicon-167x167.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicon-180x180.png">
+{% block meta %}
+<meta property="og:title" content="{% block title %}{% endblock %}">
+<meta property="og:description" content="{% block description %}{% endblock %}">
+<meta property="og:image" content="http://{{ request.get_host }}{% block image %}/static/img/splash.png{% endblock %}">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:type" content="{% block pagetype %}website{% endblock %}" />
+<meta property="og:site_name" content="Notes From Below" />
+<meta name="twitter:card" content="{% block twittercard %}summary_large_image{% endblock %}" />
+<meta name="twitter:site" content="classinquiry" />
+{% endblock %}
 
-</head>
-<body>
+{% block body %}
 <div id="masthead" class="{% block mastheadclass %}{% endblock %}"
      style="background-image: url('{% block mastheadbg %}{% endblock %}')">
     {% include 'header.html' %}
     {% block masthead %}
     {% endblock %}
 </div>
-    {% include 'print.html' %}
-    {% block content %}
-    {% endblock %}
-    {% include 'footer.html' %}
-    <script src="/static/js/scripts.js" type="text/javascript"></script>
-</body>
-</html>
+{% include 'print.html' %}
+{% block content %}
+{% endblock %}
+{% include 'footer.html' %}
+<script src="/static/js/scripts.js" type="text/javascript"></script>
+{% endblock %}

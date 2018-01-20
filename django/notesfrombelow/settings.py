@@ -28,9 +28,9 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
 ]
-hostname = os.environ.get('HOSTNAME')
-if hostname:
-    ALLOWED_HOSTS.append(hostname)
+allowed_host = os.environ.get('ALLOWED_HOST')
+if allowed_host:
+    ALLOWED_HOSTS.append(allowed_host)
 
 
 # Application definition

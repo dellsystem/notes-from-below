@@ -4,6 +4,7 @@
 {% block mastheadbg %}/static/img/triangles.png{% endblock %}
 
 {% block title %}{{ issue.title }} (#{{ issue.number }}){% endblock %}
+{% block description %}The {{ issue.date|date:"F Y" }} issue of Notes From Below{% endblock %}
 
 {% block masthead %}
 <div class="dark-screen">
