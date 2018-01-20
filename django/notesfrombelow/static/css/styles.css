@@ -27,6 +27,11 @@
     #footer h2 {
         margin-top: 0 !important;
     }
+
+    /* Otherwise it might be too big and cause overflow */
+    h3.article-title.ui.header {
+        font-size: 1rem;
+    }
 }
 
 #header {
@@ -40,7 +45,7 @@
 }
 
 .logo img {
-    width: 250px !important;
+    width: 210px !important;
     padding: 10px 0;
 }
 
