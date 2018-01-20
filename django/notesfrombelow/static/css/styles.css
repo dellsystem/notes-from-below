@@ -15,29 +15,6 @@
     background-repeat: repeat;
 }
 
-@media only screen and (max-width: 767px) {
-    #masthead {
-        height: auto !important;
-    }
-
-    #masthead .dark-screen {
-        position: static;
-    }
-
-    #footer h2 {
-        margin-top: 0 !important;
-    }
-
-    /* Otherwise it might be too big and cause overflow */
-    h3.article-title.ui.header {
-        font-size: 1rem;
-    }
-
-    .page-content {
-        font-size: 1.1rem;
-    }
-}
-
 #header {
     width: 100%;
     color: #fff;
@@ -298,4 +275,35 @@ blockquote {
 
 .image-credit a:hover {
     color: #fff;
+}
+
+@media only screen and (max-width: 767px) {
+    #masthead {
+        height: auto !important;
+    }
+
+    #masthead .dark-screen {
+        position: static;
+    }
+
+    #footer h2 {
+        margin-top: 0 !important;
+    }
+
+    /* Otherwise it might be too big and cause overflow */
+    h2.article-title.ui.header {
+        font-size: 1.5rem;
+    }
+
+    h3.article-title.ui.header {
+        font-size: 1rem;
+    }
+
+    .page-content {
+        font-size: 1.1rem;
+    }
+
+    #footer h2.ui.header {
+        font-size: 1.3rem;
+    }
 }
