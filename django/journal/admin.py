@@ -31,6 +31,16 @@ class ArticleForm(forms.ModelForm):
                 },
             ),
             'subtitle': forms.TextInput(),
+            'related_2': forms.Select(
+                attrs={
+                    'class': 'ui search fluid dropdown',
+                },
+            ),
+            'related_1': forms.Select(
+                attrs={
+                    'class': 'ui search fluid dropdown',
+                },
+            ),
         }
 
 

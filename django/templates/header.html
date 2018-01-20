@@ -1,9 +1,14 @@
 <div id="header">
     <div class="ui container">
-        <div class="ui inverted secondary menu">
-            <a class="item logo" href="/">
-                ✐ Notes From Below
-            </a>
+        <div class="ui inverted stackable secondary menu">
+            <div class="item logo">
+                <a href="/">
+                    <img src="/static/logo.png" alt="Notes From Below" />
+                </a>
+                <a href="#" id="hamburger" onclick='toggleHamburger()'>
+                    <i class="big content icon"></i>
+                </a>
+            </div>
             <div class="right menu">
                 <a class="item" href="{% url 'category' 'inquiry' %}">Inquiry</a>
                 <a class="item" href="{% url 'category' 'bulletins' %}">Bulletins</a>
@@ -13,9 +18,9 @@
             <div class="right menu">
                 <a class="item" href="{% url 'about' %}">About</a>
                 <a class="item" href="{% url 'contribute' %}">Contribute</a>
-                <!--<a class="item" href="">
+                <a class="item" href="https://www.facebook.com/notesfrombelow4">
                     <i class="facebook icon"></i>
-                </a>-->
+                </a>
                 <a class="item" href="https://twitter.com/classinquiry">
                     <i class="twitter icon"></i>
                 </a>

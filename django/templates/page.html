@@ -5,8 +5,8 @@
 
 {% block title %}{{ page.title }}{% endblock %}
 
-{% block content %}
-<div id="article-header" class="dark-screen">
+{% block masthead %}
+<div class="dark-screen">
     <div class="ui container">
         <h1 class="ui inverted centered header">
             {{ page.title }}
@@ -16,13 +16,18 @@
         </h1>
     </div>
 </div>
+{% endblock %}
+
+{% block content %}
 <article class="page-content">
     <div class="ui container">
         {% block precontent %}
         {% endblock %}
+        {% if page.content %}
         <div class="section">
             {{ page.formatted_content|safe }}
         </div>
+        {% endif %}
         {% block postcontent %}
         {% endblock %}
     </div>

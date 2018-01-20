@@ -2,7 +2,7 @@
 
 {% block precontent %}
 <div class="section">
-    <div class="ui two column grid">
+    <div class="ui two column stackable grid">
     {% for article in articles %}
         {% include 'article_thumb.html' with article=article only %}
     {% endfor %}
@@ -12,9 +12,7 @@
 {% endblock %}
 
 {% block postcontent %}
-<hr />
 <div class="section">
-    <p>Some sort of visual goes here</p>
     <h1 class="ui centered header">
         <a href="{{ LATEST_ISSUE.get_absolute_url }}">
             {{ LATEST_ISSUE.title }} (#{{ LATEST_ISSUE.number }})

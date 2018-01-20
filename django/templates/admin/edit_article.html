@@ -21,13 +21,35 @@
                 </div>
             </div>
             <div class="ui field">
-                <label>Slug</label>
-                <div class="ui huge fluid input">
-                {{ adminform.form.slug }}
+                <label>Image credit URL (optional)</label>
+                <div class="ui fluid input">
+                    {{ adminform.form.image_credit }}
                 </div>
             </div>
             <div class="ui grid">
-                <div class="seven wide column">
+                <div class="eight wide column">
+                    <div class="ui field">
+                        <label>Slug</label>
+                        <div class="ui huge searchable fluid input">
+                        {{ adminform.form.slug }}
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <div class="ui field">
+                        <label>Related 1</label>
+                        {{ adminform.form.related_1 }}
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <div class="ui field">
+                        <label>Related 2</label>
+                        {{ adminform.form.related_2 }}
+                    </div>
+                </div>
+            </div>
+            <div class="ui grid">
+                <div class="six wide column">
                     <div class="ui field">
                         <label>Authors</label>
                         {{ adminform.form.authors }}
@@ -39,7 +61,7 @@
                         {{ adminform.form.category }}
                     </div>
                 </div>
-                <div class="three wide column">
+                <div class="four wide column">
                     <div class="ui field">
                         <label>Issue</label>
                         {{ adminform.form.issue }}

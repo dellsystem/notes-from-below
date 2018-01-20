@@ -5,8 +5,8 @@
 
 {% block title %}{{ issue.title }} (#{{ issue.number }}){% endblock %}
 
-{% block content %}
-<div id="category-header" class="dark-screen">
+{% block masthead %}
+<div class="dark-screen">
     <div class="ui container">
         <h1 class="ui inverted header">
             {{ issue.title }} (#{{ issue.number }})
@@ -16,11 +16,14 @@
         </h1>
     </div>
 </div>
+{% endblock %}
+
+{% block content %}
 <div class="page-content">
     <div class="ui container">
         <h1><a href="">Download the PDF</a></h1>
         <h3 class="section-header">articles</h3>
-        <div class="ui two column grid">
+        <div class="ui two column stackable grid">
             {% for article in issue.articles.all %}
             {% include 'article_thumb.html' with article=article only %}
             {% endfor %}

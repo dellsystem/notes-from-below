@@ -177,6 +177,7 @@ MARTOR_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.nl2br',
     'markdown.extensions.smarty',
     'markdown.extensions.footnotes',
+    'markdown.extensions.toc',
     # Custom markdown extensions.
     'martor.extensions.urlize',
     'martor.extensions.del_ins', # ~~strikethrough~~ and ++underscores++

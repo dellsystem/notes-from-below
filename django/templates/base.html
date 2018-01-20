@@ -13,10 +13,13 @@
 <div id="masthead" class="{% block mastheadclass %}{% endblock %}"
      style="background-image: url('{% block mastheadbg %}{% endblock %}')">
     {% include 'header.html' %}
+    {% block masthead %}
+    {% endblock %}
 </div>
     {% include 'print.html' %}
     {% block content %}
     {% endblock %}
     {% include 'footer.html' %}
+    <script src="/static/js/scripts.js" type="text/javascript"></script>
 </body>
 </html>

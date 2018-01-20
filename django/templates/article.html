@@ -5,9 +5,14 @@
 
 {% block title %}{{ article.title }}{% endblock %}
 
-{% block content %}
-<div id="article-header" class="dark-screen">
+{% block masthead %}
+<div class="dark-screen">
     <div class="ui container">
+        {% if article.image_credit %}
+        <div class="image-credit">
+            <a href="{{ article.image_credit }}">Image credit</a>
+        </div>
+        {% endif %}
         <h3 class="ui inverted header article-category">
             <a href="{{ article.category.get_absolute_url }}">
                 {{ article.category.slug }}
@@ -34,6 +39,9 @@
         </h1>
     </div>
 </div>
+{% endblock %}
+
+{% block content %}
 <article class="page-content">
     <div class="ui container">
         <p id="article-lead">
@@ -65,7 +73,7 @@
                 </a>
             </div>
         </div>
-        <div id="article-content" class="section">
+        <div class="article-content section">
             <p>
                 {{ article.formatted_content|safe }}
             </p>
@@ -75,7 +83,7 @@
             {% with num_authors=article.authors.count %}
             <h3 class="section-header">author{{ num_authors|pluralize }}</h3>
             {% endwith %}
-            <div class="ui grid">
+            <div class="ui stackable grid">
                 {% for author in article.authors.all %}
                 {% include 'author_bio.html' with author=author only %}
                 {% endfor %}
@@ -84,7 +92,7 @@
         <hr id="related-hr" />
         <div class="section" id="article-related">
             <h3 class="section-header">related</h3>
-            <div class="ui two column grid">
+            <div class="ui two column stackable grid">
             {% for article in article.get_related %}
             {% include 'article_thumb.html' with article=article only %}
             {% endfor %}
