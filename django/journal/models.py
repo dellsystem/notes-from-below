@@ -18,7 +18,12 @@ class Category(models.Model):
     description = models.TextField()
     content = MartorField()
     formatted_content = models.TextField(editable=False)
-    image = models.ImageField(upload_to='categories', blank=True, null=True)
+    image = ProcessedImageField(
+        upload_to='categories',
+        processors=[ResizeToFill(1920, 1080)],
+        format='JPEG',
+        options={'quality': 100},
+    )
 
     class Meta:
         verbose_name_plural = 'categories'
