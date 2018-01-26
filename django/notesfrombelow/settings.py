@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'martor',
     'journal',
     'cms',
+    'uploads',
 ]
 
 MIDDLEWARE = [
@@ -179,6 +180,7 @@ MARTOR_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.footnotes',
     'markdown.extensions.toc',
     # Custom markdown extensions.
+    'uploads.extensions.embed',
     'martor.extensions.urlize',
     'martor.extensions.del_ins', # ~~strikethrough~~ and ++underscores++
     'martor.extensions.mention', # require for mention
