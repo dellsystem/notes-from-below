@@ -81,7 +81,8 @@ class Article(models.Model):
         related_name='articles')
     title = models.CharField(max_length=255)
     slug = models.SlugField()
-    authors = models.ManyToManyField(Author, related_name='articles')
+    authors = models.ManyToManyField(Author, related_name='articles',
+        blank=True)
     subtitle = models.TextField()
     content = MartorField()
     formatted_content = models.TextField(editable=False)

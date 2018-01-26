@@ -14,11 +14,13 @@
                 <a href="{{ article.get_absolute_url }}">
                     {{ article.title }}
                 </a>
+                {% if article.authors.count %}
                 <div class="sub header">
                     by {% for author in article.authors.all %}
                     <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>{% if not forloop.last %}, {% endif %}
                     {% endfor %}
                 </div>
+                {% endif %}
             </{{ header }}>
             {% endwith %}
         </div>
