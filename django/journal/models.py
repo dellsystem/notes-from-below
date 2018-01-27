@@ -45,7 +45,6 @@ class Author(models.Model):
     bio = MartorField()
     formatted_bio = models.TextField(editable=False)
     slug = models.SlugField()
-    image = models.ImageField(upload_to='authors')
     is_editor = models.BooleanField(default=False)
 
     def __str__(self):

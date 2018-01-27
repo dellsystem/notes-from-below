@@ -91,11 +91,9 @@
         <hr />
         <div class="section">
             <h3 class="section-header">author{{ num_authors|pluralize }}</h3>
-            <div class="ui stackable grid">
-                {% for author in article.authors.all %}
-                {% include 'author_bio.html' with author=author only %}
-                {% endfor %}
-            </div>
+            {% for author in article.authors.all %}
+            {% include 'author_bio.html' with author=author only %}
+            {% endfor %}
         </div>
         {% endif %}
         {% endwith %}
