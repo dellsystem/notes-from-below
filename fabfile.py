@@ -8,6 +8,10 @@ env.use_ssh_config = True
 env.host_string = 'picric'
 
 
+def re():
+    local('sudo systemctl restart notesfrombelow')
+
+
 def up():
     local('django/manage.py runserver')
 
