@@ -28,7 +28,7 @@ class ArticleForm(forms.ModelForm):
             'image_credit': forms.TextInput(),
             'authors': forms.SelectMultiple(
                 attrs={
-                    'class': 'ui dropdown multi-select',
+                    'class': 'ui search fluid dropdown multi-select',
                 },
             ),
             'subtitle': forms.TextInput(),
