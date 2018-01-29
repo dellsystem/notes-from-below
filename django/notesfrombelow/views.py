@@ -5,7 +5,7 @@ from cms.models import Page
 
 
 def index(request):
-    articles = Article.objects.order_by('-date')[:5]
+    articles = Article.objects.order_by('-date')
     page = Page.objects.get(slug='')
 
     context = {
