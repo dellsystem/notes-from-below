@@ -311,3 +311,17 @@ blockquote {
         font-size: 1.3rem;
     }
 }
+
+.uploaded-image {
+    text-align: center;
+}
+
+.uploaded-image span {
+    display: block;
+    font-style: italic;
+    padding-bottom: 1rem;
+}
+
+.uploaded-image img {
+    max-width: 100%;
+}
