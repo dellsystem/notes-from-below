@@ -25,6 +25,7 @@ class ArticleForm(forms.ModelForm):
         model = models.Article
         fields = '__all__'
         widgets = {
+            'image_credit': forms.TextInput(),
             'authors': forms.SelectMultiple(
                 attrs={
                     'class': 'ui dropdown multi-select',
