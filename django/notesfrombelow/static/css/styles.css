@@ -82,6 +82,10 @@ hr:after {
     background: #fff;
 }
 
+.page-content ul {
+    line-height: 2.0em;
+}
+
 .page-content .section {
     padding: 50px 0;
 }
