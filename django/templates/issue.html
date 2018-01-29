@@ -1,28 +1,21 @@
 {% extends 'base.html' %}
 
-{% block mastheadclass %}pattern{% endblock %}
-{% block mastheadbg %}/static/img/triangles.png{% endblock %}
+{% block mastheadclass %}photo fixed{% endblock %}
+{% block mastheadbg %}{{ issue.image.url }}{% endblock %}
+{% block mastheadposition %}top{% endblock %}
 
 {% block title %}{{ issue.title }} (#{{ issue.number }}){% endblock %}
 {% block description %}The {{ issue.date|date:"F Y" }} issue of Notes From Below{% endblock %}
 
-{% block masthead %}
-<div class="dark-screen">
+{% block content %}
+<div class="page-content">
     <div class="ui container">
-        <h1 class="ui inverted header">
+        <h1 class="ui header">
             {{ issue.title }} (#{{ issue.number }})
             <div class="sub header">
                 {{ issue.date|date:"F Y"}}
             </div>
         </h1>
-    </div>
-</div>
-{% endblock %}
-
-{% block content %}
-<div class="page-content">
-    <div class="ui container">
-        <h1><a href="">Download the PDF</a></h1>
         <h3 class="section-header">articles</h3>
         <div class="ui two column stackable grid">
             {% for article in issue.articles.all %}

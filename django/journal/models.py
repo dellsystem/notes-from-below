@@ -65,6 +65,11 @@ class Issue(models.Model):
     title =  models.CharField(max_length=50)
     date = models.DateField(help_text='Day ignored')
     slug = models.SlugField()
+    image = ProcessedImageField(
+        upload_to='issues',
+        processors=[ResizeToFill(1920, 450)],
+        options={'quality': 100}
+    )
 
     class Meta:
         get_latest_by = 'number'

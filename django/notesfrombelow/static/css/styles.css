@@ -15,6 +15,11 @@
     background-repeat: repeat;
 }
 
+#masthead.fixed {
+    background-size: auto;
+    background-attachment: scroll;
+}
+
 #header {
     width: 100%;
     color: #fff;
