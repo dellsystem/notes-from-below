@@ -14,6 +14,7 @@ class Page(models.Model):
         format='JPEG',
         options={'quality': 100},
     )
+    background_position = models.CharField(max_length=50, blank=True)
     title = models.CharField(max_length=100, blank=True)
     subtitle = models.TextField(blank=True)
     content = MartorField(blank=True)

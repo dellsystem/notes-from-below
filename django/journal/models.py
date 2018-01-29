@@ -24,6 +24,7 @@ class Category(models.Model):
         format='JPEG',
         options={'quality': 100},
     )
+    background_position = models.CharField(max_length=50, blank=True)
 
     class Meta:
         verbose_name_plural = 'categories'
@@ -104,6 +105,7 @@ class Article(models.Model):
         format='JPEG',
         options={'quality': 90}
     )
+    background_position = models.CharField(max_length=50, blank=True)
     image_credit = models.URLField(blank=True)
     related_1 = models.ForeignKey("self", related_name='related_1_articles',
         on_delete=models.CASCADE, blank=True, null=True)
