@@ -57,12 +57,9 @@
             {{ article.subtitle }}
         </p>
         <hr />
-        <div class="ui three column grid" id="article-metadata">
+        <div class="ui two column grid" id="article-metadata">
             <div class="column">
                 <p>{{ article.date|date:"F j, Y" }}</p>
-            </div>
-            <div class="center aligned column">
-                <p>{{ article.read_time }} min read</p>
             </div>
             <div class="right aligned column">
                 {% with url=request.build_absolute_uri|urlencode title=article.title|urlencode %}
