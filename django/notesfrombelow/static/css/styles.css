@@ -306,8 +306,16 @@ blockquote {
         font-size: 1.1rem;
     }
 
+    #footer {
+        background: #f62811;
+    }
+
     #footer h2.ui.header {
         font-size: 1.3rem;
+    }
+
+    #footer .column {
+        text-align: center;
     }
 }
 
