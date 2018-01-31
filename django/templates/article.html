@@ -41,9 +41,6 @@
                 </a>
                 </strong>
                 {% endif %}
-                <span class="print-only">
-                / {{ article.date|date:"F j, Y" }}
-                </span>
             </div>
         </h1>
     </div>
@@ -53,6 +50,32 @@
 {% block content %}
 <article class="page-content">
     <div class="ui container">
+        <div class="print-only">
+            <h3 class="ui inverted header article-category">
+                <a href="{{ article.category.get_absolute_url }}">
+                    {{ article.category.slug }}
+                </a>
+            </h3>
+            <h1 class="ui inverted header article-title">
+                {{ article.title }}
+                <div class="sub header">
+                    {% if article.authors.count %}
+                    by {% for author in article.authors.all %}
+                        <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    {% if article.issue %}
+                    in
+                    <strong>
+                    <a href="{{ article.issue.get_absolute_url }}">
+                        {{ article.issue.title }} (#{{ article.issue.number }})
+                    </a>
+                    </strong>
+                    {% endif %}
+                    / {{ article.date|date:"F j, Y" }}
+                </div>
+            </h1>
+        </div>
         <p id="article-lead">
             {{ article.subtitle }}
         </p>

@@ -169,7 +169,7 @@ hr:after {
 }
 
 .print-only {
-    visibility: hidden;
+    display: none;
 }
 #print-banner {
     display: none;
@@ -208,7 +208,7 @@ hr:after {
         padding: 0;
     }
     .print-only {
-        visibility: visible;
+        display: block;
     }
     #article-metadata {
         display: none;
@@ -306,6 +306,10 @@ blockquote {
         font-size: 1.1rem;
     }
 
+    #article-metadata .column {
+        text-align: center;
+    }
+
     #footer {
         background: #f62811;
     }
@@ -316,6 +320,10 @@ blockquote {
 
     #footer .column {
         text-align: center;
+    }
+
+    .page-content .section {
+        padding: 30px 0;
     }
 }
 
