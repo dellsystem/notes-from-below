@@ -35,12 +35,15 @@
                         <button type="submit" class="ui button">Subscribe</button>
                     </div>
                 </form>
-                <br />
                 <h2 class="ui inverted header">
                     Latest issue:
                     <a href="{{ LATEST_ISSUE.get_absolute_url }}">
                         {{ LATEST_ISSUE.title }} (#{{ LATEST_ISSUE.number }})
                     </a>
+                    <div class="sub header">
+                        Site by <a href="https://twitter.com/dellsystem">@dellsystem</a>.
+                        Source on <a href="https://github.com/dellsystem/notes-from-below">GitHub</a>.
+                    </div>
                 </h2>
             </div>
         </div>

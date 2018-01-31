@@ -293,10 +293,6 @@ blockquote {
         position: static;
     }
 
-    #footer h2 {
-        margin-top: 0 !important;
-    }
-
     /* Otherwise it might be too big and cause overflow */
     h2.article-title.ui.header {
         font-size: 1.5rem;
