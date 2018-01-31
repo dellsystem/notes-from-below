@@ -80,7 +80,7 @@
             {{ article.subtitle }}
         </p>
         <hr />
-        <div class="ui two column grid" id="article-metadata">
+        <div class="ui two column stackable grid" id="article-metadata">
             <div class="column">
                 <p>{{ article.date|date:"F j, Y" }}</p>
             </div>
@@ -133,9 +133,9 @@
             <h3 class="section-header">issue</h3>
             <div class="ui center aligned basic segment">
                 <h2>
-                    This article is part of
+                    From
                     <a href="{{ article.issue.get_absolute_url }}">
-                        {{ article.issue.title }} (#{{ article.issue.number }})
+                        {{ article.issue.title }} (issue #{{ article.issue.number }})
                     </a>
                 </h2>
             </div>
