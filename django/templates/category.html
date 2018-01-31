@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
-{% block mastheadclass %}photo{% endblock %}
-{% block mastheadbg %}{{ category.image.url }}{% endblock %}
-{% block mastheadposition %}{{ category.background_position|default:"center" }}{% endblock %}
+{% block mastheadclass %}photo fixed{% endblock %}
+{% block mastheadbg %}{{ LATEST_ISSUE.image.url }}{% endblock %}
+{% block mastheadposition %}top{% endblock %}
+{% block twittercard %}summary{% endblock %}
 
 {% block title %}{{ category.name }}{% endblock %}
 {% block description %}{{ category.description }}{% endblock %}
