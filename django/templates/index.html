@@ -6,9 +6,9 @@
 
 {% block precontent %}
 <div class="section">
-    <div class="ui two column stackable grid">
+    <div class="ui stackable grid">
     {% for article in articles %}
-        {% include 'article_thumb.html' with article=article only %}
+        {% include 'article_thumb.html' with article=article resize=True only %}
     {% endfor %}
     </div>
 </div>

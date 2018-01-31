@@ -97,7 +97,7 @@ class Article(models.Model):
     read_time = models.PositiveSmallIntegerField(editable=False)
     issue = models.ForeignKey(Issue, related_name='articles', null=True,
         blank=True, on_delete=models.CASCADE)
-    order_in_issue = models.PositiveIntegerField(default=0, editable=False)
+    order_in_issue = models.PositiveIntegerField(default=0)
     image = ProcessedImageField(
         upload_to='articles',
         processors=[ResizeToFill(1920, 1080)],
@@ -116,6 +116,9 @@ class Article(models.Model):
         on_delete=models.CASCADE, blank=True, null=True)
     related_2 = models.ForeignKey("self", related_name='related_2_articles',
         on_delete=models.CASCADE, blank=True, null=True)
+
+    class Meta:
+        ordering = ['order_in_issue']
 
     def __str__(self):
         return self.title

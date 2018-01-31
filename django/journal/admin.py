@@ -46,8 +46,10 @@ class ArticleForm(forms.ModelForm):
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'list_authors', 'category', 'issue', 'date']
+    list_display = ['title', 'list_authors', 'category', 'issue',
+        'order_in_issue', 'date']
     readonly_fields = ['image_thumbnail']
+    list_filter = ['issue']
     prepopulated_fields = {'slug': ('title',)}
     change_form_template = 'admin/edit_article.html'
     form = ArticleForm
