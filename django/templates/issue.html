@@ -3,6 +3,7 @@
 {% block mastheadclass %}photo fixed{% endblock %}
 {% block mastheadbg %}{{ issue.image.url }}{% endblock %}
 {% block mastheadposition %}top{% endblock %}
+{% block twittercard %}summary{% endblock %}
 
 {% block title %}{{ issue.title }} (#{{ issue.number }}){% endblock %}
 {% block description %}The {{ issue.date|date:"F Y" }} issue of Notes From Below{% endblock %}
