@@ -111,7 +111,7 @@ class Article(models.Model):
         on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
-        ordering = ['order_in_issue']
+        ordering = ['-date', 'order_in_issue']
 
     def __str__(self):
         return self.title
