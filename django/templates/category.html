@@ -7,6 +7,7 @@
 
 {% block title %}{{ category.name }}{% endblock %}
 {% block description %}{{ category.description }}{% endblock %}
+{% block longdescription %}{{ category.formatted_content|striptags|truncatechars:500 }}{% endblock %}
 
 {% block masthead %}
 <div class="dark-screen">
