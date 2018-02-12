@@ -13,4 +13,12 @@ Set the following environment variables within the virtualenv:
 * `DJANGO_SECRET_KEY`: the `SECRET_KEY` used by Django
 * `ALLOWED_HOST`: e.g., 'notesfrombelow.org'
 
-`cd django && ./manage.py runserver`
+To run:
+
+`./django/manage.py makemigrations journal cms`
+`./django/manage.py migrate`
+`./django/manage.py createsuperuser`
+
+Finally:
+
+`./django/manage.py runserver`
