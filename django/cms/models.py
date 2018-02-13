@@ -20,6 +20,8 @@ class Page(models.Model):
     content = MartorField(blank=True)
     formatted_content = models.TextField(editable=False)
     slug = models.SlugField(blank=True, unique=True)
+    last_modified = models.DateField(auto_now=True)
+    is_static = models.BooleanField(default=True, help_text='Ignore this')
 
     def __str__(self):
         return self.title
