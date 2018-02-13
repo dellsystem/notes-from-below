@@ -77,8 +77,17 @@ hr {
     text-align: center;
 }
 
-.page-content ul {
-    line-height: 2.0em;
+.page-content ul, .page-content ol {
+    line-height: 1.5em;
+}
+.page-content li {
+    padding-top: 0.5em;
+}
+.page-content ol ol ol {
+    list-style-type: lower-roman;
+}
+.page-content ol ol {
+    list-style-type: lower-alpha;
 }
 
 .page-content .section {
