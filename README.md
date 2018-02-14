@@ -7,11 +7,13 @@ Django site for managing an online publication.
 
 Within a virtualenv, run the following commands, in order:
 
-`pip install -r requirements.txt`
-`./django/manage.py makemigrations journal cms`
-`./django/manage.py migrate`
-`./django/manage.py createsuperuser`
-`./django/manage.py loaddata initial_fixtures.json`
+```bash
+pip install -r requirements.txt
+./django/manage.py makemigrations journal cms
+./django/manage.py migrate
+./django/manage.py createsuperuser
+./django/manage.py loaddata initial_fixtures.json
+```
 
 Finally:
 
