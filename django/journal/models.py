@@ -61,7 +61,8 @@ class Issue(models.Model):
     image = ProcessedImageField(
         upload_to='issues',
         processors=[ResizeToFill(1920, 450)],
-        options={'quality': 100}
+        options={'quality': 100},
+        blank=True
     )
 
     class Meta:
