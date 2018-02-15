@@ -24,12 +24,12 @@ from notesfrombelow.admin import editor_site
 import journal.views
 import notesfrombelow.views
 import cms.views
-from journal.sitemaps import ArticleSitemap, AuthorSitemap, CategorySitemap, \
-    IssueSitemap
-from cms.sitemaps import PageSitemap
+from journal.sitemaps import *
+from cms.sitemaps import *
 
 sitemaps = {
     'articles': ArticleSitemap(),
+    'article_translations': ArticleTranslationSitemap(),
     'authors': AuthorSitemap(),
     'categories': CategorySitemap(),
     'issues': IssueSitemap(),

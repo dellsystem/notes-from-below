@@ -10,6 +10,16 @@ class ArticleSitemap(Sitemap):
     def items(self):
         return Article.objects.filter(published=True)
 
+    def lastmod(self, item):
+        return item.last_modified
+
+
+class ArticleTranslationSitemap(Sitemap):
+    changefreq = 'never'
+    priority = 0.7
+
+    def items(self):
+        return ArticleTranslation.objects.filter(article__published=True)
 
     def lastmod(self, item):
         return item.last_modified

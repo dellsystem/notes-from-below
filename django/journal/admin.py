@@ -58,12 +58,18 @@ class ArticleAdmin(admin.ModelAdmin):
         return ', '.join(a.name for a in obj.authors.all())
 
 
+class ArticleTranslationAdmin(admin.ModelAdmin):
+    list_display = ['article', 'language']
+
+
 editor_site.register(models.Issue, IssueAdmin)
 editor_site.register(models.Article, ArticleAdmin)
+editor_site.register(models.ArticleTranslation, ArticleTranslationAdmin)
 editor_site.register(models.Author, AuthorAdmin)
 editor_site.register(models.Category, CategoryAdmin)
 
 admin.site.register(models.Issue, IssueAdmin)
 admin.site.register(models.Article, ArticleAdmin)
+admin.site.register(models.ArticleTranslation, ArticleTranslationAdmin)
 admin.site.register(models.Author, AuthorAdmin)
 admin.site.register(models.Category, CategoryAdmin)

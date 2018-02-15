@@ -2,6 +2,7 @@ import collections
 import math
 import operator
 
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.html import strip_tags
@@ -174,3 +175,29 @@ class Article(models.Model):
     def get_related(self):
         # Limited to 2. Currently just gets the latest articles.
         return [self.related_1, self.related_2]
+
+
+class ArticleTranslation(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE,
+        related_name='translations')
+    language = models.CharField(max_length=2, choices=settings.LANGUAGES)
+    content = MartorField()
+    formatted_content = models.TextField(editable=False)
+    # Store the formatted_content field with all tags removed (for description)
+    unformatted_content = models.TextField(editable=False)
+    last_modified = models.DateField(auto_now=True)
+
+    class Meta:
+        unique_together = ('article', 'language')
+
+    def __str__(self):
+        return "{}—{}".format(self.article.title, self.get_language_display())
+
+    def save(self, *args, **kwargs):
+        # Parse markdown and cache it.
+        self.formatted_content = markdownify(self.content)
+        self.unformatted_content = strip_tags(self.formatted_content)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('article', args=[self.article.slug]) + '?language=' + self.language
