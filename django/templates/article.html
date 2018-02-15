@@ -144,15 +144,19 @@
         </div>
         {% endif %}
         {% endwith %}
+        {% with related=article.get_related %}
+        {% if related %}
         <hr id="related-hr" />
         <div class="section" id="article-related">
             <h3 class="section-header">related</h3>
             <div class="ui two column stackable grid">
-            {% for article in article.get_related %}
-            {% include 'article_thumb.html' with article=article only %}
+            {% for related_article in related %}
+            {% include 'article_thumb.html' with article=related_article only %}
             {% endfor %}
             </div>
         </div>
+        {% endif %}
+        {% endwith %}
         {% if article.issue %}
         <hr />
         <div class="section">

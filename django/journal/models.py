@@ -156,8 +156,10 @@ class Article(models.Model):
                 articles.append((cosine, article))
             articles.sort(key=operator.itemgetter(0), reverse=True)
 
-            self.related_1 = articles[0][1]
-            self.related_2 = articles[1][1]
+            if len(articles) > 1:
+                self.related_1 = articles[0][1]
+            if len(articles) > 1:
+                self.related_2 = articles[1][1]
 
         super().save(*args, **kwargs)
 
@@ -170,7 +172,12 @@ class Article(models.Model):
 
     def get_related(self):
         # Limited to 2. Currently just gets the latest articles.
-        return [self.related_1, self.related_2]
+        related = []
+        if self.related_1:
+            related.append(self.related_1)
+        if self.related_2:
+            related.append(self.related_2)
+        return related
 
 
 class ArticleTranslation(models.Model):
