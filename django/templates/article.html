@@ -97,10 +97,10 @@
                 <a href="?language={{ language_code }}"
                    class="ui {% if language_code == desired_language_code %}black{% endif %} button">
                     {{ language_name }}
-                    {% if not forloop.last %}
-                    <div class="/"></div>
-                    {% endif %}
                 </a>
+                {% if not forloop.last %}
+                <div class="or" data-text="/"></div>
+                {% endif %}
                 {% endfor %}
             </div>
             {% endif %}
