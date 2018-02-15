@@ -98,7 +98,6 @@ class Article(models.Model):
     # Store the formatted_content field with all tags removed (for related)
     unformatted_content = models.TextField(editable=False)
     date = models.DateField()
-    read_time = models.PositiveSmallIntegerField(editable=False)
     issue = models.ForeignKey(Issue, related_name='articles', null=True,
         blank=True, on_delete=models.CASCADE)
     order_in_issue = models.PositiveIntegerField(default=0)
@@ -138,9 +137,6 @@ class Article(models.Model):
         self.formatted_content = markdownify(self.content)
         self.unformatted_content = strip_tags(self.formatted_content)
         words = self.unformatted_content.split()
-
-        # Calculate the read time.
-        self.read_time = max(len(words) / 200, 1)  # assuming 200wpm reading speed
 
         # Find the two most similar articles based on cosine similarity. Only
         # do this if they're missing!
