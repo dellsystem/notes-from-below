@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block mastheadclass %}photo fixed{% endblock %}
-{% block mastheadbg %}{{ issue.image.url }}{% endblock %}
+{% block mastheadbg %}{% if issue.image %}{{ issue.image.url }}{% else %}/static/img/triangles.png{% endif %}{% endblock %}
 {% block mastheadposition %}top{% endblock %}
 {% block twittercard %}summary{% endblock %}
 
@@ -20,7 +20,7 @@
         </h1>
         <h3 class="section-header">articles</h3>
         <div class="ui stackable grid">
-            {% for article in issue.articles.all %}
+            {% for article in issue.get_articles %}
             {% include 'article_thumb.html' with article=article resize=True only %}
             {% endfor %}
         </div>

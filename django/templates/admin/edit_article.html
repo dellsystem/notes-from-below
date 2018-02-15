@@ -101,6 +101,11 @@
             {% if adminform.form.instance.image_thumbnail %}
             <img class="ui fluid image" src="{{ adminform.form.instance.image.url }}" />
             {% endif %}
+            <br />
+            <div class="ui field">
+                <label>Published?</label>
+                {{ adminform.form.published }}
+            </div>
         </div>
     </div>
 </div>

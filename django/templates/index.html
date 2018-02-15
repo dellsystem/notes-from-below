@@ -6,7 +6,7 @@
 {% block twittercard %}summary{% endblock %}
 
 {% block masthead %}{% endblock %}
-{% block mastheadbg %}{{ LATEST_ISSUE.image.url }}{% endblock %}
+{% block mastheadbg %}{% if LATEST_ISSUE.image %}{{ LATEST_ISSUE.image.url }}{% else %}/static/img/triangles.png{% endif %}{% endblock %}
 {% block mastheadclass %}photo fixed{% endblock %}
 
 {% block precontent %}

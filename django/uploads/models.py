@@ -15,5 +15,8 @@ class ImageUpload(models.Model):
 
 class PdfUpload(models.Model):
     title = models.CharField(max_length=100)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     file = models.FileField(upload_to='pdfs')
+
+    def __str__(self):
+        return self.title

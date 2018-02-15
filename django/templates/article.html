@@ -4,10 +4,10 @@
 {% block mastheadbg %}{{ article.image.url }}{% endblock %}
 {% block mastheadposition %}{{ article.background_position|default:"center" }}{% endblock %}
 
-{% block title %}{{ article.title }}{% endblock %}
+{% block title %}{{ article.title }}{% if desired_language_name %} ({{ desired_language_name }}){% endif %}{% endblock %}
 {% block date %}{{ article.date|date:"Y-m-d" }}{% endblock %}
 
-{% block longdescription %}{{ article.unformatted_content|truncatechars:500 }}{% endblock %}
+{% block longdescription %}{{ unformatted|truncatechars:500 }}{% endblock %}
 
 {% block description %}{% if article.authors.count %}by {{ article.authors.all|join:", " }} // {% endif %}{{ article.subtitle }}{% endblock %}
 
@@ -30,6 +30,7 @@
         </h3>
         <h1 class="ui inverted header article-title">
             {{ article.title }}
+            {% if desired_language_name %}({{ desired_language_name }}){% endif %}
             <div class="sub header">
                 {% if article.authors.count %}
                 by {% for author in article.authors.all %}
@@ -79,9 +80,31 @@
                 </div>
             </h1>
         </div>
-        <p id="article-lead">
-            {{ article.subtitle }}
-        </p>
+        {% if not article.published %}
+        <div class="ui error message">
+            <div class="header">
+                Not published
+            </div>
+            <p>This article won't yet show up elsewhere on the website.</p>
+        </div>
+        {% endif %}
+        <div id="article-lead">
+            <p>{{ article.subtitle }}</p>
+            {% if languages %}
+            <br />
+            <div class="ui buttons">
+                {% for language_code, language_name in languages %}
+                <a href="?language={{ language_code }}"
+                   class="ui {% if language_code == desired_language_code %}black{% endif %} button">
+                    {{ language_name }}
+                    {% if not forloop.last %}
+                    <div class="/"></div>
+                    {% endif %}
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
         <hr />
         <div class="ui two column stackable grid" id="article-metadata">
             <div class="column">
@@ -107,7 +130,7 @@
         </div>
         <div class="article-content section">
             <p>
-                {{ article.formatted_content|safe }}
+                {{ formatted|safe }}
             </p>
         </div>
         {% with num_authors=article.authors.count %}
@@ -121,15 +144,19 @@
         </div>
         {% endif %}
         {% endwith %}
+        {% with related=article.get_related %}
+        {% if related %}
         <hr id="related-hr" />
         <div class="section" id="article-related">
             <h3 class="section-header">related</h3>
             <div class="ui two column stackable grid">
-            {% for article in article.get_related %}
-            {% include 'article_thumb.html' with article=article only %}
+            {% for related_article in related %}
+            {% include 'article_thumb.html' with article=related_article only %}
             {% endfor %}
             </div>
         </div>
+        {% endif %}
+        {% endwith %}
         {% if article.issue %}
         <hr />
         <div class="section">
