@@ -20,7 +20,7 @@
         </h1>
         <h3 class="section-header">articles</h3>
         <div class="ui stackable grid">
-            {% for article in issue.articles.all %}
+            {% for article in issue.get_articles %}
             {% include 'article_thumb.html' with article=article resize=True only %}
             {% endfor %}
         </div>

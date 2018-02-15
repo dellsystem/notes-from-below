@@ -31,7 +31,7 @@
         <hr />
         <h3 class="section-header">articles</h3>
         <div class="ui two column stackable grid">
-            {% for article in category.articles.all %}
+            {% for article in category.get_articles %}
             {% include 'article_thumb.html' with article=article only %}
             {% endfor %}
         </div>

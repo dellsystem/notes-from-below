@@ -22,6 +22,9 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'categories'
 
+    def get_articles(self):
+        return self.articles.filter(published=True)
+
     def get_absolute_url(self):
         return reverse('category', args=[self.slug])
 
@@ -43,6 +46,9 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_articles(self):
+        return self.articles.filter(published=True)
 
     def get_absolute_url(self):
         return reverse('author', args=[self.slug])
@@ -67,6 +73,9 @@ class Issue(models.Model):
 
     class Meta:
         get_latest_by = 'number'
+
+    def get_articles(self):
+        return self.articles.filter(published=True)
 
     def get_absolute_url(self):
         return reverse('issue', args=[self.slug])
@@ -111,6 +120,7 @@ class Article(models.Model):
     related_2 = models.ForeignKey("self", related_name='related_2_articles',
         on_delete=models.CASCADE, blank=True, null=True)
     last_modified = models.DateField(auto_now=True)
+    published = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['-date', 'order_in_issue']

@@ -47,7 +47,7 @@ class ArticleForm(forms.ModelForm):
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ['title', 'list_authors', 'category', 'issue',
-        'order_in_issue', 'date']
+        'order_in_issue', 'date', 'published']
     readonly_fields = ['image_thumbnail']
     list_filter = ['issue']
     prepopulated_fields = {'slug': ('title',)}
