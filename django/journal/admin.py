@@ -59,7 +59,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
 
 class ArticleTranslationAdmin(admin.ModelAdmin):
-    list_display = ['article', 'language']
+    list_display = ['article', 'title', 'language']
 
 
 editor_site.register(models.Issue, IssueAdmin)

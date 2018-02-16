@@ -4,7 +4,7 @@
 {% block mastheadbg %}{{ article.image.url }}{% endblock %}
 {% block mastheadposition %}{{ article.background_position|default:"center" }}{% endblock %}
 
-{% block title %}{{ article.title }}{% if desired_language_name %} ({{ desired_language_name }}){% endif %}{% endblock %}
+{% block title %}{{ title }}{% if desired_language_name %} ({{ desired_language_name }}){% endif %}{% endblock %}
 {% block date %}{{ article.date|date:"Y-m-d" }}{% endblock %}
 
 {% block longdescription %}{{ unformatted|truncatechars:500 }}{% endblock %}
@@ -29,7 +29,7 @@
             </a>
         </h3>
         <h1 class="ui inverted header article-title">
-            {{ article.title }}
+            {{ title }}
             {% if desired_language_name %}({{ desired_language_name }}){% endif %}
             <div class="sub header">
                 {% if article.authors.count %}

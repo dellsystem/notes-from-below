@@ -184,6 +184,7 @@ class ArticleTranslation(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE,
         related_name='translations')
     language = models.CharField(max_length=2, choices=settings.LANGUAGES)
+    title = models.CharField(max_length=255)
     content = MartorField()
     formatted_content = models.TextField(editable=False)
     # Store the formatted_content field with all tags removed (for description)

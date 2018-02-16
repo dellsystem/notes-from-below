@@ -31,6 +31,7 @@ class ArticleView(generic.DetailView):
 
         context['formatted'] = desired_translation.formatted_content
         context['unformatted'] = desired_translation.unformatted_content
+        context['title'] = desired_translation.title
 
         # Only add these context variables if translations exist.
         if all_languages:
