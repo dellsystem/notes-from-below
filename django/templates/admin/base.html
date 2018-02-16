@@ -13,3 +13,12 @@
 {% block branding %}
 Notes From Below
 {% endblock %}
+
+{% block welcome-msg %}
+{% trans 'Hi' %} {{ user.get_username }}
+/
+<a href="https://github.com/dellsystem/notes-from-below/blob/master/TUTORIAL.md">
+   {% trans 'Read tutorial' %}
+</a>
+/
+{% endblock %}
