@@ -1,7 +1,12 @@
-<div class="column">
+<div class="{% if resize %}{% if article.order_in_issue %}eight{% else %}sixteen{% endif %} wide {% endif %} column">
     <div class="article-thumb">
         <a href="{{ article.get_absolute_url }}">
-            <img src="{{ article.image_thumbnail.url }}" class="ui fluid image" />
+            <img src="{{ article.image_thumbnail.url }}"
+                 class="ui fluid image"
+                 {% if article.order_in_issue == 0 %}
+                 style="height: 327px; object-fit: cover"
+                 {% endif %}
+                 />
         </a>
         <div class="dark-screen">
             <h4 class="ui inverted header article-category">
@@ -14,11 +19,13 @@
                 <a href="{{ article.get_absolute_url }}">
                     {{ article.title }}
                 </a>
+                {% if article.authors.count %}
                 <div class="sub header">
                     by {% for author in article.authors.all %}
                     <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>{% if not forloop.last %}, {% endif %}
                     {% endfor %}
                 </div>
+                {% endif %}
             </{{ header }}>
             {% endwith %}
         </div>

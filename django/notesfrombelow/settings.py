@@ -41,11 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sitemaps',
     'django.contrib.staticfiles',
     'imagekit',
     'martor',
     'journal',
     'cms',
+    'uploads',
 ]
 
 MIDDLEWARE = [
@@ -179,6 +181,7 @@ MARTOR_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.footnotes',
     'markdown.extensions.toc',
     # Custom markdown extensions.
+    'uploads.extensions.embed',
     'martor.extensions.urlize',
     'martor.extensions.del_ins', # ~~strikethrough~~ and ++underscores++
     'martor.extensions.mention', # require for mention
@@ -198,3 +201,8 @@ MARTOR_MARKDOWN_BASE_MENTION_URL = 'https://python.web.id/author/' # default (ch
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+
+LANGUAGES = (
+    ('es', 'Español'),
+    ('pl', 'Polish'),
+)

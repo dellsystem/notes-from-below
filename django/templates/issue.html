@@ -1,32 +1,27 @@
 {% extends 'base.html' %}
 
-{% block mastheadclass %}pattern{% endblock %}
-{% block mastheadbg %}/static/img/triangles.png{% endblock %}
+{% block mastheadclass %}photo fixed{% endblock %}
+{% block mastheadbg %}{% if issue.image %}{{ issue.image.url }}{% else %}/static/img/triangles.png{% endif %}{% endblock %}
+{% block mastheadposition %}top{% endblock %}
+{% block twittercard %}summary{% endblock %}
 
 {% block title %}{{ issue.title }} (#{{ issue.number }}){% endblock %}
 {% block description %}The {{ issue.date|date:"F Y" }} issue of Notes From Below{% endblock %}
+{% block date %}{{ issue.date|date:"Y-m-d" }}{% endblock %}
 
-{% block masthead %}
-<div class="dark-screen">
+{% block content %}
+<div class="page-content">
     <div class="ui container">
-        <h1 class="ui inverted header">
+        <h1 class="ui header">
             {{ issue.title }} (#{{ issue.number }})
             <div class="sub header">
                 {{ issue.date|date:"F Y"}}
             </div>
         </h1>
-    </div>
-</div>
-{% endblock %}
-
-{% block content %}
-<div class="page-content">
-    <div class="ui container">
-        <h1><a href="">Download the PDF</a></h1>
         <h3 class="section-header">articles</h3>
-        <div class="ui two column stackable grid">
-            {% for article in issue.articles.all %}
-            {% include 'article_thumb.html' with article=article only %}
+        <div class="ui stackable grid">
+            {% for article in issue.get_articles %}
+            {% include 'article_thumb.html' with article=article resize=True only %}
             {% endfor %}
         </div>
     </div>

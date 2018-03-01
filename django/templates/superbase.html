@@ -4,13 +4,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{% block longdescription %}{% block description %}{% endblock %}{% endblock %}" />
+    <meta name="date" content="{% block date %}2018-01-29{% endblock %}" scheme="YYYY-MM-DD">
+
     <title>{% block fulltitle %}{% block title %}{% endblock %} // Notes From Below{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="/static/css/semantic.min.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/styles.css" />
     {% include 'favicon.html' %}
     {% block meta %}
     {% endblock %}
+    <script async
+    src="https://www.googletagmanager.com/gtag/js?id=UA-107718477-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-107718477-1');
+    </script>
 </head>
 <body>
     {% block body %}

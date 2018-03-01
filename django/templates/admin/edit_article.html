@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block field_sets %}
+{{ adminform.form.errors }}
 <div class="ui grid">
     <div class="twelve wide column">
         <div class="ui segment">
@@ -20,13 +21,23 @@
                 {{ adminform.form.subtitle }}
                 </div>
             </div>
-            <div class="ui field">
-                <label>Image credit URL (optional)</label>
-                <div class="ui fluid input">
-                    {{ adminform.form.image_credit }}
-                </div>
-            </div>
             <div class="ui grid">
+                <div class="twelve wide column">
+                    <div class="ui field">
+                        <label>Image credit URL (optional)</label>
+                        <div class="ui fluid input">
+                            {{ adminform.form.image_credit }}
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <div class="ui field">
+                        <label>Background position (ignore)</label>
+                        <div class="ui fluid input">
+                            {{ adminform.form.background_position }}
+                        </div>
+                    </div>
+                </div>
                 <div class="eight wide column">
                     <div class="ui field">
                         <label>Slug</label>
@@ -49,16 +60,24 @@
                 </div>
             </div>
             <div class="ui grid">
-                <div class="six wide column">
+                <div class="five wide column">
                     <div class="ui field">
                         <label>Authors</label>
                         {{ adminform.form.authors }}
                     </div>
                 </div>
-                <div class="three wide column">
+                <div class="two wide column">
                     <div class="ui field">
                         <label>Category</label>
                         {{ adminform.form.category }}
+                    </div>
+                </div>
+                <div class="two wide column">
+                    <div class="ui field">
+                        <label>Order (ignore)</label>
+                        <div class="ui fluid input">
+                        {{ adminform.form.order_in_issue }}
+                        </div>
                     </div>
                 </div>
                 <div class="four wide column">
@@ -82,6 +101,11 @@
             {% if adminform.form.instance.image_thumbnail %}
             <img class="ui fluid image" src="{{ adminform.form.instance.image.url }}" />
             {% endif %}
+            <br />
+            <div class="ui field">
+                <label>Published?</label>
+                {{ adminform.form.published }}
+            </div>
         </div>
     </div>
 </div>

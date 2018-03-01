@@ -2,7 +2,7 @@
 
 {% block title %}{{ author.name }}{% endblock %}
 {% block description %}{{ author.name }}'s writing at Notes From Below.{% endblock %}
-{% block image %}{{ author.image.url }}{% endblock %}
+{% block image %}/static/img/favicon-180x180.png{% endblock %}
 {% block twittercard %}summary{% endblock %}
 
 {% block mastheadclass %}pattern{% endblock %}
@@ -22,21 +22,13 @@
 <div class="page-content">
     <div class="ui container">
         <div class="section">
-            <div class="ui stackable grid">
-                <div class="two wide column">
-                    <img class="ui medium circular image"
-                         src="{{ author.image.url }}" />
-                </div>
-                <div class="fourteen wide column">
-                    {{ author.formatted_bio|safe }}
-                </div>
-            </div>
+            {{ author.formatted_bio|safe }}
         </div>
         <hr />
         <div class="section">
             <h3 class="section-header">articles</h3>
             <div class="ui two column stackable grid">
-                {% for article in author.articles.all %}
+                {% for article in author.get_articles %}
                 {% include 'article_thumb.html' with article=article only %}
                 {% endfor %}
             </div>

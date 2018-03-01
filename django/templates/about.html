@@ -1,5 +1,7 @@
 {% extends 'page.html' %}
 
+{% block twittercard %}summary{% endblock %}
+
 {% block precontent %}
 {% endblock %}
 
@@ -9,7 +11,9 @@
     <h1>Editors</h1>
     <div class="ui three column stackable grid">
     {% for editor in editors %}
+        <div class="column">
         {% include 'author_bio.html' with author=editor only %}
+        </div>
     {% endfor %}
     </div>
 </div>
@@ -18,7 +22,9 @@
     <h1>Contributors</h1>
     <div class="ui three column stackable grid">
     {% for contributor in contributors %}
+        <div class="column">
         {% include 'author_bio.html' with author=contributor only %}
+        </div>
     {% endfor %}
     </div>
 </div>

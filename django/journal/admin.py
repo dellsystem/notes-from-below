@@ -25,9 +25,10 @@ class ArticleForm(forms.ModelForm):
         model = models.Article
         fields = '__all__'
         widgets = {
+            'image_credit': forms.TextInput(),
             'authors': forms.SelectMultiple(
                 attrs={
-                    'class': 'ui dropdown multi-select',
+                    'class': 'ui search fluid dropdown multi-select',
                 },
             ),
             'subtitle': forms.TextInput(),
@@ -45,8 +46,10 @@ class ArticleForm(forms.ModelForm):
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'list_authors', 'category', 'issue', 'date']
+    list_display = ['title', 'list_authors', 'category', 'issue',
+        'order_in_issue', 'date', 'published']
     readonly_fields = ['image_thumbnail']
+    list_filter = ['issue']
     prepopulated_fields = {'slug': ('title',)}
     change_form_template = 'admin/edit_article.html'
     form = ArticleForm
@@ -55,12 +58,18 @@ class ArticleAdmin(admin.ModelAdmin):
         return ', '.join(a.name for a in obj.authors.all())
 
 
+class ArticleTranslationAdmin(admin.ModelAdmin):
+    list_display = ['article', 'title', 'language']
+
+
 editor_site.register(models.Issue, IssueAdmin)
 editor_site.register(models.Article, ArticleAdmin)
+editor_site.register(models.ArticleTranslation, ArticleTranslationAdmin)
 editor_site.register(models.Author, AuthorAdmin)
 editor_site.register(models.Category, CategoryAdmin)
 
 admin.site.register(models.Issue, IssueAdmin)
 admin.site.register(models.Article, ArticleAdmin)
+admin.site.register(models.ArticleTranslation, ArticleTranslationAdmin)
 admin.site.register(models.Author, AuthorAdmin)
 admin.site.register(models.Category, CategoryAdmin)

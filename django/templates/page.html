@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
-{% block mastheadclass %}photo{% endblock %}
+{% block mastheadclass %}photo fixed{% endblock %}
 {% block mastheadbg %}{{ page.image.url }}{% endblock %}
+{% block mastheadposition %}{{ page.background_position|default:"center" }}{% endblock %}
 
 {% block title %}{{ page.title }}{% endblock %}
 
 {% block description %}{{ page.subtitle }}{% endblock %}
+{% block longdescription %}{{ page.formatted_content|striptags|truncatechars:500 }}{% endblock %}
 
 {% block masthead %}
 <div class="dark-screen">
