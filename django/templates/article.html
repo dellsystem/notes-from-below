@@ -82,11 +82,22 @@
         </div>
         {% if not article.published %}
         <div class="ui error message">
-            <div class="header">
-                Not published
+            <div class="ui two column grid">
+                <div class="column">
+                    <div class="header">
+                        Not published
+                    </div>
+                    <p>This article won't yet show up elsewhere on the
+                    website.</p>
+                    <p>Here's what the thumbnail will look like when it is
+                    published:</p>
+                </div>
+                <div class="column">
+                    {% include 'article_thumb.html' with article=article only %}
+                </div>
             </div>
-            <p>This article won't yet show up elsewhere on the website.</p>
         </div>
+        <br /><br />
         {% endif %}
         <div id="article-lead">
             <p>{{ article.subtitle }}</p>

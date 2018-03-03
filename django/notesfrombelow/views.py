@@ -19,7 +19,10 @@ def index(request):
 def about(request):
     page = Page.objects.get(slug='about')
     editors = Author.objects.filter(is_editor=True)
-    contributors = Author.objects.filter(is_editor=False)
+    contributors = Author.objects.filter(
+        is_editor=False,
+        articles__published=True
+    )
 
     context = {
         'page': page,

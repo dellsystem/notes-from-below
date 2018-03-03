@@ -71,12 +71,17 @@ class Issue(models.Model):
         options={'quality': 100},
         blank=True
     )
+    published = models.BooleanField(default=True)
 
     class Meta:
         get_latest_by = 'number'
 
     def get_articles(self):
-        return self.articles.filter(published=True)
+        # If this issue isn't published, just return all the articles.
+        if self.published:
+            return self.articles.filter(published=True)
+        else:
+            return self.articles.all()
 
     def get_absolute_url(self):
         return reverse('issue', args=[self.slug])
