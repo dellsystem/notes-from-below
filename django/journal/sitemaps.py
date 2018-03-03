@@ -19,7 +19,7 @@ class ArticleTranslationSitemap(Sitemap):
     priority = 0.7
 
     def items(self):
-        return ArticleTranslation.objects.filter(article__published=True)
+        return ArticleTranslation.objects.filter(article__published=True).order_by('pk')
 
     def lastmod(self, item):
         return item.last_modified
@@ -30,7 +30,7 @@ class AuthorSitemap(Sitemap):
     priority = 0.4
 
     def items(self):
-        return Author.objects.order_by('name')
+        return Author.objects.filter(articles__published=True).order_by('name')
 
     def lastmod(self, item):
         try:

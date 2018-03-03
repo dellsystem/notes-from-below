@@ -12,6 +12,17 @@
 {% block content %}
 <div class="page-content">
     <div class="ui container">
+        {% if not issue.published %}
+        <div class="ui error message">
+            <div class="header">
+                Not published
+            </div>
+            <p>This issue hasn't yet been published, so it won't be
+            linked anywhere on the website.</p>
+            <p>All the articles associated with this issue (whether
+            they've been published or not) are listed below.</p>
+        </div>
+        {% endif %}
         <h1 class="ui header">
             {{ issue.title }} (#{{ issue.number }})
             <div class="sub header">

@@ -71,12 +71,17 @@ class Issue(models.Model):
         options={'quality': 100},
         blank=True
     )
+    published = models.BooleanField(default=True)
 
     class Meta:
         get_latest_by = 'number'
 
     def get_articles(self):
-        return self.articles.filter(published=True)
+        # If this issue isn't published, just return all the articles.
+        if self.published:
+            return self.articles.filter(published=True)
+        else:
+            return self.articles.all()
 
     def get_absolute_url(self):
         return reverse('issue', args=[self.slug])
@@ -121,6 +126,7 @@ class Article(models.Model):
         on_delete=models.CASCADE, blank=True, null=True)
     last_modified = models.DateField(auto_now=True)
     published = models.BooleanField(default=True)
+    featured = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-date', 'order_in_issue']
