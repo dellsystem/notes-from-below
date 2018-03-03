@@ -121,6 +121,7 @@ class Article(models.Model):
         on_delete=models.CASCADE, blank=True, null=True)
     last_modified = models.DateField(auto_now=True)
     published = models.BooleanField(default=True)
+    featured = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-date', 'order_in_issue']
