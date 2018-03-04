@@ -23,12 +23,16 @@ class Page(models.Model):
     slug = models.SlugField(blank=True, unique=True)
     last_modified = models.DateField(auto_now=True)
     is_static = models.BooleanField(default=True, help_text='Ignore this')
+    published = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('page', args=[self.slug])
+        if self.slug:
+            return reverse('page', args=[self.slug])
+        else:
+            return '/'
 
     def save(self, *args, **kwargs):
         self.formatted_content = markdownify(self.content)

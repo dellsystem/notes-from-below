@@ -17,7 +17,7 @@ class PageSitemap(Sitemap):
             return 'monthly'
 
     def items(self):
-        return Page.objects.exclude(slug='').order_by('pk')
+        return Page.objects.filter(published=True).order_by('pk')
 
     def lastmod(self, item):
         return item.last_modified
