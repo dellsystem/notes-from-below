@@ -22,7 +22,9 @@ class Page(models.Model):
     formatted_content = models.TextField(editable=False)
     slug = models.SlugField(blank=True, unique=True)
     last_modified = models.DateField(auto_now=True)
-    is_static = models.BooleanField(default=True, help_text='Ignore this')
+    is_static = models.BooleanField(default=True,
+        help_text='Ignore this. For sitemap usage only'
+    )
     published = models.BooleanField(default=True)
 
     def __str__(self):
