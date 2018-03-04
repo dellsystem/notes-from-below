@@ -1,21 +1,23 @@
 from django import forms
 from django.contrib import admin
 
+from reversion_compare.admin import CompareVersionAdmin
+
 from notesfrombelow.admin import editor_site
 from . import models
 
 
-class IssueAdmin(admin.ModelAdmin):
+class IssueAdmin(CompareVersionAdmin):
     list_display = ['number', 'title', 'date', 'slug']
     prepopulated_fields = {'slug': ('title',)}
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(CompareVersionAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
 
 
-class AuthorAdmin(admin.ModelAdmin):
+class AuthorAdmin(CompareVersionAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
 
@@ -45,7 +47,7 @@ class ArticleForm(forms.ModelForm):
         }
 
 
-class ArticleAdmin(admin.ModelAdmin):
+class ArticleAdmin(CompareVersionAdmin):
     list_display = ['title', 'list_authors', 'category', 'issue',
         'order_in_issue', 'date', 'published', 'featured']
     readonly_fields = ['image_thumbnail']
@@ -58,7 +60,7 @@ class ArticleAdmin(admin.ModelAdmin):
         return ', '.join(a.name for a in obj.authors.all())
 
 
-class ArticleTranslationAdmin(admin.ModelAdmin):
+class ArticleTranslationAdmin(CompareVersionAdmin):
     list_display = ['article', 'title', 'language']
 
 
