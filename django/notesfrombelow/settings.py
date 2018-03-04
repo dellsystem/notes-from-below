@@ -43,12 +43,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
+    'reversion',
+    'reversion_compare',
     'imagekit',
     'martor',
     'journal',
     'cms',
     'uploads',
 ]
+ADD_REVERSION_ADMIN = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
