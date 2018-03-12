@@ -12,7 +12,10 @@ class EmbedPattern(markdown.inlinepatterns.Pattern):
         if embed_type == 'pdf':
             pdf_upload = PdfUpload.objects.filter(slug=slug).first()
             if pdf_upload:
-                object_el = markdown.util.etree.Element('object')
+                # This div structure is messy because it forces the enclosing
+                # <p> to close first. Ideally, we'd make this a block pattern.
+                div_el = markdown.util.etree.Element('div')
+                object_el = markdown.util.etree.SubElement(div_el, 'object')
                 path = pdf_upload.file.url
                 object_el.set('data', path)
                 object_el.set('type', 'application/pdf')
@@ -23,7 +26,15 @@ class EmbedPattern(markdown.inlinepatterns.Pattern):
                 iframe_el.set('width', '100%')
                 iframe_el.set('height', '800px')
                 iframe_el.text = 'Please download the PDF'
-                return object_el
+
+                # Show the PNG version for a mobile fallback (if it exists)
+                if pdf_upload.png_file:
+                    image_el = markdown.util.etree.SubElement(div_el, 'img')
+                    image_el.set('class', 'mobile-only')
+                    object_el.set('class', 'non-mobile-only')
+                    image_el.set('src', pdf_upload.png_file.url)
+
+                return div_el
             else:
                 return 'INVALID FILE: ' + slug
         elif embed_type == 'img':
