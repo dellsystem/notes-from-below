@@ -144,7 +144,20 @@ hr {
     }
 }
 
+.mobile-only {
+    display: none;
+}
+
 @media only screen and (max-width: 1200px) {
+    .mobile-only {
+        display: block;
+    }
+    img.mobile-only {
+        width: 100%;
+    }
+    .non-mobile-only {
+        display: none;
+    }
     #hamburger-item {
         width: 100%;
     }
