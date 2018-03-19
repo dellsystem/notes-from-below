@@ -138,6 +138,9 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse('article', args=[self.slug])
 
+    def get_word_count(self):
+        return len(self.unformatted_content.split())
+
     def save(self, *args, **kwargs):
         # Parse markdown and cache it.
         self.formatted_content = markdownify(self.content)
