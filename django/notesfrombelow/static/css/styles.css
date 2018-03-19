@@ -356,3 +356,27 @@ blockquote {
 .uploaded-image img {
     max-width: 100%;
 }
+
+.interview-quote {
+    display: block;
+    color: white;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 25px;
+    box-sizing: border-box;
+    margin-top: -10px;
+}
+
+.interview-quote.author-2 {
+    margin-right: -60px;
+    float: right;
+    background: #000;
+}
+
+.interview-quote.author-1 {
+    margin-left: -60px;
+    float: left;
+    background: #f62811;
+}

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'journal',
     'cms',
     'uploads',
+    'notesfrombelow',
 ]
 ADD_REVERSION_ADMIN = True
 
@@ -184,6 +185,7 @@ MARTOR_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.footnotes',
     'markdown.extensions.toc',
     # Custom markdown extensions.
+    'notesfrombelow.extensions.interview',
     'uploads.extensions.embed',
     'martor.extensions.urlize',
     'martor.extensions.del_ins', # ~~strikethrough~~ and ++underscores++
