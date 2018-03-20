@@ -341,6 +341,18 @@ blockquote {
     .page-content .section {
         padding: 30px 0;
     }
+
+    .interview-quote.author-1 {
+        margin-left: 0 !important;
+        margin-right: 10px !important;
+        margin-top: 10px !important;
+    }
+
+    .interview-quote.author-2 {
+        margin-left: 10px !important;
+        margin-right: 0px !important;
+        margin-top: 10px !important;
+    }
 }
 
 .uploaded-image {
