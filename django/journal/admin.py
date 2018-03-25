@@ -61,7 +61,7 @@ class ArticleAdmin(CompareVersionAdmin):
     list_display = ['title', 'list_authors', 'category', 'issue', 'list_tags',
         'order_in_issue', 'date', 'published', 'featured']
     readonly_fields = ['image_thumbnail']
-    list_filter = ['issue']
+    list_filter = ['tags', 'issue']
     prepopulated_fields = {'slug': ('title',)}
     change_form_template = 'admin/edit_article.html'
     form = ArticleForm
