@@ -1,3 +1,5 @@
+import operator
+
 from django.shortcuts import render
 
 from journal.models import Article, Author, Issue, Tag
@@ -11,11 +13,12 @@ def index(request):
     for tag in Tag.objects.filter(featured=True):
         article = tag.get_latest_article()
         if article:
-            tags.append((tag, article))
+            tags.append((tag, article, article.date))
+    tags.sort(key=operator.itemgetter(2), reverse=True)
 
     context = {
         'tags': tags,
-        'issues': Issue.objects.order_by('-number'),
+        'issues': Issue.objects.filter(published=True).order_by('-number'),
         'page': page,
     }
 
