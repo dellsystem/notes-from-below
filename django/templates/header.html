@@ -10,10 +10,35 @@
                 </a>
             </div>
             <div class="right menu">
-                <a class="item" href="{% url 'category' 'inquiry' %}">Inquiry</a>
-                <a class="item" href="{% url 'category' 'bulletins' %}">Bulletins</a>
-                <a class="item" href="{% url 'category' 'theory' %}">Theory</a>
-                <a class="item" href="{% url 'category' 'history' %}">History</a>
+                <div class="ui dropdown item">
+                    <strong>Issues</strong> <i class="dropdown icon"></i>
+                    <div class="menu">
+                        {% for issue in ISSUES %}
+                        <a class="item" href="{% url 'issue' issue.slug %}">
+                            {{ issue.title }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="ui dropdown item">
+                    <strong>Tags</strong> <i class="dropdown icon"></i>
+                    <div class="menu">
+                        {% for tag in TAGS %}
+                        <a class="item" href="{% url 'tag' tag.slug %}">
+                            {{ tag.name }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="ui dropdown item">
+                    <strong>Categories</strong> <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="{% url 'category' 'inquiry' %}">Inquiry</a>
+                        <a class="item" href="{% url 'category' 'bulletins' %}">Bulletins</a>
+                        <a class="item" href="{% url 'category' 'theory' %}">Theory</a>
+                        <a class="item" href="{% url 'category' 'history' %}">History</a>
+                    </div>
+                </div>
             </div>
             <div class="right menu">
                 <a class="item" href="{% url 'about' %}">About</a>
