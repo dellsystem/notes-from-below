@@ -173,7 +173,7 @@ class Article(models.Model):
     featured = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-date', 'order_in_issue']
+        ordering = ['order_in_issue']
         get_latest_by = 'date'
 
     def __str__(self):
