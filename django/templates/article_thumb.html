@@ -1,4 +1,4 @@
-<div class="{% if resize %}{% if article.featured %}sixteen{% else %}eight{% endif %} wide {% endif %} column">
+{% if not direct %}<div class="{% if resize %}{% if article.featured %}sixteen{% else %}eight{% endif %} wide {% endif %} column">{% endif %}
     <div class="article-thumb">
         <a href="{{ article.get_absolute_url }}">
             <img src="{{ article.image_thumbnail.url }}"
@@ -31,4 +31,4 @@
             {% endwith %}
         </div>
     </div>
-</div>
+{% if not direct %}</div>{% endif %}

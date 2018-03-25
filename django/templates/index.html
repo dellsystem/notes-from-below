@@ -5,30 +5,49 @@
 {% block description %}No politics without inquiry{% endblock %}
 {% block twittercard %}summary{% endblock %}
 
-{% block masthead %}{% endblock %}
-{% block mastheadbg %}{% if LATEST_ISSUE.image %}{{ LATEST_ISSUE.image.url }}{% else %}/static/img/triangles.png{% endif %}{% endblock %}
-{% block mastheadclass %}photo fixed{% endblock %}
+{% block mastheaddiv %}
+{% include "header.html" %}
+{% endblock %}
 
 {% block precontent %}
-<div class="section">
-    <div class="ui stackable grid">
-    {% for article in articles %}
-        {% include 'article_thumb.html' with article=article resize=True only %}
-    {% endfor %}
-    </div>
-</div>
-<hr />
 {% endblock %}
 
 {% block postcontent %}
+<hr />
 <div class="section">
-    <h1 class="ui centered header">
-        <a href="{{ LATEST_ISSUE.get_absolute_url }}">
-            {{ LATEST_ISSUE.title }} (#{{ LATEST_ISSUE.number }})
-        </a>
-        <div class="sub header">
-            View the latest issue ({{ LATEST_ISSUE.date|date:"F Y" }})
+    <h2 class="ui centered header">latest issues</h2>
+    <div class="ui stackable two column grid">
+        {% for issue in issues %}
+        <div class="column">
+            <div class="issue-thumb">
+                <a href="{{ issue.get_absolute_url }}">
+                    <img src="{{ issue.small_image.url }}" alt="{{ issue.title }}" class="ui fluid image"/>
+                </a>
+                <h2 class="ui centered header">
+                    <div class="sub header">
+                        {{ issue.date|date:"F Y" }}
+                    </div>
+                </h2>
+            </div>
         </div>
-    </h1>
+        {% endfor %}
+    </div>
+</div>
+<hr />
+<div class="section">
+    <h2 class="ui centered header">ongoing coverage</h2>
+    <div class="ui stackable two column grid">
+        {% for tag, article in tags %}
+        <div class="ui column">
+            <h2 class="ui centered header">
+                {{ tag.name }}
+                <div class="sub header">
+                    <a href="{{ tag.get_absolute_url }}">View older &raquo;</A>
+                </div>
+            </h2>
+            {% include "article_thumb.html" with direct=True article=article %}
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
