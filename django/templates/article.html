@@ -27,6 +27,17 @@
             <a href="{{ article.category.get_absolute_url }}">
                 {{ article.category.slug }}
             </a>
+            {% if article.tags.count %}
+            ::
+            {% for tag in article.tags.all %}
+            <a href="{{ tag.get_absolute_url }}">
+                {{ tag.name }}
+            </a>
+            {% if not forloop.last %}
+            /
+            {% endif %}
+            {% endfor %}
+            {% endif %}
         </h3>
         <h1 class="ui inverted header article-title">
             {{ title }}
