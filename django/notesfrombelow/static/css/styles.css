@@ -32,7 +32,7 @@
 }
 
 .dark-screen {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     box-sizing: border-box;
     position: absolute;
     bottom: 0;
