@@ -13,6 +13,37 @@ from martor.models import MartorField
 from martor.utils import markdownify
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=50)
+    description = models.TextField()
+    image = ProcessedImageField(
+        upload_to='tags',
+        processors=[ResizeToFill(1920, 450)],
+        options={'quality': 100},
+    )
+    featured = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+    def get_articles(self):
+        return self.articles.filter(published=True)
+
+    def get_latest_article(self):
+        articles = self.articles.filter(published=True)
+        if articles.exists():
+            return articles.latest()
+
+    def get_date(self):
+        latest = self.get_latest_article()
+        if latest:
+            return latest.date
+
+    def get_absolute_url(self):
+        return reverse('tag', args=[self.slug])
+
+
 class Category(models.Model):
     name = models.CharField(max_length=20)
     slug = models.SlugField(max_length=20)
@@ -71,6 +102,12 @@ class Issue(models.Model):
         options={'quality': 100},
         blank=True
     )
+    small_image = ProcessedImageField(
+        upload_to='issues',
+        processors=[ResizeToFill(540, 360)],
+        options={'quality': 100},
+        blank=True
+    )
     published = models.BooleanField(default=True)
 
     class Meta:
@@ -97,6 +134,7 @@ class Article(models.Model):
     slug = models.SlugField()
     authors = models.ManyToManyField(Author, related_name='articles',
         blank=True)
+    tags = models.ManyToManyField(Tag, related_name='articles', blank=True)
     subtitle = models.TextField()
     content = MartorField()
     formatted_content = models.TextField(editable=False)

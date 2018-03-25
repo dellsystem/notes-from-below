@@ -1,4 +1,4 @@
-<div class="{% if resize %}{% if article.featured %}sixteen{% else %}eight{% endif %} wide {% endif %} column">
+{% if not direct %}<div class="{% if resize %}{% if article.featured %}sixteen{% else %}eight{% endif %} wide {% endif %} column">{% endif %}
     <div class="article-thumb">
         <a href="{{ article.get_absolute_url }}">
             <img src="{{ article.image_thumbnail.url }}"
@@ -19,15 +19,16 @@
                 <a href="{{ article.get_absolute_url }}">
                     {{ article.title }}
                 </a>
-                {% if article.authors.count %}
                 <div class="sub header">
+                    {% if article.authors.count %}
                     by {% for author in article.authors.all %}
                     <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
+                    {% endfor %} /
+                    {% endif %}
+                    {{ article.date }}
                 </div>
-                {% endif %}
             </{{ header }}>
             {% endwith %}
         </div>
     </div>
-</div>
+{% if not direct %}</div>{% endif %}

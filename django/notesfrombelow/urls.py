@@ -31,6 +31,7 @@ sitemaps = {
     'articles': ArticleSitemap(),
     'article_translations': ArticleTranslationSitemap(),
     'authors': AuthorSitemap(),
+    'tags': TagSitemap(),
     'categories': CategorySitemap(),
     'issues': IssueSitemap(),
     'pages': PageSitemap(),
@@ -41,6 +42,7 @@ urlpatterns = [
     path('', notesfrombelow.views.index, name='index'),
     path('about', notesfrombelow.views.about, name='about'),
     path('contribute', notesfrombelow.views.contribute, name='contribute'),
+    path('archives', notesfrombelow.views.archives, name='archives'),
     path('martor/', include('martor.urls')),
     path('sudo/', admin.site.urls),
     path('editor/', editor_site.urls),
@@ -48,6 +50,7 @@ urlpatterns = [
     path('category/<slug:slug>', journal.views.CategoryView.as_view(), name='category'),
     path('article/<slug:slug>', journal.views.ArticleView.as_view(), name='article'),
     path('issue/<slug:slug>', journal.views.IssueView.as_view(), name='issue'),
+    path('tag/<slug:slug>', journal.views.TagView.as_view(), name='tag'),
     path('<slug:slug>', cms.views.PageView.as_view(), name='page'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

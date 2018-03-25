@@ -4,3 +4,5 @@ function toggleHamburger() {
     rightMenus[1].classList.toggle('visible');
     return false;
 };
+
+$('.ui.dropdown').dropdown();

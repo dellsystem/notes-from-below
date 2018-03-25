@@ -31,7 +31,7 @@
 }
 
 .dark-screen {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     box-sizing: border-box;
     position: absolute;
     bottom: 0;
@@ -390,4 +390,8 @@ blockquote {
     margin-left: -60px;
     float: left;
     background: #f62811;
+}
+
+.issue-thumb + .issue-thumb {
+    padding-top: 50px;
 }

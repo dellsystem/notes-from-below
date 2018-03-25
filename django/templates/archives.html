@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+
+{% block mastheadclass %}photo fixed{% endblock %}
+{% block mastheadbg %}{% if LATEST_ISSUE.image %}{{ LATEST_ISSUE.image.url }}{% else %}/static/img/triangles.png{% endif %}{% endblock %}
+{% block mastheadposition %}top{% endblock %}
+{% block twittercard %}summary{% endblock %}
+
+{% block title %}Archives{% endblock %}
+{% block description %}All {{ articles.count }} articles published on Notes From Below{% endblock %}
+{% block longdescription %}All {{ articles.count }} articles published on Notes From Below{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="ui container">
+        <h1>Archives</h1>
+        <div class="ui two column stackable grid">
+            {% for article in articles %}
+            {% include 'article_thumb.html' with article=article only %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -12,6 +12,7 @@
 {% endblock %}
 
 {% block body %}
+{% block mastheaddiv %}
 <div id="masthead" class="{% block mastheadclass %}{% endblock %}"
      style="background-image: url('{% block mastheadbg %}{% endblock %}');
      background-color: #f62811;
@@ -20,9 +21,12 @@
     {% block masthead %}
     {% endblock %}
 </div>
+{% endblock %}
 {% include 'print.html' %}
 {% block content %}
 {% endblock %}
 {% include 'footer.html' %}
+<script src="/static/js/jquery.min.js" type="text/javascript"></script>
+<script src="/static/js/semantic.min.js" type="text/javascript"></script>
 <script src="/static/js/scripts.js" type="text/javascript"></script>
 {% endblock %}

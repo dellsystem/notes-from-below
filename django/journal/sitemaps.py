@@ -62,3 +62,17 @@ class IssueSitemap(Sitemap):
 
     def lastmod(self, item):
         return item.date
+
+
+class TagSitemap(Sitemap):
+    changefreq = 'weekly'
+    priority = 0.8
+
+    def items(self):
+        return Tag.objects.order_by('name')
+
+    def lastmod(self, item):
+        try:
+            return item.articles.latest().date
+        except Article.DoesNotExist:
+            return None
