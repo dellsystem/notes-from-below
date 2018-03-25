@@ -42,6 +42,7 @@ urlpatterns = [
     path('', notesfrombelow.views.index, name='index'),
     path('about', notesfrombelow.views.about, name='about'),
     path('contribute', notesfrombelow.views.contribute, name='contribute'),
+    path('archives', notesfrombelow.views.archives, name='archives'),
     path('martor/', include('martor.urls')),
     path('sudo/', admin.site.urls),
     path('editor/', editor_site.urls),

@@ -5,7 +5,6 @@ from cms.models import Page
 
 
 def index(request):
-    articles = Article.objects.filter(published=True).order_by('order_in_issue')
     page = Page.objects.get(slug='')
 
     tags = []
@@ -17,7 +16,6 @@ def index(request):
     context = {
         'tags': tags,
         'issues': Issue.objects.order_by('-number'),
-        'articles': articles,
         'page': page,
     }
 
@@ -49,3 +47,13 @@ def contribute(request):
     }
 
     return render(request, 'contribute.html', context)
+
+
+def archives(request):
+    articles = Article.objects.filter(published=True).order_by('-date')
+
+    context = {
+        'articles': articles,
+    }
+
+    return render(request, 'archives.html', context)

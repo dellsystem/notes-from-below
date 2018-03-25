@@ -11,7 +11,7 @@
             </div>
             <div class="right menu">
                 <div class="ui dropdown item">
-                    <strong>Issues</strong> <i class="dropdown icon"></i>
+                    Issues <i class="dropdown icon"></i>
                     <div class="menu">
                         {% for issue in ISSUES %}
                         <a class="item" href="{% url 'issue' issue.slug %}">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="ui dropdown item">
-                    <strong>Tags</strong> <i class="dropdown icon"></i>
+                    Tags <i class="dropdown icon"></i>
                     <div class="menu">
                         {% for tag in TAGS %}
                         <a class="item" href="{% url 'tag' tag.slug %}">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="ui dropdown item">
-                    <strong>Categories</strong> <i class="dropdown icon"></i>
+                    Categories <i class="dropdown icon"></i>
                     <div class="menu">
                         <a class="item" href="{% url 'category' 'inquiry' %}">Inquiry</a>
                         <a class="item" href="{% url 'category' 'bulletins' %}">Bulletins</a>
@@ -39,6 +39,9 @@
                         <a class="item" href="{% url 'category' 'history' %}">History</a>
                     </div>
                 </div>
+                <a class="item" href="{% url 'archives' %}">
+                    Archives
+                </a>
             </div>
             <div class="right menu">
                 <a class="item" href="{% url 'about' %}">About</a>
