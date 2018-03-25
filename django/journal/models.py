@@ -71,6 +71,12 @@ class Issue(models.Model):
         options={'quality': 100},
         blank=True
     )
+    small_image = ProcessedImageField(
+        upload_to='issues',
+        processors=[ResizeToFill(540, 360)],
+        options={'quality': 100},
+        blank=True
+    )
     published = models.BooleanField(default=True)
 
     class Meta:
