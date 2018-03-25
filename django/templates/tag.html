@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block mastheadclass %}photo fixed{% endblock %}
+{% block mastheadbg %}{{ tag.image.url }}{% endblock %}
+{% block mastheadposition %}middle{% endblock %}
+{% block twittercard %}summary{% endblock %}
+
+{% block title %}{{ tag.name }}{% endblock %}
+{% block description %}{{ tag.description }}{% endblock %}
+{% block date %}{{ tag.get_date|date:"Y-m-d" }}{% endblock %}
+
+{% block masthead %}
+<div class="dark-screen">
+    <div class="ui container">
+        <h1 class="ui inverted header">
+            {{ tag.name }}
+            <div class="sub header">
+                {{ tag.description }}
+            </div>
+        </h1>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="ui container">
+        <h3 class="section-header">articles</h3>
+        <div class="ui stackable two column grid">
+            {% for article in tag.get_articles %}
+            {% include 'article_thumb.html' with article=article only %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

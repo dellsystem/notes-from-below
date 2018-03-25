@@ -32,10 +32,8 @@
                 </div>
                 <div class="four wide column">
                     <div class="ui field">
-                        <label>Background position (ignore)</label>
-                        <div class="ui fluid input">
-                            {{ adminform.form.background_position }}
-                        </div>
+                        <label>Tags</label>
+                        {{ adminform.form.tags }}
                     </div>
                 </div>
                 <div class="eight wide column">
@@ -109,6 +107,12 @@
             <div class="ui field">
                 <label>Featured (large picture)?</label>
                 {{ adminform.form.featured }}
+            </div>
+            <div class="ui field">
+                <label>Background position (ignore)</label>
+                <div class="ui fluid input">
+                    {{ adminform.form.background_position }}
+                </div>
             </div>
         </div>
     </div>
