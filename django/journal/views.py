@@ -58,6 +58,11 @@ class IssueView(generic.DetailView):
     template_name = 'issue.html'
 
 
+class IssuePdfView(generic.DetailView):
+    model = Issue
+    template_name = 'issue_pdf.html'
+
+
 class TagView(generic.DetailView):
     model = Tag
     template_name = 'tag.html'

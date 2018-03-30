@@ -49,7 +49,7 @@
     padding-top: 10px !important;
 }
 
-#article-lead {
+.article-lead {
     font-size: 1.1em;
     text-align: center;
     padding-bottom: 50px;
@@ -194,18 +194,17 @@ hr {
     #masthead {
         display: none;
     }
-/*
+
     body {
-      padding: 50mm 25mm !important;
-      margin: 0 !important;
-      margin-bottom: 20mm !important;
-      }
-*/
-    #article-header {
-        margin-top: 0;
-        background: #fff;
-        height: auto;
+        padding: 15mm 10mm !important;
+        margin: 0 !important;
+        margin-bottom: 20mm !important;
     }
+
+    iframe {
+        display: none;
+    }
+
     .article-category {
         font-size: 0.8em;
     }
@@ -228,9 +227,8 @@ hr {
     #article-metadata {
         display: none;
     }
-    #article-lead {
-        padding: 30px;
-        text-align: left;
+    .article-lead {
+        padding: 20px;
     }
     .article-content {
         margin-top: 30px;
@@ -240,6 +238,13 @@ hr {
         column-gap: 25px;
         -webkit-column-gap: 25px;
         -moz-column-gap: 25px;
+    }
+    .article-content h2 {
+        font-size: 1.2em;
+        margin-top: 0;
+    }
+    .break-after {
+        page-break-after: always;
     }
     .author-image {
         display: none !important;
@@ -256,6 +261,26 @@ hr {
     }
     #related-hr {
         display: none;
+    }
+
+    .interview-quote {
+        background: none !important;
+        border: 1px solid #000;
+        color: #000 !important;
+        margin-top: -8px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .interview-quote.author-1 {
+        margin-left: 0 !important;
+        margin-right: 10px;
+    }
+
+    .interview-quote.author-2 {
+        margin-right: 0 !important;
+        margin-left: 0;
     }
 }
 
