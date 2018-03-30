@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block image %}{{ page.image.url }}{% endblock %}
+
 {% block mastheadclass %}photo fixed{% endblock %}
 {% block mastheadbg %}{{ page.image.url }}{% endblock %}
 {% block mastheadposition %}{{ page.background_position|default:"center" }}{% endblock %}
