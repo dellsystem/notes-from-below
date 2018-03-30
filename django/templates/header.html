@@ -15,7 +15,7 @@
                     <div class="menu">
                         {% for issue in ISSUES %}
                         <a class="item" href="{% url 'issue' issue.slug %}">
-                            {{ issue.title }}
+                            {{ issue.number }}: {{ issue.title }}
                         </a>
                         {% endfor %}
                     </div>
