@@ -71,6 +71,11 @@ def imp():
     # Then run loaddata.
     local('django/manage.py loaddata ' + remote_filename)
 
+def import_media():
+    with cd('notes-from-below'):
+        run('tar czvf media.tar.gz media/')
+        get('media.tar.gz', 'media.tar.gz')
+
 
 # ONLY RUN THIS LOCALLY. Exports the local database dump.
 def exp():
