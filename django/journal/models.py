@@ -108,10 +108,16 @@ class Issue(models.Model):
         options={'quality': 100},
         blank=True
     )
+    content = MartorField()
+    formatted_content = models.TextField(editable=False)
     published = models.BooleanField(default=True)
 
     class Meta:
         get_latest_by = 'number'
+
+    def save(self, *args, **kwargs):
+        self.formatted_content = markdownify(self.content)
+        super().save(*args, **kwargs)
 
     def get_articles(self):
         # If this issue isn't published, just return all the articles.
@@ -167,7 +173,7 @@ class Article(models.Model):
     featured = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-date', 'order_in_issue']
+        ordering = ['order_in_issue']
         get_latest_by = 'date'
 
     def __str__(self):

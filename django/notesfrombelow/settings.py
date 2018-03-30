@@ -187,7 +187,6 @@ MARTOR_MARKDOWN_EXTENSIONS = [
     # Custom markdown extensions.
     'notesfrombelow.extensions.interview',
     'uploads.extensions.embed',
-    'martor.extensions.urlize',
     'martor.extensions.del_ins', # ~~strikethrough~~ and ++underscores++
     'martor.extensions.mention', # require for mention
     'martor.extensions.emoji',   # require for emoji

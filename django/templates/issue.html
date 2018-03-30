@@ -23,13 +23,7 @@
             they've been published or not) are listed below.</p>
         </div>
         {% endif %}
-        <h1 class="ui header">
-            {{ issue.title }} (#{{ issue.number }})
-            <div class="sub header">
-                {{ issue.date|date:"F Y"}}
-            </div>
-        </h1>
-        <h3 class="section-header">articles</h3>
+        {{ issue.formatted_content|safe }}
         <div class="ui stackable grid">
             {% for article in issue.get_articles %}
             {% include 'article_thumb.html' with article=article resize=True only %}

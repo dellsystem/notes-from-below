@@ -15,10 +15,34 @@
 {% block postcontent %}
 <hr />
 <div class="section">
+    <h2 class="ui centered header">
+        ongoing coverage
+        <div class="sub header">
+            <a href="{% url 'archives' %}">
+                View archives &raquo;
+            </a>
+        </div>
+    </h2>
+    <div class="ui stackable two column grid">
+        {% for tag, article, date in tags %}
+        <div class="ui centered column">
+            <h2 class="ui centered header">
+                {{ tag.name }}
+                <div class="sub header">
+                    <a href="{{ tag.get_absolute_url }}">View older &raquo;</A>
+                </div>
+            </h2>
+            {% include "article_thumb.html" with direct=True article=article %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<hr />
+<div class="section">
     <h2 class="ui centered header">latest issues</h2>
     <div class="ui stackable two column grid">
         {% for issue in issues %}
-        <div class="column">
+        <div class="centered column">
             <div class="issue-thumb">
                 <a href="{{ issue.get_absolute_url }}">
                     <img src="{{ issue.small_image.url }}" alt="{{ issue.title }}" class="ui fluid image"/>
@@ -29,23 +53,6 @@
                     </div>
                 </h2>
             </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-<hr />
-<div class="section">
-    <h2 class="ui centered header">ongoing coverage</h2>
-    <div class="ui stackable two column grid">
-        {% for tag, article in tags %}
-        <div class="ui column">
-            <h2 class="ui centered header">
-                {{ tag.name }}
-                <div class="sub header">
-                    <a href="{{ tag.get_absolute_url }}">View older &raquo;</A>
-                </div>
-            </h2>
-            {% include "article_thumb.html" with direct=True article=article %}
         </div>
         {% endfor %}
     </div>

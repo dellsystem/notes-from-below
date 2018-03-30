@@ -12,7 +12,7 @@ class ImageUploadAdmin(CompareVersionAdmin):
 
 
 class PdfUploadAdmin(CompareVersionAdmin):
-    list_display = ['title', 'slug']
+    list_display = ['title', 'slug', 'png_file']
     prepopulated_fields ={'slug': ('title',),}
 
 

@@ -27,6 +27,17 @@
             <a href="{{ article.category.get_absolute_url }}">
                 {{ article.category.slug }}
             </a>
+            {% if article.tags.count %}
+            ::
+            {% for tag in article.tags.all %}
+            <a href="{{ tag.get_absolute_url }}">
+                {{ tag.name }}
+            </a>
+            {% if not forloop.last %}
+            /
+            {% endif %}
+            {% endfor %}
+            {% endif %}
         </h3>
         <h1 class="ui inverted header article-title">
             {{ title }}
@@ -91,6 +102,13 @@
                     website.</p>
                     <p>Here's what the thumbnail will look like when it is
                     published:</p>
+                    {% if request.user.is_staff %}
+                    <a href="{% url 'admin:journal_article_change' article.pk %}"
+                       class="ui blue icon button">
+                       <i class="edit icon"></i>
+                       Edit in admin
+                    </a>
+                    {% endif %}
                 </div>
                 <div class="column">
                     {% include 'article_thumb.html' with article=article only %}
@@ -117,10 +135,19 @@
             {% endif %}
         </div>
         <hr />
-        <div class="ui two column stackable grid" id="article-metadata">
+        <div class="ui {% if request.user.is_staff %}three{% else %}two{% endif %} column stackable grid" id="article-metadata">
             <div class="column">
                 <p>{{ article.date|date:"F j, Y" }}</p>
             </div>
+            {% if request.user.is_staff %}
+            <div class="column">
+                <a href="{% url 'admin:journal_article_change' article.pk %}"
+                   class="ui blue fluid icon button">
+                    <i class="edit icon"></i>
+                    Edit in admin
+                </a>
+            </div>
+            {% endif %}
             <div class="right aligned column">
                 {% with url=request.build_absolute_uri|urlencode title=article.title|urlencode %}
                 <a href="mailto:?subject={{ title }}&amp;body={{ url }}"
@@ -159,7 +186,7 @@
         {% if related %}
         <hr id="related-hr" />
         <div class="section" id="article-related">
-            <h3 class="section-header">related</h3>
+            <h3 class="section-header">read next</h3>
             <div class="ui two column stackable grid">
             {% for related_article in related %}
             {% include 'article_thumb.html' with article=related_article only %}
