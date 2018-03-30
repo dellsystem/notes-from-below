@@ -1,0 +1,49 @@
+{% extends 'superbase.html' %}
+
+{% block title %}{{ issue.title }} (#{{ issue.number }}){% endblock %}
+
+{% block body %}
+<article class="page-content">
+    <div class="article-lead">
+        {{ issue.formatted_content|safe }}
+    </div>
+    {% for article in issue.articles.all %}
+    <br />
+    <h1 class="ui header centered article-header">
+        {{ article.title }}
+        <div class="sub header">
+            by {% for author in article.authors.all %}
+                <strong>
+                    {% if author.bio %}
+                    <a href="{{ author.bio }}">{{ author.name }}</a>{% else %}{{ author.name }}{% endif %}</strong>{% if not forloop.last %}, {% endif %}
+            {% empty %}
+            anonymous
+            {% endfor %}
+            /
+            <a href="{{ article.category.get_absolute_url }}/">
+            {{ article.category }}
+            </a>
+            /
+            {{ article.date|date:"F j, Y" }}
+        </div>
+    </h1>
+    <div class="article-lead">
+        <p>{{ article.subtitle }}</p>
+    </div>
+    <hr />
+    <div class="article-content section">
+        {{ article.formatted_content|safe }}
+    </div>
+    <div class="section break-after">
+        {% with num_authors=article.authors.count %}
+        {% if num_authors %}
+        <hr />
+        {% for author in article.authors.all %}
+        {% include 'author_bio.html' with author=author only %}
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    {% endfor %}
+</article>
+{% endblock %}
