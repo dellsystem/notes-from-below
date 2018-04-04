@@ -24,6 +24,7 @@ from notesfrombelow.admin import editor_site
 import journal.views
 import notesfrombelow.views
 import cms.views
+from journal.feeds import ArticleFeed
 from journal.sitemaps import *
 from cms.sitemaps import *
 
@@ -52,6 +53,7 @@ urlpatterns = [
     path('issue/<slug:slug>', journal.views.IssueView.as_view(), name='issue'),
     path('issue/<slug:slug>/pdf', journal.views.IssuePdfView.as_view(), name='issue_pdf'),
     path('tag/<slug:slug>', journal.views.TagView.as_view(), name='tag'),
+    path('rss/', ArticleFeed()),
     path('<slug:slug>', cms.views.PageView.as_view(), name='page'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
