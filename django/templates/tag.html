@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block image %}{{ tag.image.url }}{% endblock %}
+
 {% block mastheadclass %}photo fixed{% endblock %}
 {% block mastheadbg %}{{ tag.image.url }}{% endblock %}
 {% block mastheadposition %}middle{% endblock %}

@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
+{% block image %}{{ issue.small_image.url }}{% endblock %}
+
 {% block mastheadclass %}photo fixed{% endblock %}
 {% block mastheadbg %}{% if issue.image %}{{ issue.image.url }}{% else %}/static/img/triangles.png{% endif %}{% endblock %}
-{% block mastheadposition %}top{% endblock %}
+{% block mastheadposition %}bottom{% endblock %}
 {% block twittercard %}summary{% endblock %}
 
 {% block title %}{{ issue.title }} (#{{ issue.number }}){% endblock %}
