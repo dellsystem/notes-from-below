@@ -16,6 +16,7 @@ idna==2.6
 Markdown==2.6.10
 martor==1.2.5
 paramiko==2.4.0
+pdf2image==0.1.11
 pilkit==2.0
 Pillow==5.0.0
 psycopg2==2.7.3.2

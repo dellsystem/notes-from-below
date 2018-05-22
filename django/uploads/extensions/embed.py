@@ -27,12 +27,11 @@ class EmbedPattern(markdown.inlinepatterns.Pattern):
                 iframe_el.set('height', '800px')
                 iframe_el.text = 'Please download the PDF'
 
-                # Show the PNG version for a mobile fallback (if it exists)
-                if pdf_upload.png_file:
-                    image_el = markdown.util.etree.SubElement(div_el, 'img')
-                    image_el.set('class', 'mobile-only')
-                    object_el.set('class', 'non-mobile-only')
-                    image_el.set('src', pdf_upload.png_file.url)
+                # Show the PNG version for a mobile fallback.
+                image_el = markdown.util.etree.SubElement(div_el, 'img')
+                image_el.set('class', 'mobile-only')
+                object_el.set('class', 'non-mobile-only')
+                image_el.set('src', path + '.png')
 
                 return div_el
             else:

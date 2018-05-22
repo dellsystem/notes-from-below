@@ -2,6 +2,8 @@ from django.db import models
 
 from imagekit.processors import ResizeToFit
 from imagekit.models import ProcessedImageField
+from pdf2image import convert_from_path
+from PIL import Image
 
 
 class ImageUpload(models.Model):
@@ -17,7 +19,23 @@ class PdfUpload(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
     file = models.FileField(upload_to='pdfs')
-    png_file = models.ImageField(upload_to='pdf_pngs', blank=True, null=True)
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        super(PdfUpload, self).save(*args, **kwargs)
+        if getattr(self, '_file_changed', True):
+            self.generate_png()
+
+    def generate_png(self):
+        images = convert_from_path(self.file.path, dpi=150)
+        widths, heights = zip(*(i.size for i in images))
+        total_height = sum(heights)
+        max_width = max(widths)
+        new_image = Image.new('RGB', (max_width, total_height))
+        y_offset = 0
+        for image in images:
+            new_image.paste(image, (0, y_offset))
+            y_offset += image.size[1]
+        new_image.save(self.file.path + '.png')
