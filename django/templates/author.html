@@ -25,6 +25,17 @@
             {{ author.formatted_bio|safe }}
         </div>
         <hr />
+        {% if posts %}
+        <div class="section">
+            <h3 class="section-header">blog posts</h3>
+            <div class="ui two column stackable grid">
+                {% for post in posts %}
+                {% include 'blog_post_thumb.html' with post=post author=author only %}
+                {% endfor %}
+            </div>
+        </div>
+        <hr />
+        {% endif %}
         <div class="section">
             <h3 class="section-header">articles</h3>
             <div class="ui two column stackable grid">

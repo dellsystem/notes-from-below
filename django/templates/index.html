@@ -11,6 +11,26 @@
 {% endblock %}
 
 {% block postcontent %}
+{% if posts %}
+<hr />
+<div class="section">
+    <h2 class="ui centered header">
+        Ed Emery's blog
+        <div class="sub header">
+            <a href="{% url 'blog' %}">
+                View all posts &raquo;
+            </a>
+        </div>
+    </h2>
+    <div class="ui stackable two column grid">
+        {% for post in posts %}
+        <div class="ui column">
+            {% include "blog_post_thumb.html" with post=post author=blog_author %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 <hr />
 <div class="section">
     <h2 class="ui centered header">

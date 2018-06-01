@@ -24,14 +24,18 @@ from notesfrombelow.admin import editor_site
 import journal.views
 import notesfrombelow.views
 import cms.views
+import blog.views
 from journal.feeds import ArticleFeed
 from journal.sitemaps import *
 from cms.sitemaps import *
+from blog.sitemaps import BlogSitemap
+
 
 sitemaps = {
     'articles': ArticleSitemap(),
     'article_translations': ArticleTranslationSitemap(),
     'authors': AuthorSitemap(),
+    'blog': BlogSitemap(),
     'tags': TagSitemap(),
     'categories': CategorySitemap(),
     'issues': IssueSitemap(),
@@ -44,6 +48,8 @@ urlpatterns = [
     path('about', notesfrombelow.views.about, name='about'),
     path('contribute', notesfrombelow.views.contribute, name='contribute'),
     path('archives', notesfrombelow.views.archives, name='archives'),
+    path('blog', notesfrombelow.views.view_blog, name='blog'),
+    path('blog/<slug:slug>', blog.views.BlogPostView.as_view(), name='blog-post'),
     path('martor/', include('martor.urls')),
     path('sudo/', admin.site.urls),
     path('editor/', editor_site.urls),
