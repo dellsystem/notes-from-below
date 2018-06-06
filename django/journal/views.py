@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 
 from .models import Article, Category, Author, Issue, Tag
+from blog.models import BlogPost
 
 
 class ArticleView(generic.DetailView):
@@ -52,6 +53,11 @@ class AuthorView(generic.DetailView):
     model = Author
     template_name = 'author.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if context['author'].slug == 'ed-emery':
+            context['posts'] = BlogPost.objects.filter(published=True)
+        return context
 
 class IssueView(generic.DetailView):
     model = Issue

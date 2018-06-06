@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 from journal.models import Article, Author, Issue, Tag
 from cms.models import Page
+from blog.models import BlogPost
 
 
 def index(request):
@@ -20,6 +21,8 @@ def index(request):
         'tags': tags,
         'issues': Issue.objects.filter(published=True).order_by('-number'),
         'page': page,
+        'posts': BlogPost.objects.filter(published=True).order_by('-date')[:2],
+        'blog_author': Author.objects.get(slug='ed-emery'),
     }
 
     return render(request, 'index.html', context)
@@ -60,3 +63,13 @@ def archives(request):
     }
 
     return render(request, 'archives.html', context)
+
+
+def view_blog(request):
+    posts = BlogPost.objects.filter(published=True).order_by('-date')
+    context = {
+        'posts': posts,
+        'author': Author.objects.get(slug='ed-emery'),
+    }
+
+    return render(request, 'blog.html', context)

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'martor',
     'journal',
     'cms',
+    'blog',
     'uploads',
     'notesfrombelow',
 ]
