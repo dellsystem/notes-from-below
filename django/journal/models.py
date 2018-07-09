@@ -238,6 +238,7 @@ class ArticleTranslation(models.Model):
         related_name='translations')
     language = models.CharField(max_length=2, choices=settings.LANGUAGES)
     title = models.CharField(max_length=255)
+    subtitle = models.TextField()
     content = MartorField()
     formatted_content = models.TextField(editable=False)
     # Store the formatted_content field with all tags removed (for description)
