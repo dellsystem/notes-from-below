@@ -30,6 +30,12 @@ class ArticleView(generic.DetailView):
             desired_language_code = 'en'
             desired_translation = article
 
+        # Only show "by" (before the author name) for English.
+        if desired_language_code == 'en':
+            context['by_word'] = 'by '
+        else:
+            context['by_word'] = ''
+
         context['formatted'] = desired_translation.formatted_content
         context['unformatted'] = desired_translation.unformatted_content
         context['title'] = desired_translation.title

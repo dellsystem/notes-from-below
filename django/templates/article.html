@@ -9,7 +9,7 @@
 
 {% block longdescription %}{{ unformatted|truncatechars:500 }}{% endblock %}
 
-{% block description %}{% if article.authors.count %}by {{ article.authors.all|join:", " }} // {% endif %}{{ subtitle }}{% endblock %}
+{% block description %}{% if article.authors.count %}{{ by_word }}{{ article.authors.all|join:", " }} // {% endif %}{{ subtitle }}{% endblock %}
 
 {% block image %}{{ article.image_thumbnail.url }}{% endblock %}
 
