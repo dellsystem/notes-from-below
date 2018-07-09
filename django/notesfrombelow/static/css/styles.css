@@ -451,3 +451,7 @@ blockquote cite::before {
 .issue-thumb + .issue-thumb {
     padding-top: 50px;
 }
+
+.twitter-tweet {
+    margin: 0 auto;
+}
