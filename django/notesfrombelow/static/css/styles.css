@@ -299,6 +299,15 @@ blockquote {
     color: #666;
 }
 
+blockquote cite {
+    text-align: right;
+    display: block;
+}
+
+blockquote cite::before {
+    content: "\2014";
+}
+
 .author-bio {
     font-size: 0.8em;
 }
@@ -418,4 +427,8 @@ blockquote {
 
 .issue-thumb + .issue-thumb {
     padding-top: 50px;
+}
+
+.twitter-tweet {
+    margin: 0 auto;
 }
