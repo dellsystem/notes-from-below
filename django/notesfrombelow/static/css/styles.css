@@ -271,16 +271,8 @@ hr {
         width: 40px;
         height: 40px;
         line-height: 40px;
-    }
-
-    .interview-quote.author-1 {
         margin-left: 0 !important;
         margin-right: 10px;
-    }
-
-    .interview-quote.author-2,.interview-quote.author-3,.interview-quote.author-4,.interview-quote.author-5 {
-        margin-right: 0 !important;
-        margin-left: 0;
     }
 }
 
@@ -366,16 +358,9 @@ blockquote {
         padding: 30px 0;
     }
 
-    .interview-quote.author-1 {
+    .interview-quote {
         margin-left: 0 !important;
         margin-right: 10px !important;
-        margin-top: 10px !important;
-    }
-
-
-    .interview-quote.author-2,.interview-quote.author-3,.interview-quote.author-4,.interview-quote.author-5 {
-        margin-left: 10px !important;
-        margin-right: 0px !important;
         margin-top: 10px !important;
     }
 }
@@ -404,38 +389,30 @@ blockquote {
     border-radius: 25px;
     box-sizing: border-box;
     margin-top: -10px;
+    margin-left: -60px;
+    float: left;
 }
 
 .interview-quote.author-5 {
-    margin-right: -60px;
-    float: right;
     background: #ccc;
     color: black;
 }
 
 .interview-quote.author-4 {
-    margin-right: -60px;
-    float: right;
     background: #777;
 }
 
 .interview-quote.author-3 {
-    margin-right: -60px;
-    float: right;
     background: #fff;
     color: black;
     border: 1px solid #000;
 }
 
 .interview-quote.author-2 {
-    margin-right: -60px;
-    float: right;
     background: #000;
 }
 
 .interview-quote.author-1 {
-    margin-left: -60px;
-    float: left;
     background: #f62811;
 }
 
