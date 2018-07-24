@@ -25,6 +25,8 @@ Below by Ed Emery{% endblock %}
 {% block content %}
 <div class="page-content">
     <div class="ui container">
+        {{ page.formatted_content|safe }}
+        <hr />
         <div class="ui two column stackable grid">
             {% for post in posts %}
             {% include 'blog_post_thumb.html' with post=post author=author only %}
