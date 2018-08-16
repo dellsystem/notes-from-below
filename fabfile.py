@@ -97,6 +97,9 @@ def exp():
     #local('tar czvf media.tar.gz media/*')
     #put('media.tar.gz', 'notes-from-below/media.tar.gz')
 
+    # rsync with the remote media dir.
+    local('rsync -Prz media/ %s:notes-from-below/media/' % env.host_string)
+
     with cd('notes-from-below'):
         #run('tar xvzf media.tar.gz')
         # Then run loaddata.
