@@ -212,4 +212,5 @@ LANGUAGES = (
     ('fr', 'Français'),
     ('pl', 'Polish'),
     ('it', 'Italian'),
+    ('de', 'Deutsch'),
 )
