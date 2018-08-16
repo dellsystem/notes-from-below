@@ -71,6 +71,9 @@ def imp():
     # Then run loaddata.
     local('django/manage.py loaddata ' + remote_filename)
 
+    # rsync with the remote media dir.
+    local('rsync -Prz %s:notes-from-below/media/ media/' % env.host_string)
+
 def import_media():
     with cd('notes-from-below'):
         run('tar czvf media.tar.gz media/')
