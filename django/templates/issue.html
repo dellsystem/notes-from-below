@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block image %}{{ issue.small_image.url }}{% endblock %}
+{% block image %}{% if issue.small_image %}{{ issue.small_image.url }}{% endif %}{% endblock %}
 
 {% block mastheadclass %}photo fixed{% endblock %}
 {% block mastheadbg %}{% if issue.image %}{{ issue.image.url }}{% else %}/static/img/triangles.png{% endif %}{% endblock %}
