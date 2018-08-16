@@ -13,6 +13,26 @@
 {% block postcontent %}
 <hr />
 <div class="section">
+    <h2 class="ui centered header">latest issues</h2>
+    <div class="ui stackable two column grid">
+        {% for issue in issues %}
+        <div class="centered column">
+            <div class="issue-thumb">
+                <a href="{{ issue.get_absolute_url }}">
+                    <img src="{{ issue.small_image.url }}" alt="{{ issue.title }}" class="ui fluid image"/>
+                </a>
+                <h2 class="ui centered header">
+                    <div class="sub header">
+                        {{ issue.date|date:"F Y" }}
+                    </div>
+                </h2>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<hr />
+<div class="section">
     <h2 class="ui centered header">
         ongoing coverage
         <div class="sub header">
@@ -31,26 +51,6 @@
                 </div>
             </h2>
             {% include "article_thumb.html" with direct=True article=article %}
-        </div>
-        {% endfor %}
-    </div>
-</div>
-<hr />
-<div class="section">
-    <h2 class="ui centered header">latest issues</h2>
-    <div class="ui stackable two column grid">
-        {% for issue in issues %}
-        <div class="centered column">
-            <div class="issue-thumb">
-                <a href="{{ issue.get_absolute_url }}">
-                    <img src="{{ issue.small_image.url }}" alt="{{ issue.title }}" class="ui fluid image"/>
-                </a>
-                <h2 class="ui centered header">
-                    <div class="sub header">
-                        {{ issue.date|date:"F Y" }}
-                    </div>
-                </h2>
-            </div>
         </div>
         {% endfor %}
     </div>
