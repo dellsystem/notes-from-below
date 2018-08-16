@@ -148,6 +148,9 @@ hr {
 }
 
 @media only screen and (max-width: 1200px) {
+    #masthead.screen {
+        display: none;
+    }
     .mobile-only {
         display: block;
     }

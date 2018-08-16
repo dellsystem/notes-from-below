@@ -2,7 +2,7 @@
 
 {% block image %}{% if issue.small_image %}{{ issue.small_image.url }}{% endif %}{% endblock %}
 
-{% block mastheadclass %}photo fixed{% endblock %}
+{% block mastheadclass %}photo fixed screen{% endblock %}
 {% block mastheadbg %}{% if issue.image %}{{ issue.image.url }}{% else %}/static/img/triangles.png{% endif %}{% endblock %}
 {% block mastheadposition %}bottom{% endblock %}
 {% block twittercard %}summary{% endblock %}
@@ -14,6 +14,12 @@
 {% block content %}
 <div class="page-content">
     <div class="ui container">
+        {% if issue.small_image %}
+        <div class="mobile-only">
+            <img src="{{ issue.small_image.url }}" class="ui centered image" />
+        </div>
+        <br /><br />
+        {% endif %}
         {% if not issue.published %}
         <div class="ui error message">
             <div class="header">

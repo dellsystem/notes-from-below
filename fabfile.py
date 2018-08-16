@@ -31,7 +31,7 @@ def get_backup_filename(hostname):
         datetime.datetime.now().strftime('%Y-%m-%d-%H%M')
     )
 
-BACKUP_COMMAND = 'django/manage.py dumpdata cms journal uploads > '
+BACKUP_COMMAND = 'django/manage.py dumpdata cms journal blog uploads > '
 def backup():
     """Does a local database dump. Returns the filename."""
     local_filename = get_backup_filename(hostname=socket.gethostname())
@@ -96,6 +96,9 @@ def exp():
     # Sync the media directories.
     #local('tar czvf media.tar.gz media/*')
     #put('media.tar.gz', 'notes-from-below/media.tar.gz')
+
+    # rsync with the remote media dir.
+    local('rsync -Prz media/ %s:notes-from-below/media/' % env.host_string)
 
     with cd('notes-from-below'):
         #run('tar xvzf media.tar.gz')
