@@ -34,7 +34,7 @@ def about(request):
     contributors = Author.objects.filter(
         is_editor=False,
         articles__published=True
-    )
+    ).order_by('name')
 
     context = {
         'page': page,
