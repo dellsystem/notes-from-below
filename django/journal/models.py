@@ -28,7 +28,7 @@ class Tag(models.Model):
         return self.name
 
     def get_articles(self):
-        return self.articles.filter(published=True)
+        return self.articles.filter(published=True).order_by('-date')
 
     def get_latest_article(self):
         articles = self.articles.filter(published=True)
@@ -55,7 +55,7 @@ class Category(models.Model):
         verbose_name_plural = 'categories'
 
     def get_articles(self):
-        return self.articles.filter(published=True)
+        return self.articles.filter(published=True).order_by('-date')
 
     def get_absolute_url(self):
         return reverse('category', args=[self.slug])
@@ -80,7 +80,7 @@ class Author(models.Model):
         return self.name
 
     def get_articles(self):
-        return self.articles.filter(published=True)
+        return self.articles.filter(published=True).order_by('-date')
 
     def get_absolute_url(self):
         return reverse('author', args=[self.slug])
