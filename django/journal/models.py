@@ -106,7 +106,6 @@ class Issue(models.Model):
         upload_to='issues',
         processors=[ResizeToFill(540, 360)],
         options={'quality': 100},
-        blank=True
     )
     content = MartorField()
     formatted_content = models.TextField(editable=False)
