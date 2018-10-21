@@ -197,10 +197,6 @@ hr {
 }
 
 @media print {
-    #masthead {
-        display: none;
-    }
-
     body {
         padding: 15mm 10mm !important;
         margin: 0 !important;
@@ -230,9 +226,6 @@ hr {
     .print-only {
         display: block;
     }
-    #article-metadata {
-        display: none;
-    }
     .article-lead {
         padding: 20px;
     }
@@ -255,18 +248,12 @@ hr {
     .author-image {
         display: none !important;
     }
-    #article-related {
-        display: none;
-    }
-    #footer {
+    .print-hide {
         display: none;
     }
     #print-banner {
         display: block;
         font-size: 0.8em;
-    }
-    #related-hr {
-        display: none;
     }
 
     .interview-quote {

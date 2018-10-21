@@ -91,7 +91,7 @@
             </h1>
         </div>
         {% if not article.published %}
-        <div class="ui error message">
+        <div class="ui error message print-hide">
             <div class="ui two column grid">
                 <div class="column">
                     <div class="header">
@@ -119,17 +119,19 @@
         <div class="article-lead">
             <p>{{ desired_translation.subtitle }}</p>
             {% if translations %}
-            <br />
-            <div class="ui buttons">
-                {% for translation in translations %}
-                <a href="{{ translation.get_absolute_url }}"
-                   class="ui {% if translation.language == desired_translation.language %}black{% endif %} button">
-                    {{ translation.get_language_display }}
-                </a>
-                {% if not forloop.last %}
-                <div class="or" data-text="/"></div>
-                {% endif %}
-                {% endfor %}
+            <div class="print-hide">
+                <br />
+                <div class="ui buttons">
+                    {% for translation in translations %}
+                    <a href="{{ translation.get_absolute_url }}"
+                       class="ui {% if translation.language == desired_translation.language %}black{% endif %} button">
+                        {{ translation.get_language_display }}
+                    </a>
+                    {% if not forloop.last %}
+                    <div class="or" data-text="/"></div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
             </div>
             {% endif %}
         </div>
@@ -140,11 +142,13 @@
             </div>
             {% if request.user.is_staff %}
             <div class="column">
-                <a href="{% url 'admin:journal_article_change' article.pk %}"
-                   class="ui blue fluid icon button">
-                    <i class="edit icon"></i>
-                    Edit in admin
-                </a>
+                <div class="print-hide">
+                    <a href="{% url 'admin:journal_article_change' article.pk %}"
+                       class="ui blue fluid icon button">
+                        <i class="edit icon"></i>
+                        Edit in admin
+                    </a>
+                </div>
             </div>
             {% endif %}
             <div class="right aligned column">
@@ -183,8 +187,8 @@
         {% endwith %}
         {% with related=article.get_related %}
         {% if related %}
-        <hr id="related-hr" />
-        <div class="section" id="article-related">
+        <hr class="print-hide" />
+        <div class="section print-hide">
             <h3 class="section-header">read next</h3>
             <div class="ui two column stackable grid">
             {% for related_article in related %}
