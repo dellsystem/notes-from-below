@@ -31,6 +31,15 @@
             they've been published or not) are listed below.</p>
         </div>
         {% endif %}
+        {% if request.user.is_staff %}
+        <div class="ui center aligned basic segment">
+            <a href="{% url 'admin:journal_issue_change' issue.pk %}"
+               class="ui blue icon button">
+               <i class="edit icon"></i>
+               Edit in admin
+            </a>
+        </div>
+        {% endif %}
         {{ issue.formatted_content|safe }}
         <div class="ui stackable grid">
             {% for article in issue.get_articles %}
