@@ -26,7 +26,7 @@
 }
 
 .logo img {
-    width: 210px !important;
+    width: 170px !important;
     padding: 10px 0;
 }
 
@@ -138,10 +138,10 @@ hr {
     #header .stackable.secondary.menu {
         flex-direction: column;
     }
-    #header .right.menu.visible {
+    #header .mobile-hidden.menu.visible {
         display: flex;
     }
-    #header .ui.stackable.right.menu .item {
+    #header .ui.stackable.mobile-hidden .item {
         width: auto!important;
     }
 }
@@ -169,10 +169,10 @@ hr {
     #hamburger {
         visibility: visible;
     }
-    #header .right.menu {
+    #header .mobile-hidden {
         display: none;
     }
-    #header .right.menu.visible {
+    #header .mobile-hidden.visible {
         display: flex;
     }
 }
@@ -437,4 +437,22 @@ blockquote cite::before {
 
 .twitter-tweet {
     margin: 0 auto;
+}
+
+#search-dropdown form {
+    width: 100%;
+}
+
+#search-dropdown {
+    margin-top: 0;
+    padding: 10px 0;
+    display: none;
+}
+
+#search-dropdown.visible {
+    display: block;
+}
+
+#top-menu {
+    margin-bottom: 0;
 }

@@ -1,5 +1,7 @@
 import operator
 
+from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import render
 
 from journal.models import Article, Author, Issue, Tag
@@ -55,11 +57,32 @@ def contribute(request):
     return render(request, 'contribute.html', context)
 
 
-def archives(request):
-    articles = Article.objects.filter(published=True).order_by('-date')
+def archives(request, page=1):
+    query = request.GET.get('q', '')
+    if len(query) >= 3:
+        all_articles = Article.objects.filter(published=True).filter(
+            Q(title__icontains=query) | Q(subtitle__icontains=query)
+        ).order_by('-date')
+
+        # If there are tag or authors containing this query, display them.
+        tags = Tag.objects.filter(name__icontains=query)
+        authors = Author.objects.filter(name__icontains=query)
+    else:
+        all_articles = Article.objects.filter(published=True).order_by('-date')
+        tags = Tag.objects.none()
+        authors = Author.objects.none()
+
+    paginator = Paginator(all_articles, 10)
+    articles = paginator.get_page(page)
 
     context = {
         'articles': articles,
+        'page': page,
+        'total_pages': paginator.num_pages,
+        'total_articles': all_articles.count(),
+        'query': query,
+        'tags': tags,
+        'authors': authors,
     }
 
     return render(request, 'archives.html', context)

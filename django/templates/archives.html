@@ -13,12 +13,69 @@
 {% block content %}
 <div class="page-content">
     <div class="ui container">
-        <h1>Archives</h1>
+        <div class="ui middle aligned stackable grid">
+            <div class="five wide column">
+                <h1>Archives</h1>
+            </div>
+            <div class="six wide center aligned column">
+                {% if total_articles %}
+                {% include "pagination.html" with items=articles only %}
+                {% endif %}
+            </div>
+            <div class="five wide column">
+                {% include "search.html" %}
+            </div>
+        </div>
+        {% if query %}
+        <div class="ui message">
+            <div class="header">
+                Found {{ total_articles }} article{{ total_articles|pluralize }} for '{{ query }}'
+            </div>
+            {% if not total_articles %}
+            You can currently only find articles based on title and subtitle.
+            If you want to search based on a phrase in the body of the article,
+            try Google.
+            {% endif %}
+            {% if tags or authors %}
+            <ul class="list">
+                {% if tags %}
+                <li>
+                    Found tag{{ tags.count|pluralize }}:
+                    {% for tag in tags %}<a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+                    {% with count=tag.articles.count %}
+                    ({{ count }} article{{ count|pluralize }})
+                    {% if not forloop.last %}/{% endif %}
+                    {% endwith %}
+                    {% endfor %}
+                </li>
+                {% endif %}
+                {% if authors %}
+                <li>
+                    Found author{{ authors.count|pluralize }}:
+                    {% for author in authors %}<a href="{{ author.get_absolute_url }}">{{ author }}</a>
+                    {% with count=author.articles.count %}
+                    ({{ count }} article{{ count|pluralize }})
+                    {% if not forloop.last %}/{% endif %}
+                    {% endwith %}
+                    {% endfor %}
+                </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </div>
+        {% endif %}
         <div class="ui two column stackable grid">
             {% for article in articles %}
             {% include 'article_thumb.html' with article=article only %}
             {% endfor %}
         </div>
+        {% if total_articles %}
+        <div class="ui middle aligned stackable grid">
+            <div class="sixteen wide center aligned column">
+                {% include "pagination.html" with items=articles only %}
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
