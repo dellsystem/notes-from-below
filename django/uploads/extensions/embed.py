@@ -33,6 +33,10 @@ class EmbedPattern(markdown.inlinepatterns.Pattern):
                 object_el.set('class', 'non-mobile-only')
                 image_el.set('src', path + '.png')
 
+                print_el = markdown.util.etree.SubElement(div_el, 'div')
+                print_el.set('class', 'print-only')
+                print_el.text = "Don't print this page, print the PDF itself!"
+
                 return div_el
             else:
                 return 'INVALID FILE: ' + slug

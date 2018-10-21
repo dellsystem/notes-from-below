@@ -203,9 +203,6 @@ hr {
         margin-bottom: 20mm !important;
     }
 
-    iframe {
-        display: none;
-    }
 
     .article-category {
         font-size: 0.8em;
@@ -226,6 +223,9 @@ hr {
     .print-only {
         display: block;
     }
+    .non-mobile-only, iframe {
+        display: none;
+    }
     .article-lead {
         padding: 20px;
     }
@@ -244,9 +244,6 @@ hr {
     }
     .break-after {
         page-break-after: always;
-    }
-    .author-image {
-        display: none !important;
     }
     .print-hide {
         display: none;
