@@ -23,7 +23,7 @@ class CategoryAdmin(CompareVersionAdmin):
 
 
 class AuthorAdmin(CompareVersionAdmin):
-    list_display = ['name', 'bio', 'slug']
+    list_display = ['name', 'bio', 'slug', 'twitter']
     prepopulated_fields = {'slug': ('name',)}
 
 

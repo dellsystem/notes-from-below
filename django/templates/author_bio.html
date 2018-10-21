@@ -1,5 +1,6 @@
 <h3>
     <a href="{{ author.get_absolute_url }}">{{ author.name }}</a>
+    {% if author.twitter %}(<a href="https://twitter.com/{{ author.twitter }}">@{{author.twitter }}</a>){% endif %}
 </h3>
 <div class="author-bio">
     {{ author.formatted_bio|safe }}

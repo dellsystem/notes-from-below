@@ -13,6 +13,7 @@
     <div class="ui container">
         <h1 class="ui inverted header">
             {{ author.name }}
+            {% if author.twitter %}(<a href="https://twitter.com/{{ author.twitter }}">@{{author.twitter }}</a>){% endif %}
         </h1>
     </div>
 </div>

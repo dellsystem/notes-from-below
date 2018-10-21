@@ -44,7 +44,7 @@
             <div class="sub header">
                 {% if article.authors.count %}
                 by {% for author in article.authors.all %}
-                    <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>{% if not forloop.last %}, {% endif %}
+                    <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a>{% if author.twitter %} (<a href="https://twitter.com/{{ author.twitter }}">@{{ author.twitter }}</a>){% endif %}</strong>{% if not forloop.last %}, {% endif %}
                 {% endfor %}
                 {% endif %}
                 {% if article.issue %}

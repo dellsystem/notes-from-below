@@ -75,6 +75,7 @@ class Author(models.Model):
     formatted_bio = models.TextField(editable=False)
     slug = models.SlugField()
     is_editor = models.BooleanField(default=False)
+    twitter = models.CharField(max_length=15, blank=True, help_text='Username without the @')
 
     def __str__(self):
         return self.name
