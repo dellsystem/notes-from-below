@@ -1,0 +1,9 @@
+<form method="get" action="{% url 'archives_main' %}">
+    <div class="ui fluid icon small action input">
+        <input type="text" placeholder="Search ..." class="prompt"
+               autocomplete="off" name="q" value="{{ query }}" />
+        <button class="ui red right icon button" type="submit">
+            <i class="inverted search icon"></i>
+        </button>
+    </div>
+</form>

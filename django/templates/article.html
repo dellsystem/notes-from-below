@@ -4,12 +4,12 @@
 {% block mastheadbg %}{{ article.image.url }}{% endblock %}
 {% block mastheadposition %}{{ article.background_position|default:"center" }}{% endblock %}
 
-{% block title %}{{ title }}{% if desired_language_name %} ({{ desired_language_name }}){% endif %}{% endblock %}
+{% block title %}{{ desired_translation.title }}{% endblock %}
 {% block date %}{{ article.date|date:"Y-m-d" }}{% endblock %}
 
-{% block longdescription %}{{ unformatted|truncatechars:500 }}{% endblock %}
+{% block longdescription %}{{ desired_translation.unformatted|truncatechars:500 }}{% endblock %}
 
-{% block description %}{% if article.authors.count %}{{ by_word }}{{ article.authors.all|join:", " }} // {% endif %}{{ subtitle }}{% endblock %}
+{% block description %}{% if article.authors.count %}by {{ article.authors.all|join:", " }} // {% endif %}{{ desired_translation.subtitle }}{% endblock %}
 
 {% block image %}{{ article.image_thumbnail.url }}{% endblock %}
 
@@ -40,12 +40,11 @@
             {% endif %}
         </h3>
         <h1 class="ui inverted header article-title">
-            {{ title }}
-            {% if desired_language_name %}({{ desired_language_name }}){% endif %}
+            {{ desired_translation.title }}
             <div class="sub header">
                 {% if article.authors.count %}
                 by {% for author in article.authors.all %}
-                    <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>{% if not forloop.last %}, {% endif %}
+                    <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a>{% if author.twitter %} (<a href="https://twitter.com/{{ author.twitter }}">@{{ author.twitter }}</a>){% endif %}</strong>{% if not forloop.last %}, {% endif %}
                 {% endfor %}
                 {% endif %}
                 {% if article.issue %}
@@ -72,7 +71,7 @@
                 </a>
             </h3>
             <h1 class="ui inverted header article-title">
-                {{ article.title }}
+                {{ desired_translation.title }}
                 <div class="sub header">
                     {% if article.authors.count %}
                     by {% for author in article.authors.all %}
@@ -92,7 +91,7 @@
             </h1>
         </div>
         {% if not article.published %}
-        <div class="ui error message">
+        <div class="ui error message print-hide">
             <div class="ui two column grid">
                 <div class="column">
                     <div class="header">
@@ -118,19 +117,21 @@
         <br /><br />
         {% endif %}
         <div class="article-lead">
-            <p>{{ subtitle }}</p>
-            {% if languages %}
-            <br />
-            <div class="ui buttons">
-                {% for language_code, language_name in languages %}
-                <a href="?language={{ language_code }}"
-                   class="ui {% if language_code == desired_language_code %}black{% endif %} button">
-                    {{ language_name }}
-                </a>
-                {% if not forloop.last %}
-                <div class="or" data-text="/"></div>
-                {% endif %}
-                {% endfor %}
+            <p>{{ desired_translation.subtitle }}</p>
+            {% if translations %}
+            <div class="print-hide">
+                <br />
+                <div class="ui buttons">
+                    {% for translation in translations %}
+                    <a href="{{ translation.get_absolute_url }}"
+                       class="ui {% if translation.language == desired_translation.language %}black{% endif %} button">
+                        {{ translation.get_language_display }}
+                    </a>
+                    {% if not forloop.last %}
+                    <div class="or" data-text="/"></div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
             </div>
             {% endif %}
         </div>
@@ -141,15 +142,17 @@
             </div>
             {% if request.user.is_staff %}
             <div class="column">
-                <a href="{% url 'admin:journal_article_change' article.pk %}"
-                   class="ui blue fluid icon button">
-                    <i class="edit icon"></i>
-                    Edit in admin
-                </a>
+                <div class="print-hide">
+                    <a href="{% url 'admin:journal_article_change' article.pk %}"
+                       class="ui blue fluid icon button">
+                        <i class="edit icon"></i>
+                        Edit in admin
+                    </a>
+                </div>
             </div>
             {% endif %}
             <div class="right aligned column">
-                {% with url=request.build_absolute_uri|urlencode title=article.title|urlencode %}
+                {% with url=request.build_absolute_uri|urlencode title=desired_translation.title|urlencode %}
                 <a href="mailto:?subject={{ title }}&amp;body={{ url }}"
                    title="Send via email">
                     <i class="large mail icon"></i>
@@ -168,7 +171,7 @@
         </div>
         <div class="article-content section">
             <p>
-                {{ formatted|safe }}
+                {{ desired_translation.formatted_content|safe }}
             </p>
         </div>
         {% with num_authors=article.authors.count %}
@@ -184,8 +187,8 @@
         {% endwith %}
         {% with related=article.get_related %}
         {% if related %}
-        <hr id="related-hr" />
-        <div class="section" id="article-related">
+        <hr class="print-hide" />
+        <div class="section print-hide">
             <h3 class="section-header">read next</h3>
             <div class="ui two column stackable grid">
             {% for related_article in related %}

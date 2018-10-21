@@ -13,6 +13,7 @@
     <div class="ui container">
         <h1 class="ui inverted header">
             {{ author.name }}
+            {% if author.twitter %}(<a href="https://twitter.com/{{ author.twitter }}">@{{author.twitter }}</a>){% endif %}
         </h1>
     </div>
 </div>
@@ -21,6 +22,15 @@
 {% block content %}
 <div class="page-content">
     <div class="ui container">
+        {% if request.user.is_staff %}
+        <div class="ui center aligned basic segment">
+            <a href="{% url 'admin:journal_author_change' author.pk %}"
+               class="ui blue icon button">
+               <i class="edit icon"></i>
+               Edit in admin
+            </a>
+        </div>
+        {% endif %}
         <div class="section">
             {{ author.formatted_bio|safe }}
         </div>

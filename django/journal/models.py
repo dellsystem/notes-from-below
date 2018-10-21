@@ -75,6 +75,7 @@ class Author(models.Model):
     formatted_bio = models.TextField(editable=False)
     slug = models.SlugField()
     is_editor = models.BooleanField(default=False)
+    twitter = models.CharField(max_length=15, blank=True, help_text='Username without the @')
 
     def __str__(self):
         return self.name
@@ -92,7 +93,8 @@ class Author(models.Model):
 
 
 class Issue(models.Model):
-    number = models.PositiveSmallIntegerField(unique=True)
+    number = models.CharField(unique=True, max_length=3,
+        help_text="Either an integer (e.g., 1) or a decimal (e.g., 4.1)")
     title =  models.CharField(max_length=50)
     date = models.DateField(help_text='Day ignored')
     slug = models.SlugField()
@@ -106,14 +108,13 @@ class Issue(models.Model):
         upload_to='issues',
         processors=[ResizeToFill(540, 360)],
         options={'quality': 100},
-        blank=True
     )
     content = MartorField()
     formatted_content = models.TextField(editable=False)
     published = models.BooleanField(default=True)
 
     class Meta:
-        get_latest_by = 'number'
+        get_latest_by = 'date'
 
     def save(self, *args, **kwargs):
         self.formatted_content = markdownify(self.content)
@@ -125,6 +126,13 @@ class Issue(models.Model):
             return self.articles.filter(published=True)
         else:
             return self.articles.all()
+
+    # Use h2 or h3 in footer depending on the length of the title.
+    def get_title_header(self):
+        if len(self.title) > 30:
+            return 'h3'
+        else:
+            return 'h2'
 
     def get_absolute_url(self):
         return reverse('issue', args=[self.slug])
@@ -178,6 +186,13 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def language(self):
+        return 'en'
+
+    def get_language_display(self):
+        return 'English'
 
     def get_absolute_url(self):
         return reverse('article', args=[self.slug])
@@ -243,6 +258,8 @@ class ArticleTranslation(models.Model):
     formatted_content = models.TextField(editable=False)
     # Store the formatted_content field with all tags removed (for description)
     unformatted_content = models.TextField(editable=False)
+    # The slug should really have uniqueness checks but, too hard tbh
+    slug = models.SlugField(max_length=50)
     last_modified = models.DateField(auto_now=True)
 
     class Meta:
@@ -258,4 +275,4 @@ class ArticleTranslation(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('article', args=[self.article.slug]) + '?language=' + self.language
+        return reverse('article', args=[self.slug])

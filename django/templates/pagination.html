@@ -1,0 +1,41 @@
+<div class="ui right tiny pagination menu">
+    {% if items.has_previous %}
+    <a class="item"
+       title="First"
+       href="{% url 'archives' 1 %}">
+    {% else %}
+    <a class="disabled item">
+    {% endif %}
+    <i class="double left angle icon"></i></a>
+
+    {% if items.has_previous %}
+    <a class="item"
+       title="Previous"
+       href="{% url 'archives' items.previous_page_number %}">
+    {% else %}
+    <a class="disabled item">
+    {% endif %}
+    <i class="left angle icon"></i></a>
+
+    <a class="active item">
+        Page {{ items.number }} of {{ items.paginator.num_pages }}
+    </a>
+
+    {% if items.has_next %}
+    <a class="item"
+       title="Next"
+       href="{% url 'archives' items.next_page_number %}">
+    {% else %}
+    <a class="disabled item">
+    {% endif %}
+    <i class="angle right icon"></i></a>
+
+    {% if items.has_next %}
+    <a class="item"
+       title="Last"
+       href="{% url 'archives' items.paginator.num_pages %}">
+    {% else %}
+    <a class="disabled item">
+    {% endif %}
+    <i class="angle double right icon"></i></a>
+</div>

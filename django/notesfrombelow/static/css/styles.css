@@ -26,7 +26,7 @@
 }
 
 .logo img {
-    width: 210px !important;
+    width: 170px !important;
     padding: 10px 0;
 }
 
@@ -100,14 +100,17 @@ hr {
 #footer {
     background: url('/static/img/bottom.png');
     width: 100%;
-    height: 400px;
+    min-height: 400px;
     background-repeat: repeat-x;
-    padding: 40px 0;
     color: #fff;
 }
 
 #footer p {
     font-size: 0.8em;
+}
+
+#footer .input {
+    padding-top: 10px;
 }
 
 .footnote hr {
@@ -135,10 +138,10 @@ hr {
     #header .stackable.secondary.menu {
         flex-direction: column;
     }
-    #header .right.menu.visible {
+    #header .mobile-hidden.menu.visible {
         display: flex;
     }
-    #header .ui.stackable.right.menu .item {
+    #header .ui.stackable.mobile-hidden .item {
         width: auto!important;
     }
 }
@@ -166,10 +169,10 @@ hr {
     #hamburger {
         visibility: visible;
     }
-    #header .right.menu {
+    #header .mobile-hidden {
         display: none;
     }
-    #header .right.menu.visible {
+    #header .mobile-hidden.visible {
         display: flex;
     }
 }
@@ -194,19 +197,12 @@ hr {
 }
 
 @media print {
-    #masthead {
-        display: none;
-    }
-
     body {
         padding: 15mm 10mm !important;
         margin: 0 !important;
         margin-bottom: 20mm !important;
     }
 
-    iframe {
-        display: none;
-    }
 
     .article-category {
         font-size: 0.8em;
@@ -227,7 +223,7 @@ hr {
     .print-only {
         display: block;
     }
-    #article-metadata {
+    .non-mobile-only, iframe {
         display: none;
     }
     .article-lead {
@@ -249,21 +245,12 @@ hr {
     .break-after {
         page-break-after: always;
     }
-    .author-image {
-        display: none !important;
-    }
-    #article-related {
-        display: none;
-    }
-    #footer {
+    .print-hide {
         display: none;
     }
     #print-banner {
         display: block;
         font-size: 0.8em;
-    }
-    #related-hr {
-        display: none;
     }
 
     .interview-quote {
@@ -434,4 +421,22 @@ blockquote cite::before {
 
 .twitter-tweet {
     margin: 0 auto;
+}
+
+#search-dropdown form {
+    width: 100%;
+}
+
+#search-dropdown {
+    margin-top: 0;
+    padding: 10px 0;
+    display: none;
+}
+
+#search-dropdown.visible {
+    display: block;
+}
+
+#top-menu {
+    margin-bottom: 0;
 }

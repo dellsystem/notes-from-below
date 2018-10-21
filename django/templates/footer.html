@@ -1,7 +1,7 @@
-<div id="footer">
+<div id="footer" class="print-hide">
     <div class="ui container">
         <div class="ui middle aligned stackable grid">
-            <div class="six wide column">
+            <div class="eight wide column">
                 <div class="logo">
 
                     <img src="/static/img/logo.png" alt="Notes From Below" />
@@ -12,7 +12,7 @@
                 <div class="ui inverted horizontal list">
                     <a class="item" href="{% url 'about' %}">About</a>
                     <a class="item" href="{% url 'contribute' %}">Contribute</a>
-                    <a class="item" href="http://notesfrombelowshop.bigcartel.com" target="_blank">Shop</a>
+                    <a class="item" href="https://www.patreon.com/notesfrombelow/overview" target="_blank">Patreon</a>
                     <a class="item" href="https://www.facebook.com/notesfrombelow4">
                         <i class="facebook icon"></i>
                     </a>
@@ -26,10 +26,10 @@
                     <a class="item" href="{% url 'category' 'bulletins' %}">Bulletins</a>
                     <a class="item" href="{% url 'category' 'theory' %}">Theory</a>
                     <a class="item" href="{% url 'category' 'history' %}">History</a>
-                    <a class="item" href="{% url 'category' 'archives' %}">Archives</a>
+                    <a class="item" href="{% url 'archives_main' %}">Archives</a>
                 </div>
             </div>
-            <div class="ten wide right aligned column">
+            <div class="eight wide column">
                 <form action="https://notesfrombelow.us16.list-manage.com/subscribe/post?u=8604188cb9b7d2875a8805c95&amp;id=61b78625e4" method="post">
                     <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_8604188cb9b7d2875a8805c95_61b78625e4" tabindex="-1" value=""></div>
                     <div class="ui inverted fluid action input">
@@ -37,8 +37,11 @@
                         <button type="submit" class="ui button">Subscribe</button>
                     </div>
                 </form>
-                <h2 class="ui inverted header">
+                {% with header_number=LATEST_ISSUE.get_title_header %}
+                <{{ header_number }} class="ui inverted header">
+                    <div class="sub header">
                     Latest issue:
+                    </div>
                     <a href="{{ LATEST_ISSUE.get_absolute_url }}">
                         {{ LATEST_ISSUE.title }} (#{{ LATEST_ISSUE.number }})
                     </a>
@@ -46,7 +49,8 @@
                         Site by <a href="https://twitter.com/dellsystem">@dellsystem</a>.
                         Source on <a href="https://github.com/dellsystem/notes-from-below">GitHub</a>.
                     </div>
-                </h2>
+                </{{ header_number }}>
+                {% endwith %}
             </div>
         </div>
     </div>

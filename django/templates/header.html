@@ -1,6 +1,6 @@
-<div id="header">
+<div id="header" class="print-hide">
     <div class="ui container">
-        <div class="ui inverted stackable secondary small menu">
+        <div class="ui inverted stackable secondary small menu" id="top-menu">
             <div class="item" id="hamburger-item">
                 <a href="/" class="logo">
                     <img src="/static/img/logo.png" alt="Notes From Below" />
@@ -9,7 +9,7 @@
                     <i class="big content icon"></i>
                 </a>
             </div>
-            <div class="right menu">
+            <div class="menu mobile-hidden">
                 <div class="ui dropdown item">
                     Issues <i class="dropdown icon"></i>
                     <div class="menu">
@@ -26,20 +26,35 @@
                 <a class="item" href="{% url 'category' 'history' %}">History</a>
                 <a class="item" href="{% url 'blog' %}">Ed Emery</a>
             </div>
-            <div class="right menu">
+            <div class="right menu mobile-hidden">
                 <a class="item" href="{% url 'about' %}">About</a>
                 <a class="item" href="{% url 'contribute' %}">Contribute</a>
-                <a class="item" href="https://www.patreon.com/notesfrombelow" target="_blank">Patreon</a>
+                <a class="item" href="https://www.patreon.com/notesfrombelow/overview" target="_blank">Patreon</a>
                 <a class="item" href="https://www.facebook.com/notesfrombelow4">
                     <i class="facebook icon"></i>
                 </a>
                 <a class="item" href="https://twitter.com/NotesFrom_Below">
                     <i class="twitter icon"></i>
                 </a>
-                <!--<a class="item" href="">
-                    <i class="search link icon"></i>
-                </a>-->
             </div>
+            <div class="right menu mobile-hidden">
+                <div class="ui dropdown item" onclick="toggleSearch()">
+                    <i class="large search link icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="ui inverted secondary menu" id="search-dropdown">
+            <form method="get" action="{% url 'archives_main' %}">
+                <div class="item">
+                    <div class="ui fluid large right labeled input">
+                        <input type="text" placeholder="Search articles ..."
+                               autocomplete="off" name="q" autofocus />
+                        <button class="ui red right icon button" type="submit">
+                            <i class="inverted search icon"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
