@@ -93,7 +93,8 @@ class Author(models.Model):
 
 
 class Issue(models.Model):
-    number = models.PositiveSmallIntegerField(unique=True)
+    number = models.CharField(unique=True, max_length=3,
+        help_text="Either an integer (e.g., 1) or a decimal (e.g., 4.1)")
     title =  models.CharField(max_length=50)
     date = models.DateField(help_text='Day ignored')
     slug = models.SlugField()
@@ -113,7 +114,7 @@ class Issue(models.Model):
     published = models.BooleanField(default=True)
 
     class Meta:
-        get_latest_by = 'number'
+        get_latest_by = 'date'
 
     def save(self, *args, **kwargs):
         self.formatted_content = markdownify(self.content)
