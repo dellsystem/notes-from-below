@@ -102,12 +102,15 @@ hr {
     width: 100%;
     height: 400px;
     background-repeat: repeat-x;
-    padding: 40px 0;
     color: #fff;
 }
 
 #footer p {
     font-size: 0.8em;
+}
+
+#footer .input {
+    padding-top: 10px;
 }
 
 .footnote hr {
