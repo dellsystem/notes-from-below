@@ -126,6 +126,13 @@ class Issue(models.Model):
         else:
             return self.articles.all()
 
+    # Use h2 or h3 in footer depending on the length of the title.
+    def get_title_header(self):
+        if len(self.title) > 30:
+            return 'h3'
+        else:
+            return 'h2'
+
     def get_absolute_url(self):
         return reverse('issue', args=[self.slug])
 

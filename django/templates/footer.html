@@ -37,7 +37,8 @@
                         <button type="submit" class="ui button">Subscribe</button>
                     </div>
                 </form>
-                <h2 class="ui inverted header">
+                {% with header_number=LATEST_ISSUE.get_title_header %}
+                <{{ header_number }} class="ui inverted header">
                     <div class="sub header">
                     Latest issue:
                     </div>
@@ -48,7 +49,8 @@
                         Site by <a href="https://twitter.com/dellsystem">@dellsystem</a>.
                         Source on <a href="https://github.com/dellsystem/notes-from-below">GitHub</a>.
                     </div>
-                </h2>
+                </{{ header_number }}>
+                {% endwith %}
             </div>
         </div>
     </div>
