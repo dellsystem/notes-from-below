@@ -74,7 +74,8 @@ class ArticleAdmin(CompareVersionAdmin):
 
 
 class ArticleTranslationAdmin(CompareVersionAdmin):
-    list_display = ['article', 'title', 'language']
+    list_display = ['article', 'title', 'slug', 'language']
+    prepopulated_fields = {'slug': ('title',)}
 
 
 editor_site.register(models.Issue, IssueAdmin)

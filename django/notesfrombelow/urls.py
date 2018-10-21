@@ -56,7 +56,7 @@ urlpatterns = [
     path('editor/', editor_site.urls),
     path('author/<slug:slug>', journal.views.AuthorView.as_view(), name='author'),
     path('category/<slug:slug>', journal.views.CategoryView.as_view(), name='category'),
-    path('article/<slug:slug>', journal.views.ArticleView.as_view(), name='article'),
+    path('article/<slug:slug>', journal.views.view_article, name='article'),
     path('issue/<slug:slug>', journal.views.IssueView.as_view(), name='issue'),
     path('issue/<slug:slug>/pdf', journal.views.IssuePdfView.as_view(), name='issue_pdf'),
     path('tag/<slug:slug>', journal.views.TagView.as_view(), name='tag'),

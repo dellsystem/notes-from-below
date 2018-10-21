@@ -122,8 +122,8 @@
             {% if languages %}
             <br />
             <div class="ui buttons">
-                {% for language_code, language_name in languages %}
-                <a href="?language={{ language_code }}"
+                {% for language_code, language_name, language_url in languages %}
+                <a href="{{ language_url }}"
                    class="ui {% if language_code == desired_language_code %}black{% endif %} button">
                     {{ language_name }}
                 </a>

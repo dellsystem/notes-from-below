@@ -242,6 +242,8 @@ class ArticleTranslation(models.Model):
     formatted_content = models.TextField(editable=False)
     # Store the formatted_content field with all tags removed (for description)
     unformatted_content = models.TextField(editable=False)
+    # The slug should really have uniqueness checks but, too hard tbh
+    slug = models.SlugField(max_length=50)
     last_modified = models.DateField(auto_now=True)
 
     class Meta:
@@ -257,4 +259,4 @@ class ArticleTranslation(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('article', args=[self.article.slug]) + '?language=' + self.language
+        return reverse('article', args=[self.slug])
