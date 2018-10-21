@@ -178,6 +178,13 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def language(self):
+        return 'en'
+
+    def get_language_display(self):
+        return 'English'
+
     def get_absolute_url(self):
         return reverse('article', args=[self.slug])
 

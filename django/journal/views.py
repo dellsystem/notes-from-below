@@ -1,5 +1,5 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import generic
 
 from .models import Article, ArticleTranslation, Category, Author, Issue, Tag
@@ -11,60 +11,40 @@ class ArticleView(generic.DetailView):
     template_name = 'article.html'
 
 def view_article(request, slug):
-    # If there's an article with slug, go with that. If not, check translations
-    article = Article.objects.filter(slug=slug).first()
-    if article:
-        # For backwards compatibility, check if a language is specified.
-        desired_translation = None
-        desired_language_code = request.GET.get('language')
+    # First check if this slug is for an ArticleTranslation. If not, try a
+    # regular article (and redirect away the language code if necessary).
+    desired_translation = ArticleTranslation.objects.filter(slug=slug).first()
+    if desired_translation:
+        article = desired_translation.article
     else:
-        desired_translation = ArticleTranslation.objects.filter(slug=slug).first()
-        if desired_translation:
-            desired_language_code = desired_translation.language
-            article = desired_translation.article
+        article = Article.objects.filter(slug=slug).first()
+        language_code = request.GET.get('language')
+        if language_code:
+            desired_translation = ArticleTranslation.objects.filter(
+                language=language_code,
+                article=article,
+            ).first()
+            if desired_translation:
+                return redirect(desired_translation)
+            else:
+                # The article exists, but the translation doesn't. Show 404.
+                raise Http404
         else:
+            # Assume English.
+            desired_translation = article
+
+        if not article:
             raise Http404
 
-    all_languages = []
-    desired_language_name = None  # not needed for English
-
-    for translation in article.translations.all():
-        language_name = translation.get_language_display()
-        all_languages.append(
-            (
-                translation.language,
-                language_name,
-                translation.get_absolute_url()
-            )
-        )
-        if translation.language == desired_language_code:
-            desired_language_name = language_name
-            desired_translation = translation
-
-    # If the get parameter doesn't match an existing translation, use en.
-    if desired_translation is None:
-        desired_language_code = 'en'
-        desired_translation = article
-
-    # Only show "by" (before the author name) for English.
-    if desired_language_code == 'en':
-        by_word = 'by '
-    else:
-        by_word = ''
-
-    # Only add these context variables if translations exist.
-    if all_languages:
-        all_languages.append(('en', 'English', article.get_absolute_url()))
+    translations = [translation for translation in article.translations.all()]
+    if translations:
+        # If there are other languages, add the main article (for English).
+        translations.append(article)
 
     context = {
-        'formatted': desired_translation.formatted_content,
-        'unformatted': desired_translation.unformatted_content,
-        'title': desired_translation.title,
-        'subtitle': desired_translation.subtitle,
-        'desired_language_code': desired_language_code,
-        'desired_language_name': desired_language_name,
-        'languages': all_languages,
+        'translations': translations,
         'article': article,
+        'desired_translation': desired_translation,
     }
     return render(request, 'article.html', context)
 
