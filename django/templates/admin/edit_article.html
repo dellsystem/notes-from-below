@@ -95,21 +95,26 @@
     </div>
     <div class="four wide column">
         <div class="ui segment">
-            {{ adminform.form.image }}
-            {% if adminform.form.instance.image_thumbnail %}
-            <img class="ui fluid image" src="{{ adminform.form.instance.image.url }}" />
-            {% endif %}
-            <br />
             <div class="ui field">
                 <label>Published?</label>
                 {{ adminform.form.published }}
             </div>
+            <h2 class="ui header">
+                Image
+                <div class="sub header">{{ adminform.form.image.help_text }}</div>
+            </h2>
+            <div class="ui field">
+                {{ adminform.form.image }}
+            </div>
+            {% if adminform.form.instance.image_thumbnail %}
+            <img class="ui fluid image" src="{{ adminform.form.instance.image.url }}" />
+            {% endif %}
             <div class="ui field">
                 <label>Featured (large picture)?</label>
                 {{ adminform.form.featured }}
             </div>
             <div class="ui field">
-                <label>Background position (ignore)</label>
+                <label>Image background position (ignore)</label>
                 <div class="ui fluid input">
                     {{ adminform.form.background_position }}
                 </div>
