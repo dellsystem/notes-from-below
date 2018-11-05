@@ -102,12 +102,14 @@ class Issue(models.Model):
         upload_to='issues',
         processors=[ResizeToFill(1920, 450)],
         options={'quality': 100},
-        blank=True
+        blank=True,
+        help_text='Cropped to 1920x450. Not all of it will be visible to everyone.'
     )
     small_image = ProcessedImageField(
         upload_to='issues',
         processors=[ResizeToFill(540, 360)],
         options={'quality': 100},
+        help_text='Cropped to 540x360'
     )
     content = MartorField()
     formatted_content = models.TextField(editable=False)
@@ -162,7 +164,8 @@ class Article(models.Model):
         upload_to='articles',
         processors=[ResizeToFill(1920, 1080)],
         format='JPEG',
-        options={'quality': 100}
+        options={'quality': 100},
+        help_text="Resized to 1920x1080. Not all of it will be visible."
     )
     image_thumbnail = ImageSpecField(
         source='image',
