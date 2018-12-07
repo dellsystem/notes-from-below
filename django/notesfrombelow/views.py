@@ -32,7 +32,7 @@ def index(request):
 
 def about(request):
     page = Page.objects.get(slug='about')
-    editors = Author.objects.filter(is_editor=True)
+    editors = Author.objects.filter(is_editor=True).order_by('name')
     contributors = Author.objects.filter(
         is_editor=False,
         articles__published=True
