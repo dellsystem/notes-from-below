@@ -117,6 +117,14 @@ hr {
     margin-top: 50px 0;
 }
 
+.footnote li {
+    transition: background 1s ease;
+}
+
+.footnote .highlighted {
+    background-color: #fdd7d3;
+}
+
 .page-content {
     padding: 50px 0;
 }
