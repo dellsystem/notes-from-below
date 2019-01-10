@@ -54,9 +54,35 @@ class EmbedPattern(markdown.inlinepatterns.Pattern):
                 return 'INVALID FILE: ' + slug
 
 
+# For embedding two images side by side.
+DOUBLE_EMBED_RE = r'\[img2:([a-z0-9-]+) ([a-z0-9-]+)\]'
+class DoubleEmbedPattern(markdown.inlinepatterns.Pattern):
+    def handleMatch(self, m):
+        slug_1 = self.unescape(m.group(2))
+        slug_2 = self.unescape(m.group(3))
+        image_1 = ImageUpload.objects.filter(slug=slug_1).first()
+        image_2 = ImageUpload.objects.filter(slug=slug_2).first()
+        if image_1 and image_2:
+            div_el = markdown.util.etree.Element('div')
+            div_el.set('class' , 'uploaded-images')
+            image_el_1 = markdown.util.etree.SubElement(div_el, 'img')
+            image_el_1.set('src', image_1.file.url)
+            image_el_2 = markdown.util.etree.SubElement(div_el, 'img')
+            image_el_2.set('src', image_2.file.url)
+            return div_el
+        else:
+            invalid_slugs = []
+            if not image_1:
+                invalid_slugs.append(slug_1)
+            if not image_2:
+                invalid_slugs.append(slug_2)
+            return 'INVALID FILE: ' + ', '.join(invalid_slugs)
+
+
 class EmbedExtension(markdown.Extension):
     def extendMarkdown(self, md, md_globals):
         md.inlinePatterns['embed'] = EmbedPattern(EMBED_RE, md)
+        md.inlinePatterns['double_embed'] = DoubleEmbedPattern(DOUBLE_EMBED_RE, md)
 
 
 def makeExtension(*args, **kwargs):
