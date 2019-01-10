@@ -4,3 +4,5 @@
 media/
 env/
 /static/
+backups/
+media.tar.gz
