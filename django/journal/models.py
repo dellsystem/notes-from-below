@@ -30,8 +30,11 @@ class Tag(models.Model):
     def get_articles(self):
         return self.articles.filter(published=True).order_by('-date')
 
-    def get_latest_article(self):
+    def get_latest_article(self, existing_articles=None):
         articles = self.articles.filter(published=True)
+        if existing_articles:
+            articles = articles.exclude(pk__in=existing_articles)
+
         if articles.exists():
             return articles.latest()
 
