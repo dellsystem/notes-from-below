@@ -38,6 +38,18 @@
                <i class="edit icon"></i>
                Edit in admin
             </a>
+            <a href="{% url 'admin:journal_article_add' %}?issue={{ issue.pk }}"
+               class="ui blue basic icon button">
+               <i class="plus icon"></i>
+               Add a new article
+            </a>
+            {% if not issue.published %}
+            <a href="{% url 'issue_publish' issue.slug %}"
+               class="ui green button">
+               <i class="checkmark icon"></i>
+               Prepare for publication
+            </a>
+            {% endif %}
         </div>
         {% endif %}
         {{ issue.formatted_content|safe }}

@@ -58,6 +58,7 @@ urlpatterns = [
     path('category/<slug:slug>', journal.views.CategoryView.as_view(), name='category'),
     path('article/<slug:slug>', journal.views.view_article, name='article'),
     path('issue/<slug:slug>', journal.views.IssueView.as_view(), name='issue'),
+    path('issue/<slug:slug>/publish', journal.views.issue_publish, name='issue_publish'),
     path('issue/<slug:slug>/pdf', journal.views.IssuePdfView.as_view(), name='issue_pdf'),
     path('tag/<slug:slug>', journal.views.TagView.as_view(), name='tag'),
     path('rss/', ArticleFeed()),

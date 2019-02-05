@@ -1,3 +1,6 @@
+import datetime
+
+from django.contrib.admin.views.decorators import staff_member_required
 from django.http import Http404
 from django.shortcuts import redirect, render
 from django.views import generic
@@ -9,6 +12,31 @@ from blog.models import BlogPost
 class ArticleView(generic.DetailView):
     model = Article
     template_name = 'article.html'
+
+
+@staff_member_required
+def issue_publish(request, slug):
+    issue = Issue.objects.filter(slug=slug).first()
+    if not issue:
+        raise Http404
+
+    if issue.published:
+        return redirect(issue)
+
+    today = datetime.date.today()
+    if request.method == 'POST':
+        # Publish the articles, change all the article dates to today, and make
+        # the issue live.
+        issue.articles.all().update(published=True, date=today)
+        issue.published = True
+        issue.save()
+        return redirect(issue)
+
+    context = {
+        'issue': issue,
+    }
+    return render(request, 'issue_publish.html', context)
+
 
 def view_article(request, slug):
     # First check if this slug is for an ArticleTranslation. If not, try a
