@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ issue.title }} (#{{ issue.number }}) - Prepare for publication{% endblock %}
+
+{% block mastheadclass %}photo fixed{% endblock %}
+{% block mastheadbg %}{% if issue.image %}{{ issue.image.url }}{% else %}/static/img/triangles.png{% endif %}{% endblock %}
+{% block mastheadposition %}bottom{% endblock %}
+
+{% block masthead %}
+<div class="dark-screen">
+    <div class="ui container">
+        <h1 class="ui inverted centered header">
+            Publish issue #{{ issue.number }}: {{ issue.title }}
+            <div class="sub header">
+                {% with article_count=issue.get_articles.count %}
+                {{ article_count }} article{{ article_count|pluralize }}
+                {% endwith %}
+            </div>
+        </h1>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="ui container">
+        <div class="ui icon warning message">
+            <i class="warning icon"></i>
+            <div class="header">
+                Go through all these steps before you publish this <a href="{{ issue.get_absolute_url }}">issue</a>!
+            </div>
+        </div>
+        <h2 class="ui horizontal divider header">
+            1. Check the issue images
+        </h2>
+        <div class="ui stackable two column grid">
+            <div class="column">
+                <div class="ui warning message">
+                    <p>Check the large image, shown in the masthead above. Does it look good? Can you
+                    see the text?</p>
+                    <p>Check the display of the smaller image, on the right:</p>
+                    <p>If either image needs to be replaced, upload a new image via
+                    the admin interface
+                    <a href="{% url 'admin:journal_issue_change' issue.pk %}">here</a>.
+                    </p>
+                    <p>
+                    The dimensions for the large image are 1920x450, though only
+                    the bottom of it will be shown.
+                    </p>
+                    <p>The dimensions for the small image are 540x360. It's
+                    automatically generated, but you can also replace it with a
+                    custom one.</p>
+                </div>
+            </div>
+            <div class="centered column">
+                <div class="issue-thumb">
+                    <a href="{{ issue.get_absolute_url }}">
+                        <img src="{{ issue.small_image.url }}" alt="{{ issue.title }}" class="ui fluid image"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <h2 class="ui horizontal divider header">
+            2. Check the date
+        </h2>
+        <div class="ui warning message">
+            <p>Is {{ issue.date|date:"F Y" }} correct?</p>
+        </div>
+        <h2 class="ui horizontal divider header">
+            3. Check the issue editorial
+        </h2>
+        <div class="ui warning message">
+            <p>The editorial - viewed on the <a href="{{ issue.get_absolute_url
+            }}">main issue page</a> - should have an introduction to the issue, and
+            should list every single article in the issue.
+            </p>
+        </div>
+        <h2 class="ui horizontal divider header">
+            4. Check the articles
+        </h2>
+        <div class="ui warning message">
+            <p>For each article, check:</p>
+            <div class="ui bulleted list">
+                <div class="item">Title: not too long</div>
+                <div class="item">Subtitle: brief explanation of what the piece is
+                about</div>
+                <div class="item">Author: name, and bio; leave empty if anonymous</div>
+                <div class="item">Tags: add in relevant ones (optional)</div>
+                <div class="item">Image: make sure it looks good in the header, and
+                in the thumbnail (visible on the article page when logged in as
+                admin)</div>
+                <div class="item">Image credit: URL to the image source
+                (optional)</div>
+                <div class="item">Related articles: make sure they're actually
+                related! The default ones are terrible</div>
+                <div class="item">Formatting: make sure footnotes, URLs, italics
+                etc all look good. We use Markdown for formatting; see this <a
+                href="https://github.com/dellsystem/new-socialist/tree/master/docs#formatting">cheat
+                sheet</a> for details.</div>
+            </div>
+        </div>
+        <h2 class="ui horizontal divider header">
+            5. Publish
+        </h2>
+        <div class="ui warning message">
+            <div class="header">Effective immediately!</div>
+            <p>
+                This will immediately make the issue live on the website,
+                along with all of the articles in the issue. Don't publish
+                unless you're sure the issue is ready.
+            </p>
+            <div class="ui center aligned basic segment">
+                <form method="post" action="">
+                {% csrf_token %}
+                <button type="submit" class="ui black icon button">
+                    <i class="checkmark icon"></i>
+                    Publish issue
+                </button>
+                </form>
+            </div>
+        </div>
+        <p><a href="{{ issue.get_absolute_url }}">&laquo; Back to issue</a></p>
+    </div>
+</div>
+{% endblock %}

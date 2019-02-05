@@ -1,0 +1,120 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static admin_stats %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+<div class="ui container">
+    <div class="ui segment">
+        <h1 class="ui aligned header">
+            Standalone article management
+            <div class="sub header">
+                For articles outside of issues.
+                Yellow = today; grey = published article; red = scheduled
+                article; orange = scheduled today
+            </div>
+        </h1>
+        {% show_articles %}
+        <div class="ui divider"></div>
+        <div class="ui stackable grid">
+            <div class="ui four wide column">
+                <a class="ui black fluid icon button"
+                   href="{% url 'editor:journal_article_add' %}">
+                    Add a new article <i class="plus icon"></i>
+                </a>
+            </div>
+            <div class="ui four wide column">
+                <a class="ui fluid icon button"
+                   href="{% url 'editor:journal_article_changelist' %}">
+                    Manage all articles <i class="list icon"></i>
+                </a>
+            </div>
+            <div class="ui four wide column">
+                <a class="ui black fluid basic icon button"
+                   href="{% url 'editor:journal_articletranslation_add' %}">
+                    Add a new translation <i class="plus icon"></i>
+                </a>
+            </div>
+            <div class="ui four wide column">
+                <a class="ui fluid basic icon button"
+                   href="{% url 'editor:journal_articletranslation_changelist' %}">
+                    Manage all translations <i class="list icon"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="ui segment">
+        <h2 class="ui header">
+            Issue management
+            <div class="sub header">
+                Showing issues since the site's launch in January 2018.
+                Grey = published; red = scheduled
+            </div>
+        </h2>
+        {% show_issues %}
+        <div class="ui divider"></div>
+        <div class="ui centered stackable grid">
+            <div class="ui four wide column">
+                <a class="ui black fluid icon button"
+                   href="{% url 'editor:journal_issue_add' %}">
+                    Add a new issue <i class="plus icon"></i>
+                </a>
+            </div>
+            <div class="ui four wide column">
+                <a class="ui fluid icon button"
+                   href="{% url 'editor:journal_issue_changelist' %}">
+                    Manage all issues <i class="list icon"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="ui segment">
+        <h2 class="ui center aligned header">Other website management</h2>
+        <div class="ui five column doubling grid">
+            <div class="column">
+                <h3 class="ui icon center aligned header">
+                    <i class="archive icon"></i>
+                    <a href="{% url 'editor:cms_page_changelist' %}">
+                        Pages
+                    </a>
+                </h3>
+            </div>
+            <div class="column">
+                <h3 class="ui icon center aligned header">
+                    <i class="tags icon"></i>
+                    <a href="{% url 'editor:journal_tag_changelist' %}">
+                        Tags
+                    </a>
+                </h3>
+            </div>
+            <div class="column">
+                <h3 class="ui icon center aligned header">
+                    <i class="users icon"></i>
+                    <a href="{% url 'editor:journal_author_changelist' %}">
+                        Authors
+                    </a>
+                </h3>
+            </div>
+            <div class="column">
+                <h3 class="ui icon center aligned header">
+                    <i class="image outline icon"></i>
+                    <a href="{% url 'editor:uploads_imageupload_changelist' %}">
+                        Images
+                    </a>
+                </h3>
+            </div>
+            <div class="column">
+                <h3 class="ui icon center aligned header">
+                    <i class="pdf file outline icon"></i>
+                    <a href="{% url 'editor:uploads_pdfupload_changelist' %}">
+                        PDFs
+                    </a>
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

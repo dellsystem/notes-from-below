@@ -30,8 +30,11 @@ class Tag(models.Model):
     def get_articles(self):
         return self.articles.filter(published=True).order_by('-date')
 
-    def get_latest_article(self):
+    def get_latest_article(self, existing_articles=None):
         articles = self.articles.filter(published=True)
+        if existing_articles:
+            articles = articles.exclude(pk__in=existing_articles)
+
         if articles.exists():
             return articles.latest()
 
@@ -113,7 +116,7 @@ class Issue(models.Model):
     )
     content = MartorField()
     formatted_content = models.TextField(editable=False)
-    published = models.BooleanField(default=True)
+    published = models.BooleanField(default=False)
 
     class Meta:
         get_latest_by = 'date'
@@ -180,7 +183,7 @@ class Article(models.Model):
     related_2 = models.ForeignKey("self", related_name='related_2_articles',
         on_delete=models.CASCADE, blank=True, null=True)
     last_modified = models.DateField(auto_now=True)
-    published = models.BooleanField(default=True)
+    published = models.BooleanField(default=False)
     featured = models.BooleanField(default=False)
 
     class Meta:

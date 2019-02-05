@@ -53,7 +53,7 @@
                 <li>
                     Found author{{ authors.count|pluralize }}:
                     {% for author in authors %}<a href="{{ author.get_absolute_url }}">{{ author }}</a>
-                    {% with count=author.articles.count %}
+                    {% with count=author.get_articles.count %}
                     ({{ count }} article{{ count|pluralize }})
                     {% if not forloop.last %}/{% endif %}
                     {% endwith %}

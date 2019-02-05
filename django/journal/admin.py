@@ -25,6 +25,7 @@ class CategoryAdmin(CompareVersionAdmin):
 class AuthorAdmin(CompareVersionAdmin):
     list_display = ['name', 'bio', 'slug', 'twitter']
     prepopulated_fields = {'slug': ('name',)}
+    ordering = ['name']
 
 
 class ArticleForm(forms.ModelForm):

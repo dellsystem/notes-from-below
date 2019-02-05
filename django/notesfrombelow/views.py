@@ -12,11 +12,15 @@ from blog.models import BlogPost
 def index(request):
     page = Page.objects.get(slug='')
 
+    # Make sure we don't show the same article twice under different tags.
+    existing_articles = []
     tags = []
     for tag in Tag.objects.filter(featured=True):
-        article = tag.get_latest_article()
+        article = tag.get_latest_article(existing_articles)
         if article:
             tags.append((tag, article, article.date))
+            existing_articles.append(article.pk)
+
     tags.sort(key=operator.itemgetter(2), reverse=True)
 
     context = {
