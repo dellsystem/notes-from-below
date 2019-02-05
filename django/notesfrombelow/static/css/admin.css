@@ -39,3 +39,8 @@ div.breadcrumbs {
 .object-tools a {
     font-size: 18px !important;
 }
+
+.ui.grid.calendar>.row>.column {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
