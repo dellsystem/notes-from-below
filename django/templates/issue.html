@@ -55,7 +55,7 @@
         {{ issue.formatted_content|safe }}
         <div class="ui stackable grid">
             {% for article in issue.get_articles %}
-            {% include 'article_thumb.html' with article=article resize=True only %}
+            {% include 'article_thumb.html' with article=article direct=False resize=True only %}
             {% endfor %}
         </div>
     </div>

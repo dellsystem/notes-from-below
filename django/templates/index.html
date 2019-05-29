@@ -51,7 +51,7 @@
                     <a href="{{ tag.get_absolute_url }}">View older &raquo;</A>
                 </div>
             </h2>
-            {% include "article_thumb.html" with direct=True article=article %}
+            {% include "article_thumb.html" with direct=True resize=False article=article %}
         </div>
         {% endfor %}
     </div>

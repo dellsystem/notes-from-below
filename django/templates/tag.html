@@ -30,7 +30,7 @@
         <h3 class="section-header">articles</h3>
         <div class="ui stackable two column grid">
             {% for article in tag.get_articles %}
-            {% include 'article_thumb.html' with article=article only %}
+            {% include 'article_thumb.html' with article=article direct=False resize=False only %}
             {% endfor %}
         </div>
     </div>

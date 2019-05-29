@@ -90,6 +90,8 @@ class AuthorView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         if context['author'].slug == 'ed-emery':
             context['posts'] = BlogPost.objects.filter(published=True)
+        else:
+            context['posts'] = None
         return context
 
 class IssueView(generic.DetailView):
