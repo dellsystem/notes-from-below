@@ -7,7 +7,7 @@
 {% block title %}{{ desired_translation.title }}{% endblock %}
 {% block date %}{{ article.date|date:"Y-m-d" }}{% endblock %}
 
-{% block longdescription %}{{ desired_translation.unformatted|truncatechars:500 }}{% endblock %}
+{% block longdescription %}{{ desired_translation.unformatted_content|truncatechars:500 }}{% endblock %}
 
 {% block description %}{% if article.authors.count %}by {{ article.authors.all|join:", " }} // {% endif %}{{ desired_translation.subtitle }}{% endblock %}
 
