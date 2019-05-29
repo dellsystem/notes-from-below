@@ -210,7 +210,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 LANGUAGES = (
     ('es', 'Español'),
     ('fr', 'Français'),
-    ('pl', 'Polish'),
-    ('it', 'Italian'),
+    ('pl', 'Polski'),
+    ('it', 'Italiano'),
     ('de', 'Deutsch'),
+    ('pt', 'Português'),
 )
