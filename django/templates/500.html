@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block mastheadclass %}pattern{% endblock %}
+{% block mastheadbg %}/static/img/triangles.png{% endblock %}
+
+{% block title %}Internal server error{% endblock %}
+{% block description %}This page is currently not available. Please try again later.{% endblock %}
+
+{% block masthead %}
+<div class="dark-screen">
+    <div class="ui container">
+        <h1 class="ui inverted centered header">
+            Internal server error
+            <div class="sub header">
+                We've been notified of this error and will fix it ASAP!
+            </div>
+        </h1>
+    </div>
+</div>
+{% endblock %}

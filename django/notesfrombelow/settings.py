@@ -210,7 +210,44 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 LANGUAGES = (
     ('es', 'Español'),
     ('fr', 'Français'),
-    ('pl', 'Polish'),
-    ('it', 'Italian'),
+    ('pl', 'Polski'),
+    ('it', 'Italiano'),
     ('de', 'Deutsch'),
+    ('pt', 'Português'),
 )
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/home/dellsystem/notes-from-below/django.log',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file', 'mail_admins'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'notesfrombelow'
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+SITE_URL = 'https://notesfrombelow.org'
+ADMINS = [
+    ('Wendy', 'ilostwaldo@gmail.com'),
+]
+SERVER_EMAIL = 'editors@notesfrombelow.org'

@@ -66,7 +66,7 @@
         {% endif %}
         <div class="ui two column stackable grid">
             {% for article in articles %}
-            {% include 'article_thumb.html' with article=article only %}
+            {% include 'article_thumb.html' with article=article direct=False resize=False only %}
             {% endfor %}
         </div>
         {% if total_articles %}

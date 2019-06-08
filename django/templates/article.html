@@ -7,7 +7,7 @@
 {% block title %}{{ desired_translation.title }}{% endblock %}
 {% block date %}{{ article.date|date:"Y-m-d" }}{% endblock %}
 
-{% block longdescription %}{{ desired_translation.unformatted|truncatechars:500 }}{% endblock %}
+{% block longdescription %}{{ desired_translation.unformatted_content|truncatechars:500 }}{% endblock %}
 
 {% block description %}{% if article.authors.count %}by {{ article.authors.all|join:", " }} // {% endif %}{{ desired_translation.subtitle }}{% endblock %}
 
@@ -110,7 +110,7 @@
                     {% endif %}
                 </div>
                 <div class="column">
-                    {% include 'article_thumb.html' with article=article only %}
+                    {% include 'article_thumb.html' with article=article direct=False resize=False only %}
                 </div>
             </div>
         </div>
@@ -192,7 +192,7 @@
             <h3 class="section-header">read next</h3>
             <div class="ui two column stackable grid">
             {% for related_article in related %}
-            {% include 'article_thumb.html' with article=related_article only %}
+            {% include 'article_thumb.html' with article=related_article direct=False resize=False only %}
             {% endfor %}
             </div>
         </div>
