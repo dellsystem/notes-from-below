@@ -94,7 +94,7 @@ def archives(request, page=1):
 
 def view_blog(request):
     posts = BlogPost.objects.filter(published=True).order_by('-date')
-    page = Page.objects.get(slug='blog')
+    page = Page.objects.get(slug='edemery')
     context = {
         'posts': posts,
         'page': page,
