@@ -1,16 +1,17 @@
 import markdown
 
-from uploads.models import PdfUpload, ImageUpload
+import uploads.models
 
 
 EMBED_RE = r'\[(pdf|img):([a-z0-9-]+) ?([^\]]*)\]'
+#PDF_EMBED_RE = r'\[pdf:([a-z0-9-]+) ?([^\]]*)\]'
 class EmbedPattern(markdown.inlinepatterns.Pattern):
     def handleMatch(self, m):
         embed_type = m.group(2)
         slug = self.unescape(m.group(3))
         caption = self.unescape(m.group(4))
         if embed_type == 'pdf':
-            pdf_upload = PdfUpload.objects.filter(slug=slug).first()
+            pdf_upload = uploads.models.PdfUpload.objects.filter(slug=slug).first()
             if pdf_upload:
                 # This div structure is messy because it forces the enclosing
                 # <p> to close first. Ideally, we'd make this a block pattern.
@@ -41,7 +42,7 @@ class EmbedPattern(markdown.inlinepatterns.Pattern):
             else:
                 return 'INVALID FILE: ' + slug
         elif embed_type == 'img':
-            image_upload = ImageUpload.objects.filter(slug=slug).first()
+            image_upload = uploads.models.ImageUpload.objects.filter(slug=slug).first()
             if image_upload:
                 div_el = markdown.util.etree.Element('div')
                 div_el.set('class' , 'uploaded-image')
@@ -60,8 +61,8 @@ class DoubleEmbedPattern(markdown.inlinepatterns.Pattern):
     def handleMatch(self, m):
         slug_1 = self.unescape(m.group(2))
         slug_2 = self.unescape(m.group(3))
-        image_1 = ImageUpload.objects.filter(slug=slug_1).first()
-        image_2 = ImageUpload.objects.filter(slug=slug_2).first()
+        image_1 = uploads.models.ImageUpload.objects.filter(slug=slug_1).first()
+        image_2 = uploads.models.ImageUpload.objects.filter(slug=slug_2).first()
         if image_1 and image_2:
             div_el = markdown.util.etree.Element('div')
             div_el.set('class' , 'uploaded-images')
@@ -79,10 +80,32 @@ class DoubleEmbedPattern(markdown.inlinepatterns.Pattern):
             return 'INVALID FILE: ' + ', '.join(invalid_slugs)
 
 
+# For embedding 2+ images side by side. Will eventually supersede Double
+IMAGE_EMBED_RE = r'\[images:([a-z0-9- ]+)\]'
+class ImageEmbedPattern(markdown.inlinepatterns.Pattern):
+    def handleMatch(self, m):
+        div_el = markdown.util.etree.Element('div')
+        div_el.set('class' , 'uploaded-image')
+
+        slugs = self.unescape(m.group(2)).split()
+        for slug in slugs:
+            image = uploads.models.ImageUpload.objects.filter(slug=slug).first()
+
+            # Might want to do this asynchronously to catch all the invalids
+            if not image:
+                return 'INVALID FILE: {}'.format(image)
+
+            image_el = markdown.util.etree.SubElement(div_el, 'img')
+            image_el.set('src', image.file.url)
+
+        return div_el
+
+
 class EmbedExtension(markdown.Extension):
     def extendMarkdown(self, md, md_globals):
         md.inlinePatterns['embed'] = EmbedPattern(EMBED_RE, md)
         md.inlinePatterns['double_embed'] = DoubleEmbedPattern(DOUBLE_EMBED_RE, md)
+        md.inlinePatterns['image_embed'] = ImageEmbedPattern(IMAGE_EMBED_RE, md)
 
 
 def makeExtension(*args, **kwargs):
