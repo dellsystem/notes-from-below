@@ -76,7 +76,7 @@ class Author(models.Model):
     name = models.CharField(max_length=100)
     bio = MartorField()
     formatted_bio = models.TextField(editable=False)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     is_editor = models.BooleanField(default=False)
     twitter = models.CharField(max_length=15, blank=True, help_text='Username without the @')
 
