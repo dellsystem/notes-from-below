@@ -18,6 +18,12 @@ If you want to add a caption below it:
 [img:test-image-1 This is a caption]
 ```
 
+If you have multiple images that you want to appear on the same line and don't need a caption, use:
+
+```
+[images:test-image-1 test-image-2 test-image-3]
+```
+
 Embedding a PDF is similar. Upload it under "Pdf uploads" and make a note of the slug (e.g., `test-bulletin-1`). Then embed it like this:
 
 ```
