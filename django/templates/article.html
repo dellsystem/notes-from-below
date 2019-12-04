@@ -121,16 +121,28 @@
             {% if translations %}
             <div class="print-hide">
                 <br />
-                <div class="ui buttons">
-                    {% for translation in translations %}
-                    <a href="{{ translation.get_absolute_url }}"
-                       class="ui {% if translation.language == desired_translation.language %}black{% endif %} button">
-                        {{ translation.get_language_display }}
-                    </a>
-                    {% if not forloop.last %}
-                    <div class="or" data-text="/"></div>
-                    {% endif %}
-                    {% endfor %}
+                <div class="non-mobile-only">
+                    <div class="ui buttons">
+                        {% for translation in translations %}
+                        <a href="{{ translation.get_absolute_url }}"
+                           class="ui {% if translation.language == desired_translation.language %}black{% endif %} button">
+                            {{ translation.get_language_display }}
+                        </a>
+                        {% if not forloop.last %}
+                        <div class="or" data-text="/"></div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="mobile-only">
+                    <div class="ui vertical buttons">
+                        {% for translation in translations %}
+                        <a href="{{ translation.get_absolute_url }}"
+                           class="ui {% if translation.language == desired_translation.language %}black{% endif %} button">
+                            {{ translation.get_language_display }}
+                        </a>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
             {% endif %}
