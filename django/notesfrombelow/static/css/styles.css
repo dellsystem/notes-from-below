@@ -67,6 +67,11 @@
     margin: 50px 0;
 }
 
+.footnote {
+    /* For long URLs in article footnotes. */
+    word-break: break-word;
+}
+
 article {
     padding-bottom: 50px;
 }
