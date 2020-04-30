@@ -38,8 +38,16 @@ class PdfUploadAdmin(CompareVersionAdmin):
     prepopulated_fields ={'slug': ('title',),}
 
 
+class OtherUploadAdmin(CompareVersionAdmin):
+    list_display = ['title', 'slug', 'extension']
+    prepopulated_fields ={'slug': ('title',),}
+
+
 admin.site.register(ImageUpload, ImageUploadAdmin)
 editor_site.register(ImageUpload, ImageUploadAdmin)
+
+admin.site.register(OtherUpload, OtherUploadAdmin)
+editor_site.register(OtherUpload, OtherUploadAdmin)
 
 admin.site.register(PdfUpload, PdfUploadAdmin)
 editor_site.register(PdfUpload, PdfUploadAdmin)

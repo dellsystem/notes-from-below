@@ -8,7 +8,7 @@ from PIL import Image
 
 class ImageUpload(models.Model):
     title = models.CharField(max_length=100)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     file = ProcessedImageField(
         upload_to='images',
         processors=[ResizeToFit(width=1115, upscale=False)],
@@ -39,3 +39,13 @@ class PdfUpload(models.Model):
             new_image.paste(image, (0, y_offset))
             y_offset += image.size[1]
         new_image.save(self.file.path + '.png')
+
+
+class OtherUpload(models.Model):
+    title = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
+    file = models.FileField(upload_to='other')
+    extension = models.CharField(
+        max_length=10,
+        help_text='Human-readable file extension (e.g., epub, docx, etc)'
+    )

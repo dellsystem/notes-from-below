@@ -2,9 +2,11 @@
 
 Message me if you have questions.
 
-## Uploading images/PDFs
+## Uploading files
 
-From the main admin page, click on "Image uploads" or "Pdf uploads" (under UPLOADS) and add a new one. Set the title to something descriptive—the slug field will automatically be populated from there. You can think of the slug as the (unique) name which you'll use to refer to this file in order to embed it within an article.
+Any kind of file can be uploaded. There are special features for images (which are displayed) and PDFs (which are embedded); other files are simply linked to.
+
+From the main admin page, click on "Image uploads" or "Pdf uploads" or "Other uploads" (under UPLOADS) and to upload a file. Set the title to something descriptive—the slug field will automatically be populated from there. You can think of the slug as the (unique) name which you'll use to refer to this file in order to embed it within an article.
 
 For example, if you upload an image with the slug `test-image-1`, you can embed it within an article using the following code:
 
@@ -29,6 +31,14 @@ Embedding a PDF is similar. Upload it under "Pdf uploads" and make a note of the
 ```
 [pdf:test-bulletin-1]
 ```
+
+To add a link to any other type of file (e.g. a docx, or an epub), upload it under "Other uploads" with the slug `test-epub`, title `Some File To Download`, and extension `epub`, and embed it like this:
+
+```
+[file:test-epub]
+```
+
+When the article is published, it will be converted into a large red button that says "Download Some File To Download (epub)", with a link to the file.
 
 ## Previewing articles
 

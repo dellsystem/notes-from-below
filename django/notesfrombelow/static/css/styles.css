@@ -391,6 +391,11 @@ blockquote cite::before {
     max-width: 100%;
 }
 
+.uploaded-file {
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
 .interview-quote {
     display: block;
     color: white;

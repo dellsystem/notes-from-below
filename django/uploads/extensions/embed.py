@@ -1,9 +1,10 @@
+from django.utils.html import escape
 import markdown
 
 import uploads.models
 
 
-EMBED_RE = r'\[(pdf|img):([a-z0-9-]+) ?([^\]]*)\]'
+EMBED_RE = r'\[(pdf|img|file):([a-z0-9-]+) ?([^\]]*)\]'
 #PDF_EMBED_RE = r'\[pdf:([a-z0-9-]+) ?([^\]]*)\]'
 class EmbedPattern(markdown.inlinepatterns.Pattern):
     def handleMatch(self, m):
@@ -50,6 +51,24 @@ class EmbedPattern(markdown.inlinepatterns.Pattern):
                 span_el.text = caption
                 image_el = markdown.util.etree.SubElement(div_el, 'img')
                 image_el.set('src', image_upload.file.url)
+                return div_el
+            else:
+                return 'INVALID FILE: ' + slug
+        else:
+            other_upload = uploads.models.OtherUpload.objects.filter(slug=slug).first()
+            if other_upload:
+                div_el = markdown.util.etree.Element('div')
+                div_el.set('class', 'uploaded-file')
+                a_el = markdown.util.etree.SubElement(div_el, 'a')
+                a_el.set('class', 'ui large red icon button')
+                a_el.set('href', other_upload.file.url)
+                i_el = markdown.util.etree.SubElement(a_el, 'i')
+                i_el.set('class', 'download icon')
+                # Using .tail not .text to ensure that it follows the <i>
+                i_el.tail = 'Download {title} ({ext})'.format(
+                    title=escape(other_upload.title),
+                    ext=other_upload.extension
+                )
                 return div_el
             else:
                 return 'INVALID FILE: ' + slug
