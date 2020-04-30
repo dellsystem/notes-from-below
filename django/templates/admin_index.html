@@ -73,7 +73,7 @@
     <br />
     <div class="ui segment">
         <h2 class="ui center aligned header">Other website management</h2>
-        <div class="ui five column doubling grid">
+        <div class="ui six column doubling grid">
             <div class="column">
                 <h3 class="ui icon center aligned header">
                     <i class="archive icon"></i>
@@ -111,6 +111,14 @@
                     <i class="pdf file outline icon"></i>
                     <a href="{% url 'editor:uploads_pdfupload_changelist' %}">
                         PDFs
+                    </a>
+                </h3>
+            </div>
+            <div class="column">
+                <h3 class="ui icon center aligned header">
+                    <i class="file outline icon"></i>
+                    <a href="{% url 'editor:uploads_otherupload_changelist' %}">
+                        Other files
                     </a>
                 </h3>
             </div>
