@@ -2,36 +2,41 @@
 
 {% block image %}{{ tag.image.url }}{% endblock %}
 
-{% block mastheadclass %}photo fixed{% endblock %}
-{% block mastheadbg %}{{ tag.image.url }}{% endblock %}
-{% block mastheadposition %}middle{% endblock %}
 {% block twittercard %}summary{% endblock %}
 
 {% block title %}{{ tag.name }}{% endblock %}
 {% block description %}{{ tag.description }}{% endblock %}
 {% block date %}{{ tag.get_date|date:"Y-m-d" }}{% endblock %}
 
-{% block masthead %}
-<div class="dark-screen">
-    <div class="ui container">
-        <h1 class="ui inverted header">
-            {{ tag.name }}
-            <div class="sub header">
-                {{ tag.description }}
-            </div>
-        </h1>
-    </div>
-</div>
-{% endblock %}
 
 {% block content %}
 <div class="page-content">
     <div class="ui container">
-        <h3 class="section-header">articles</h3>
-        <div class="ui stackable two column grid">
+        {% if request.user.is_staff %}
+        <div class="ui center aligned basic segment">
+            <a href="{% url 'admin:journal_tag_change' tag.pk %}"
+               class="ui blue icon button">
+               <i class="edit icon"></i>
+               Edit in admin
+            </a>
+        </div>
+        {% endif %}
+        <div class="nfb-content-box">
+        <div class="ui basic segment">
+            <h1 class="ui header">{{ tag.name }}
+                <div class="sub header">{{ tag.description }}</div>
+            </h1>
+            <img src="{{ tag.image.url }}" class="ui fluid image" />
+        </div>
+        </div>
+        <br /><br />
+        <div class="ui stackable three column grid">
             {% for article in tag.get_articles %}
-            {% include 'article_thumb.html' with article=article direct=False resize=False only %}
+            <div class="column">
+            {% include 'article_thumb.html' with article=article only %}
+            </div>
             {% endfor %}
+            </div>
         </div>
     </div>
 </div>

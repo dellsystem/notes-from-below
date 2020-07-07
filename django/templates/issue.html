@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
 
-{% block image %}{% if issue.small_image %}{{ issue.small_image.url }}{% endif %}{% endblock %}
-
-{% block mastheadclass %}photo fixed screen{% endblock %}
-{% block mastheadbg %}{% if issue.image %}{{ issue.image.url }}{% else %}/static/img/triangles.png{% endif %}{% endblock %}
-{% block mastheadposition %}bottom{% endblock %}
-{% block twittercard %}summary{% endblock %}
+{% block image %}{{ issue.image.url }}{% endblock %}
 
 {% block title %}{{ issue.title }} (#{{ issue.number }}){% endblock %}
 {% block description %}The {{ issue.date|date:"F Y" }} issue of Notes From Below{% endblock %}
@@ -14,12 +9,6 @@
 {% block content %}
 <div class="page-content">
     <div class="ui container">
-        {% if issue.small_image %}
-        <div class="mobile-only">
-            <img src="{{ issue.small_image.url }}" class="ui centered image" />
-        </div>
-        <br /><br />
-        {% endif %}
         {% if not issue.published %}
         <div class="ui error message">
             <div class="header">
@@ -52,10 +41,31 @@
             {% endif %}
         </div>
         {% endif %}
-        {{ issue.formatted_content|safe }}
-        <div class="ui stackable grid">
+        <div class="nfb-content-box">
+            <div class="ui basic segment">
+                <div class="ui stackable two column grid">
+                    <div class="column">
+                        <h1 class="ui header">Issue {{ issue.number }}: {{ issue.title }}
+                            <div class="sub header">
+                                {{ issue.date }}
+                            </div>
+                        </h1>
+                    </div>
+                    <div class="column">
+                    <img src="{{ issue.image.url }}" class="ui centered image" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br /><br />
+        <div class="section">
+            {{ issue.formatted_content|safe }}
+        </div>
+        <div class="ui three column stackable grid">
             {% for article in issue.get_articles %}
-            {% include 'article_thumb.html' with article=article direct=False resize=True only %}
+            <div class="column">
+                {% include 'article_thumb.html' with article=article only %}
+            </div>
             {% endfor %}
         </div>
     </div>

@@ -8,7 +8,7 @@ from . import models
 
 
 class TagAdmin(CompareVersionAdmin):
-    list_display = ['name', 'slug', 'featured']
+    list_display = ['name', 'slug', 'category']
     prepopulated_fields = {'slug': ('name',)}
 
 
@@ -18,7 +18,7 @@ class IssueAdmin(CompareVersionAdmin):
 
 
 class CategoryAdmin(CompareVersionAdmin):
-    list_display = ['name', 'slug']
+    list_display = ['name', 'slug', 'tag_name', 'order_on_homepage']
     prepopulated_fields = {'slug': ('name',)}
 
 

@@ -5,20 +5,6 @@
 {% block image %}/static/img/favicon-180x180.png{% endblock %}
 {% block twittercard %}summary{% endblock %}
 
-{% block mastheadclass %}pattern{% endblock %}
-{% block mastheadbg %}/static/img/triangles.png{% endblock %}
-
-{% block masthead %}
-<div class="dark-screen">
-    <div class="ui container">
-        <h1 class="ui inverted header">
-            {{ author.name }}
-            {% if author.twitter %}(<a href="https://twitter.com/{{ author.twitter }}">@{{author.twitter }}</a>){% endif %}
-        </h1>
-    </div>
-</div>
-{% endblock %}
-
 {% block content %}
 <div class="page-content">
     <div class="ui container">
@@ -31,28 +17,34 @@
             </a>
         </div>
         {% endif %}
-        <div class="section">
-            {{ author.formatted_bio|safe }}
-        </div>
-        <hr />
-        {% if posts %}
-        <div class="section">
-            <h3 class="section-header">blog posts</h3>
-            <div class="ui two column stackable grid">
-                {% for post in posts %}
-                {% include 'blog_post_thumb.html' with post=post author=author only %}
-                {% endfor %}
+        <div class="nfb-content-box">
+            <div class="section">
+                <h1 class="ui header">
+                    {{ author.name }}
+                    {% if author.twitter %}(<a href="https://twitter.com/{{ author.twitter }}">@{{author.twitter }}</a>){% endif %}
+                </h1>
+                <hr class="nfb-divider" />
+                {{ author.formatted_bio|safe }}
             </div>
+        </div>
+        {% if posts %}
+        <h3 class="section-header">blog posts</h3>
+        <div class="ui three column stackable grid">
+            {% for post in posts %}
+            <div class="column">
+            {% include 'blog_post_thumb.html' with post=post author=author only %}
+            </div>
+            {% endfor %}
         </div>
         <hr />
         {% endif %}
-        <div class="section">
-            <h3 class="section-header">articles</h3>
-            <div class="ui two column stackable grid">
-                {% for article in author.get_articles %}
-                {% include 'article_thumb.html' with article=article direct=False resize=False only %}
-                {% endfor %}
+        <h3 class="section-header">articles</h3>
+        <div class="ui three column stackable grid">
+            {% for article in author.get_articles %}
+            <div class="column">
+            {% include 'article_thumb.html' with article=article only %}
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>

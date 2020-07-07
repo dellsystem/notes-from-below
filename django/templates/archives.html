@@ -1,9 +1,5 @@
-
 {% extends 'base.html' %}
 
-{% block mastheadclass %}photo fixed{% endblock %}
-{% block mastheadbg %}{% if LATEST_ISSUE.image %}{{ LATEST_ISSUE.image.url }}{% else %}/static/img/triangles.png{% endif %}{% endblock %}
-{% block mastheadposition %}top{% endblock %}
 {% block twittercard %}summary{% endblock %}
 
 {% block title %}Archives{% endblock %}
@@ -13,13 +9,21 @@
 {% block content %}
 <div class="page-content">
     <div class="ui container">
+        <h1 class="ui header">Archives</h1>
         <div class="ui middle aligned stackable grid">
             <div class="five wide column">
-                <h1>Archives</h1>
+                <div class="ui tiny buttons">
+                    {% for filter in filters %}
+                    {% if not forloop.first %}
+                    <div class="or"></div>
+                    {% endif %}
+                    <a href="{% url 'archives' filter 1 %}" class="ui {% if filter == category %}red{% endif %} button"> {{ filter|title }}</a>
+                    {% endfor %}
+                </div>
             </div>
             <div class="six wide center aligned column">
                 {% if total_articles %}
-                {% include "pagination.html" with items=articles only %}
+                {% include "pagination.html" with items=articles category=category only %}
                 {% endif %}
             </div>
             <div class="five wide column">
@@ -64,15 +68,17 @@
             {% endif %}
         </div>
         {% endif %}
-        <div class="ui two column stackable grid">
+        <div class="ui three column stackable grid">
             {% for article in articles %}
-            {% include 'article_thumb.html' with article=article direct=False resize=False only %}
+            <div class="column">
+            {% include 'article_thumb.html' with article=article only %}
+            </div>
             {% endfor %}
         </div>
         {% if total_articles %}
         <div class="ui middle aligned stackable grid">
             <div class="sixteen wide center aligned column">
-                {% include "pagination.html" with items=articles only %}
+                {% include "pagination.html" with items=articles category=category only %}
             </div>
         </div>
         {% endif %}

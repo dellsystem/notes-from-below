@@ -1,10 +1,33 @@
 function toggleHamburger() {
-    var rightMenus = document.querySelectorAll('.mobile-hidden');
+    var rightMenus = document.querySelectorAll('.menu.mobile-hidden');
     rightMenus[0].classList.toggle('visible');
     rightMenus[1].classList.toggle('visible');
     rightMenus[2].classList.toggle('visible');
     return false;
 };
+
+// hide the large logo + show the small logo when scrolling down
+$(window).scroll(function () {
+    // DO NOT activate this on mobile
+    if ($(window).width() < 1200) {
+        return;
+    }
+
+    var scrollTop = $(window).scrollTop();
+    if (scrollTop > 0) {
+        if ($('#nfb-mini-logo').is(":hidden")) {
+            // large image fades out; small one appears right away
+            $('#nfb-mini-logo').show();
+            $('#nfb-large-logo').hide(400);
+        }
+    } else {
+        if ($('#nfb-large-logo').is(":hidden")) {
+            // large image fades in; small one disappears right away
+            $('#nfb-mini-logo').hide();
+            $('#nfb-large-logo').show(400);
+        }
+    }
+})
 
 function toggleSearch() {
     document.getElementById('search-dropdown').classList.toggle('visible');

@@ -1,26 +1,10 @@
 {% extends 'base.html' %}
 
-{% block mastheadclass %}photo fixed{% endblock %}
-{% block mastheadbg %}{% if LATEST_ISSUE.image %}{{ LATEST_ISSUE.image.url }}{% else %}/static/img/triangles.png{% endif %}{% endblock %}
-{% block mastheadposition %}bottom{% endblock %}
 {% block twittercard %}summary{% endblock %}
 
 {% block title %}{{ category.name }}{% endblock %}
 {% block description %}{{ category.description }}{% endblock %}
 {% block longdescription %}{{ category.formatted_content|striptags|truncatechars:500 }}{% endblock %}
-
-{% block masthead %}
-<div class="dark-screen">
-    <div class="ui container">
-        <h1 class="ui inverted header">
-            {{ category.name }}
-            <div class="sub header">
-                {{ category.description }}
-            </div>
-        </h1>
-    </div>
-</div>
-{% endblock %}
 
 {% block content %}
 <div class="page-content">
@@ -34,15 +18,31 @@
             </a>
         </div>
         {% endif %}
-        <div class="section">
-            {{ category.formatted_content|safe }}
-        </div>
-        <hr />
-        <h3 class="section-header">articles</h3>
-        <div class="ui two column stackable grid">
-            {% for article in category.get_articles %}
-            {% include 'article_thumb.html' with article=article direct=False resize=False only %}
-            {% endfor %}
+        <div class="nfb-content-box">
+            <div class="section">
+                <h2 class="ui header">{{ category.description }}</h2>
+                <hr class="nfb-divider" />
+                {{ category.formatted_content|safe }}
+            </div>
+                </div>
+        <br /><br />
+        <div class="ui padded stackable grid">
+            <div class="six wide column">
+                <h4 class="ui header">
+                    Latest {{ category.slug }}
+                </h4>
+                <hr class="nfb-divider" />
+                {% include 'article_thumb.html' with article=category.articles.latest only %}
+            </div>
+            <div class="six wide column">
+                {% include 'category_browse.html' with category=category only %}
+            </div>
+            <div class="four wide column">
+                <h4 class="ui header">
+                    <a href="/archives">Archive <i class="angle right icon"></i></a>
+                </h4>
+                <hr class="nfb-divider" />
+            </div>
         </div>
     </div>
 </div>

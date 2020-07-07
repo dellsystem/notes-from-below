@@ -3,57 +3,67 @@
 {% block title %}Notes From Below{% endblock %}
 {% block fulltitle %}Notes From Below{% endblock %}
 {% block description %}No politics without inquiry{% endblock %}
+{% block longdescription %}Notes from Below is a socialist journal that uses class composition analysis to ground revolutionary politics in the perspective of the working class.{% endblock %}
 {% block twittercard %}summary{% endblock %}
 {% block image %}/static/img/favicon-180x180.png{% endblock %}
-
-{% block mastheaddiv %}{% endblock %}
 
 {% block precontent %}
 {% endblock %}
 
 {% block postcontent %}
-<hr />
-<div class="section">
-    <h2 class="ui centered header">latest issues</h2>
-    <div class="ui stackable two column grid">
-        {% for issue in issues %}
-        <div class="centered column">
-            <div class="issue-thumb">
-                <a href="{{ issue.get_absolute_url }}">
-                    <img src="{{ issue.small_image.url }}" alt="{{ issue.title }}" class="ui fluid image"/>
-                </a>
-                <h2 class="ui centered header">
-                    <div class="sub header">
-                        {{ issue.date|date:"F Y" }}
-                    </div>
-                </h2>
-            </div>
+{% include 'featured_article.html' with article=featured_article only %}
+<br /><br />
+{% for category in categories %}
+<div class="nfb-homepage-box">
+    <div class="ui padded stackable grid">
+        <div class="three wide column nfb-red-column">
+            <h3 class="ui inverted header">
+                <a href="{{ category.get_absolute_url }}">{{ category.description|upper }}</a>
+            </h3>
         </div>
-        {% endfor %}
+        <div class="five wide column">
+            {% include 'category_latest.html' with category=category only %}
+        </div>
+        <div class="five wide column">
+            {% include 'category_browse.html' with category=category only %}
+        </div>
+        <div class="three wide column">
+            <h4 class="ui header">
+                <a href="{% url 'archives' category.slug 1 %}">Archive <i class="angle right icon"></i></a>
+            </h4>
+            <hr class="nfb-divider" />
+        </div>
     </div>
 </div>
-<hr />
-<div class="section">
-    <h2 class="ui centered header">
-        ongoing coverage
-        <div class="sub header">
-            <a href="{% url 'archives_main' %}">
-                View archives &raquo;
-            </a>
+{% endfor %}
+
+<div class="nfb-homepage-box">
+    <div class="ui padded stackable grid">
+        <div class="three wide column nfb-red-column">
+            <h3 class="ui inverted header">
+                <a href="/issues">ISSUES</a>
+            </h3>
         </div>
-    </h2>
-    <div class="ui stackable two column grid">
-        {% for tag, article, date in tags %}
-        <div class="ui centered column">
-            <h2 class="ui centered header">
-                {{ tag.name }}
-                <div class="sub header">
-                    <a href="{{ tag.get_absolute_url }}">View older &raquo;</A>
-                </div>
-            </h2>
-            {% include "article_thumb.html" with direct=True resize=False article=article %}
+        <div class="five wide column">
+            <h4 class="ui header">
+                Latest issue
+            </h4>
+            <hr class="nfb-divider" />
+            {% include 'issue_thumb.html' with issue=latest_issue only %}
         </div>
-        {% endfor %}
+        <div class="five wide column">
+            <h4 class="ui header">
+                Previous issue
+            </h4>
+            <hr class="nfb-divider" />
+            {% include 'issue_thumb.html' with issue=previous_issue only %}
+        </div>
+        <div class="three wide column">
+            <h4 class="ui header">
+                <a href="{% url 'issues' %}">Older issues <i class="angle right icon"></i></a>
+            </h4>
+            <hr class="nfb-divider" />
+        </div>
     </div>
 </div>
 {% endblock %}

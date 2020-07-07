@@ -1,45 +1,21 @@
-{% if not direct %}<div class="{% if resize %}{% if article.featured %}sixteen{% else %}eight{% endif %} wide {% endif %} column">{% endif %}
-    <div class="article-thumb">
+<div class="nfb-article-thumb">
+    <a href="{{ article.get_absolute_url }}">
+        <img src="{{ article.image_thumbnail.url }}"
+             class="ui fluid image nfb-image-link" />
+    </a>
+    {% with header=article.get_title_header %}
+    <{{ header }} class="ui header nfb-article-title">
         <a href="{{ article.get_absolute_url }}">
-            <img src="{{ article.image_thumbnail.url }}"
-                 class="ui fluid image"
-                 {% if article.featured %}
-                 style="height: 327px; object-fit: cover"
-                 {% endif %}
-                 />
+            {{ article.title }}
         </a>
-        <div class="dark-screen">
-            <h4 class="ui inverted header article-category">
-                <a href="{{ article.category.get_absolute_url }}">
-                    {{ article.category.slug }}
-                </a>
-                {% if article.tags.count %}
-                ::
-                {% for tag in article.tags.all %}
-                <a href="{{ tag.get_absolute_url }}">
-                    {{ tag.name }}
-                </a>
-                {% if not forloop.last %}
-                /
-                {% endif %}
-                {% endfor %}
-                {% endif %}
-            </h4>
-            {% with header=article.get_title_header %}
-            <{{ header }} class="ui inverted header article-title">
-                <a href="{{ article.get_absolute_url }}">
-                    {{ article.title }}
-                </a>
-                <div class="sub header">
-                    {% if article.authors.count %}
-                    by {% for author in article.authors.all %}
-                    <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>{% if not forloop.last %}, {% endif %}
-                    {% endfor %} /
-                    {% endif %}
-                    {{ article.date }}
-                </div>
-            </{{ header }}>
-            {% endwith %}
+        <div class="sub header">
+            {% if article.authors.count %}
+            by {% for author in article.authors.all %}
+            <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>{% if not forloop.last %}, {% endif %}
+            {% endfor %} /
+            {% endif %}
+            {{ article.date }}
         </div>
-    </div>
-{% if not direct %}</div>{% endif %}
+    </{{ header }}>
+    {% endwith %}
+</div>

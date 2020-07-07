@@ -1,0 +1,5 @@
+<h4 class="ui header">
+    Latest {{ category.slug }}
+</h4>
+<hr class="nfb-divider" />
+{% include 'article_thumb.html' with article=category.articles.latest only %}

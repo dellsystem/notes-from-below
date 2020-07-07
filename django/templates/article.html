@@ -1,9 +1,5 @@
 {% extends 'base.html' %}
 
-{% block mastheadclass %}photo{% endblock %}
-{% block mastheadbg %}{{ article.image.url }}{% endblock %}
-{% block mastheadposition %}{{ article.background_position|default:"center" }}{% endblock %}
-
 {% block title %}{{ desired_translation.title }}{% endblock %}
 {% block date %}{{ article.date|date:"Y-m-d" }}{% endblock %}
 
@@ -15,69 +11,87 @@
 
 {% block pagetype %}article{% endblock %}
 
-{% block masthead %}
-<div class="dark-screen">
-    <div class="ui container">
-        {% if article.image_credit %}
-        <div class="image-credit">
-            <a href="{{ article.image_credit }}">Image credit</a>
-        </div>
-        {% endif %}
-        <h3 class="ui inverted header article-category">
-            <a href="{{ article.category.get_absolute_url }}">
-                {{ article.category.slug }}
-            </a>
-            {% if article.tags.count %}
-            ::
-            {% for tag in article.tags.all %}
-            <a href="{{ tag.get_absolute_url }}">
-                {{ tag.name }}
-            </a>
-            {% if not forloop.last %}
-            /
-            {% endif %}
-            {% endfor %}
-            {% endif %}
-        </h3>
-        <h1 class="ui inverted header article-title">
-            {{ desired_translation.title }}
-            <div class="sub header">
-                {% if article.authors.count %}
-                by {% for author in article.authors.all %}
-                    <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a>{% if author.twitter %} (<a href="https://twitter.com/{{ author.twitter }}">@{{ author.twitter }}</a>){% endif %}</strong>{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-                {% endif %}
-                {% if article.issue %}
-                in
-                <strong>
-                <a href="{{ article.issue.get_absolute_url }}">
-                    {{ article.issue.title }} (#{{ article.issue.number }})
-                </a>
-                </strong>
-                {% endif %}
-            </div>
-        </h1>
-    </div>
-</div>
-{% endblock %}
-
 {% block content %}
 <article class="page-content">
     <div class="ui container">
-        <div class="print-only">
-            <h3 class="ui inverted header article-category">
-                <a href="{{ article.category.get_absolute_url }}">
-                    {{ article.category.slug }}
+        <div class="print-hide">
+            {% if request.user.is_staff %}
+            <div class="ui center aligned basic segment">
+                <a href="{% url 'admin:journal_article_change' article.pk %}"
+                   class="ui blue icon button">
+                   <i class="edit icon"></i>
+                   Edit in admin
                 </a>
-            </h3>
-            <h1 class="ui inverted header article-title">
+            </div>
+            {% endif %}
+            <div class="ui stackable grid">
+                <div class="eight wide column">
+                    <h1 class="ui header nfb-article-title">
+                        {{ desired_translation.title }}
+                    </h1>
+                    <h3 class="ui header nfb-article-byline">
+                    {% if article.authors.count %}
+                    by {% for author in article.authors.all %}
+                        <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a>{% if author.twitter %} (<a href="https://twitter.com/{{ author.twitter }}">@{{ author.twitter }}</a>){% endif %}</strong>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                        <div class="sub header">
+                            {{ article.date|date:"F j, Y" }}
+                        </div>
+                    </h3>
+                    <h4 class="ui header">
+                        {% if article.issue %}
+                        Featured in
+                        <strong>
+                        <a href="{{ article.issue.get_absolute_url }}">
+                            {{ article.issue.title }} (#{{ article.issue.number }})
+                        </a>
+                        </strong>
+                        {% endif %}
+                    </h4>
+                    <div class="ui horizontal list">
+                        <div class="item">
+                            <a href="{{ article.category.get_absolute_url }}" class="ui red label">
+                                <i class="{{ article.category.icon }} icon"></i> {{ article.category }}
+                            </a>
+                        </div>
+                        {% for tag in article.tags.all %}
+                        <div class="item">
+                        <a class="ui tag label" href="{{ tag.get_absolute_url }}">
+                            {{ tag.name }}
+                        </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="nfb-article-subtitle">
+                        <p>{{ desired_translation.subtitle }}</p>
+                    </div>
+                    {% include 'article_toolbar.html' with title=desired_translation.title|urlencode url=request.build_absolute_uri|urlencode only %}
+                </div>
+                <div class="eight wide right aligned column">
+                    {% if article.image_credit %}
+                    <div class="nfb-image-credit">
+                        <a href="{{ article.image_credit }}">Image credit</a>
+                    </div>
+                    {% endif %}
+                    <img src="{{ article.image.url }}" class="ui big floated right image" />
+                </div>
+            </div>
+        </div>
+        <div class="print-only">
+            <h4 class="ui header article-category">
+                {{ article.category.slug }}
+            </h4>
+            <h1 class="ui header article-title">
                 {{ desired_translation.title }}
                 <div class="sub header">
                     {% if article.authors.count %}
                     by {% for author in article.authors.all %}
                         <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>{% if not forloop.last %}, {% endif %}
                     {% endfor %}
+                    /
                     {% endif %}
+                    {{ article.date }}
                     {% if article.issue %}
                     in
                     <strong>
@@ -86,9 +100,12 @@
                     </a>
                     </strong>
                     {% endif %}
-                    / {{ article.date|date:"F j, Y" }}
                 </div>
             </h1>
+            <div class="ui basic segment center aligned">
+                <p>{{ desired_translation.subtitle }}</p>
+            </div>
+            <br />
         </div>
         {% if not article.published %}
         <div class="ui error message print-hide">
@@ -110,77 +127,38 @@
                     {% endif %}
                 </div>
                 <div class="column">
-                    {% include 'article_thumb.html' with article=article direct=False resize=False only %}
+                    {% include 'article_thumb.html' with article=article only %}
                 </div>
             </div>
         </div>
-        <br /><br />
         {% endif %}
-        <div class="article-lead">
-            <p>{{ desired_translation.subtitle }}</p>
-            {% if translations %}
-            <div class="print-hide">
-                <br />
-                <div class="non-mobile-only">
-                    <div class="ui buttons">
-                        {% for translation in translations %}
-                        <a href="{{ translation.get_absolute_url }}"
-                           class="ui {% if translation.language == desired_translation.language %}black{% endif %} button">
-                            {{ translation.get_language_display }}
-                        </a>
-                        {% if not forloop.last %}
-                        <div class="or" data-text="/"></div>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="mobile-only">
-                    <div class="ui vertical buttons">
-                        {% for translation in translations %}
-                        <a href="{{ translation.get_absolute_url }}"
-                           class="ui {% if translation.language == desired_translation.language %}black{% endif %} button">
-                            {{ translation.get_language_display }}
-                        </a>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-        </div>
-        <hr />
-        <div class="ui {% if request.user.is_staff %}three{% else %}two{% endif %} column stackable grid" id="article-metadata">
-            <div class="column">
-                <p>{{ article.date|date:"F j, Y" }}</p>
-            </div>
-            {% if request.user.is_staff %}
-            <div class="column">
-                <div class="print-hide">
-                    <a href="{% url 'admin:journal_article_change' article.pk %}"
-                       class="ui blue fluid icon button">
-                        <i class="edit icon"></i>
-                        Edit in admin
+        {% if translations %}
+        <div class="print-hide nfb-translation-buttons">
+            <div class="non-mobile-only">
+                <div class="ui buttons">
+                    {% for translation in translations %}
+                    <a href="{{ translation.get_absolute_url }}"
+                       class="ui {% if translation.language == desired_translation.language %}black{% endif %} button">
+                        {{ translation.get_language_display }}
                     </a>
+                    {% if not forloop.last %}
+                    <div class="or" data-text="/"></div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
-            {% endif %}
-            <div class="right aligned column">
-                {% with url=request.build_absolute_uri|urlencode title=desired_translation.title|urlencode %}
-                <a href="mailto:?subject={{ title }}&amp;body={{ url }}"
-                   title="Send via email">
-                    <i class="large mail icon"></i>
-                </a>
-                <a href="https://twitter.com/intent/tweet?url=&text={{ title }}%20{{ url }}">
-                    <i class="large twitter icon"></i>
-                </a>
-                <a href="http://www.facebook.com/sharer/sharer.php?u={{ url }}">
-                    <i class="large facebook icon"></i>
-                </a>
-                {% endwith %}
-                <a onclick="window.print()" href="#">
-                    <i class="large print icon"></i>
-                </a>
+            <div class="mobile-only">
+                <div class="ui vertical buttons">
+                    {% for translation in translations %}
+                    <a href="{{ translation.get_absolute_url }}"
+                       class="ui {% if translation.language == desired_translation.language %}black{% endif %} button">
+                        {{ translation.get_language_display }}
+                    </a>
+                    {% endfor %}
+                </div>
             </div>
         </div>
+        {% endif %}
         <div class="article-content section">
             <p>
                 {{ desired_translation.formatted_content|safe }}
@@ -204,7 +182,9 @@
             <h3 class="section-header">read next</h3>
             <div class="ui two column stackable grid">
             {% for related_article in related %}
-            {% include 'article_thumb.html' with article=related_article direct=False resize=False only %}
+            <div class="column">
+            {% include 'article_thumb.html' with article=related_article only %}
+            </div>
             {% endfor %}
             </div>
         </div>

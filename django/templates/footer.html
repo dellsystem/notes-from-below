@@ -3,8 +3,7 @@
         <div class="ui middle aligned stackable grid">
             <div class="eight wide column">
                 <div class="logo">
-
-                    <img src="/static/img/logo.png" alt="Notes From Below" />
+                    <img src="/static/img/logo-large.png" alt="Notes From Below" />
                 </div>
                 <p>
                     no politics without inquiry
@@ -25,7 +24,6 @@
                     <a class="item" href="{% url 'category' 'inquiry' %}">Inquiry</a>
                     <a class="item" href="{% url 'category' 'bulletins' %}">Bulletins</a>
                     <a class="item" href="{% url 'category' 'theory' %}">Theory</a>
-                    <a class="item" href="{% url 'category' 'history' %}">History</a>
                     <a class="item" href="{% url 'archives_main' %}">Archives</a>
                 </div>
             </div>
@@ -38,18 +36,20 @@
                     </div>
                 </form>
                 {% with header_number=LATEST_ISSUE.get_title_header %}
-                <{{ header_number }} class="ui inverted header">
+                <{{ header_number }} class="ui inverted header nfb-footer-issue">
                     <div class="sub header">
                     Latest issue:
                     </div>
                     <a href="{{ LATEST_ISSUE.get_absolute_url }}">
                         {{ LATEST_ISSUE.title }} (#{{ LATEST_ISSUE.number }})
                     </a>
-                    <div class="sub header">
-                        Site by <a href="https://twitter.com/dellsystem">@dellsystem</a>.
-                        Source on <a href="https://github.com/dellsystem/notes-from-below">GitHub</a>.
-                    </div>
                 </{{ header_number }}>
+                <h4 class="ui inverted header">
+                    <div class="sub header">
+                    Site by <a href="https://twitter.com/dellsystem">@dellsystem</a>.
+                    Source on <a href="https://github.com/dellsystem/notes-from-below">GitHub</a>.
+                    </div>
+                </h4>
                 {% endwith %}
             </div>
         </div>

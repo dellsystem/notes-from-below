@@ -4,31 +4,33 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render
 
-from journal.models import Article, Author, Issue, Tag
+from journal.models import Article, Author, Issue, Tag, Category
 from cms.models import Page
-from blog.models import BlogPost
 
 
 def index(request):
     page = Page.objects.get(slug='')
 
-    # Make sure we don't show the same article twice under different tags.
-    existing_articles = []
-    tags = []
-    for tag in Tag.objects.filter(featured=True):
-        article = tag.get_latest_article(existing_articles)
-        if article:
-            tags.append((tag, article, article.date))
-            existing_articles.append(article.pk)
+    latest_issues = Issue.objects.order_by('-date')
 
-    tags.sort(key=operator.itemgetter(2), reverse=True)
+    inquiry = Category.objects.get(slug='inquiry')
+    theory = Category.objects.get(slug='theory')
+    bulletins = Category.objects.get(slug='bulletins')
+    featured_article = Article.objects.filter(featured=True).latest()
 
     context = {
-        'tags': tags,
         'issues': Issue.objects.filter(published=True).order_by('-number'),
         'page': page,
-        'posts': BlogPost.objects.filter(published=True).order_by('-date')[:2],
-        'blog_author': Author.objects.get(slug='ed-emery'),
+        'categories': Category.objects.all(),
+        'featured_article': featured_article,
+        'latest_inquiry': inquiry.articles.latest(),
+        'latest_bulletin': bulletins.articles.latest(),
+        'latest_theory': theory.articles.latest(),
+        'themes': theory.tags.all(),
+        'bulletin_publications': bulletins.tags.all(),
+        'inquiry_sectors': inquiry.tags.all(),
+        'latest_issue': latest_issues[0],
+        'previous_issue': latest_issues[1],
     }
 
     return render(request, 'index.html', context)
@@ -61,22 +63,33 @@ def contribute(request):
     return render(request, 'contribute.html', context)
 
 
-def archives(request, page=1):
+def archives(request, page=1, category='all'):
+    # If the provided category doesn't match any existing slugs, set to 'all'
+    filters = ['all']
+    for category_slug in Category.objects.values_list('slug', flat=True):
+        filters.append(category_slug)
+    if category not in filters:
+        category = 'all'
+
     query = request.GET.get('q', '')
     if len(query) >= 3:
         all_articles = Article.objects.filter(published=True).filter(
             Q(title__icontains=query) | Q(subtitle__icontains=query)
-        ).order_by('-date')
+        )
 
         # If there are tag or authors containing this query, display them.
         tags = Tag.objects.filter(name__icontains=query)
         authors = Author.objects.filter(name__icontains=query)
     else:
-        all_articles = Article.objects.filter(published=True).order_by('-date')
+        all_articles = Article.objects.filter(
+            published=True
+        )
+        if category != 'all':
+            all_articles = all_articles.filter(category__slug=category)
         tags = Tag.objects.none()
         authors = Author.objects.none()
 
-    paginator = Paginator(all_articles, 10)
+    paginator = Paginator(all_articles.order_by('-date'), 10)
     articles = paginator.get_page(page)
 
     context = {
@@ -87,18 +100,8 @@ def archives(request, page=1):
         'query': query,
         'tags': tags,
         'authors': authors,
+        'filters': filters,
+        'category': category,
     }
 
     return render(request, 'archives.html', context)
-
-
-def view_blog(request):
-    posts = BlogPost.objects.filter(published=True).order_by('-date')
-    page = Page.objects.get(slug='edemery')
-    context = {
-        'posts': posts,
-        'page': page,
-        'author': Author.objects.get(slug='ed-emery'),
-    }
-
-    return render(request, 'blog.html', context)

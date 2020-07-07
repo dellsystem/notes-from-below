@@ -224,7 +224,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/home/dellsystem/notes-from-below/django.log',
+            'filename': '/home/dellsystem/Projects/notes-from-below/django.log',
         },
         'mail_admins': {
             'level': 'ERROR',

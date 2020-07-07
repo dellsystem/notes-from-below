@@ -2,27 +2,10 @@
 
 {% block image %}{{ page.image.url }}{% endblock %}
 
-{% block mastheadclass %}photo fixed{% endblock %}
-{% block mastheadbg %}{{ page.image.url }}{% endblock %}
-{% block mastheadposition %}{{ page.background_position|default:"center" }}{% endblock %}
-
 {% block title %}{{ page.title }}{% endblock %}
 
 {% block description %}{{ page.subtitle }}{% endblock %}
 {% block longdescription %}{{ page.formatted_content|striptags|truncatechars:500 }}{% endblock %}
-
-{% block masthead %}
-<div class="dark-screen">
-    <div class="ui container">
-        <h1 class="ui inverted centered header">
-            {{ page.title }}
-            <div class="sub header">
-                {{ page.subtitle }}
-            </div>
-        </h1>
-    </div>
-</div>
-{% endblock %}
 
 {% block content %}
 <article class="page-content">
@@ -39,6 +22,16 @@
         {% block precontent %}
         {% endblock %}
         {% if page.content %}
+        <div class="nfb-content-box">
+            <div class="section">
+                <h1 class="ui header">
+                    {{ page.title }}
+                   <div class="sub header">
+                        {{ page.subtitle }}
+                   </div>
+                </h1>
+            </div>
+        </div>
         <div class="section">
             {{ page.formatted_content|safe }}
         </div>

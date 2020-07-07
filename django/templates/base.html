@@ -13,15 +13,6 @@
 
 {% block body %}
 {% include 'header.html' %}
-{% block mastheaddiv %}
-<div id="masthead" class="{% block mastheadclass %}{% endblock %} print-hide"
-     style="background-image: url('{% block mastheadbg %}{% endblock %}');
-     background-color: #f62811;
-     background-position: {% block mastheadposition %}center{% endblock %}">
-    {% block masthead %}
-    {% endblock %}
-</div>
-{% endblock %}
 {% block content %}
 {% endblock %}
 {% include 'footer.html' %}

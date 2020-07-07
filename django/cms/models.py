@@ -8,14 +8,6 @@ from martor.utils import markdownify
 
 
 class Page(models.Model):
-    image = ProcessedImageField(
-        upload_to='pages',
-        processors=[ResizeToFill(1920, 1080)],
-        format='JPEG',
-        options={'quality': 100},
-        blank=True
-    )
-    background_position = models.CharField(max_length=50, blank=True)
     title = models.CharField(max_length=100, blank=True)
     subtitle = models.TextField(blank=True)
     content = MartorField(blank=True)

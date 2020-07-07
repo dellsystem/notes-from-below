@@ -1,21 +1,14 @@
-<div class="column">
-    <div class="article-thumb">
+<div class="nfb-article-thumb">
+    <a href="{{ post.get_absolute_url }}">
+        <img src="{{ post.image_thumbnail.url }}"
+             class="ui fluid image nfb-image-link" />
+    </a>
+    <h2 class="ui header nfb-article-title">
         <a href="{{ post.get_absolute_url }}">
-            <img src="{{ post.image_thumbnail.url }}"
-                 class="ui fluid image" />
+            {{ post.title }}
         </a>
-        <div class="dark-screen">
-            <h2 class="ui inverted header article-title">
-                <a href="{{ post.get_absolute_url }}">
-                    {{ post.title }}
-                </a>
-                <div class="sub header">
-                    by
-                    <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>
-                    /
-                    {{ post.date }}
-                </div>
-            </h2>
+        <div class="sub header">
+            by <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong> / {{ post.date }}
         </div>
-    </div>
+    </h2>
 </div>

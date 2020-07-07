@@ -1,35 +1,32 @@
 <div id="header" class="print-hide">
     <div class="ui container">
-        <div class="ui inverted stackable secondary small menu" id="top-menu">
+        <a href="/" id="nfb-large-logo" class="mobile-hidden">
+            <img src="/static/img/logo.png" class="ui centered image" alt="Notes From Below" />
+        </a>
+        <div class="ui inverted stackable secondary menu" id="top-menu">
             <div class="item" id="hamburger-item">
-                <a href="/" class="logo">
+                <a href="/" class="mobile-only" id="nfb-mobile-logo">
                     <img src="/static/img/logo.png" alt="Notes From Below" />
+                </a>
+                <a href="/" id="nfb-mini-logo" class="mobile-hidden hidden">
+                    <img src="/static/img/logo-mini.png" alt="Notes From Below" />
                 </a>
                 <a href="#" id="hamburger" onclick='toggleHamburger()'>
                     <i class="big content icon"></i>
                 </a>
             </div>
             <div class="menu mobile-hidden">
-                <div class="ui dropdown item">
-                    Issues <i class="dropdown icon"></i>
-                    <div class="menu">
-                        {% for issue in ISSUES %}
-                        <a class="item" href="{% url 'issue' issue.slug %}">
-                            {{ issue.number }}: {{ issue.title }}
-                        </a>
-                        {% endfor %}
-                    </div>
-                </div>
                 <a class="item" href="{% url 'category' 'inquiry' %}">Inquiry</a>
                 <a class="item" href="{% url 'category' 'bulletins' %}">Bulletins</a>
                 <a class="item" href="{% url 'category' 'theory' %}">Theory</a>
-                <a class="item" href="{% url 'category' 'history' %}">History</a>
-                <a class="item" href="{% url 'blog' %}">Ed Emery</a>
+                <a class="item" href="{% url 'issues' %}">Issues</a>
             </div>
-            <div class="right menu mobile-hidden">
+            <div class="menu mobile-hidden">
                 <a class="item" href="{% url 'about' %}">About</a>
                 <a class="item" href="{% url 'contribute' %}">Contribute</a>
                 <a class="item" href="https://www.patreon.com/notesfrombelow/overview" target="_blank">Patreon</a>
+            </div>
+            <div class="right menu mobile-hidden">
                 <a class="item" href="https://www.facebook.com/notesfrombelow4">
                     <i class="facebook icon"></i>
                 </a>

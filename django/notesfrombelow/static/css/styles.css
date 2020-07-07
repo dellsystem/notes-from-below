@@ -1,61 +1,49 @@
-#masthead {
-    width: 100%;
-    height: 300px;
-    position: relative;
-}
-
-#masthead.photo {
-    background-size: cover;
-    background-position: center;
-    height: 400px;
-}
-
-#masthead.pattern {
-    background-repeat: repeat;
-}
-
-#masthead.fixed {
-    background-size: auto;
-    background-attachment: scroll;
-}
-
 #header {
     width: 100%;
     color: #fff;
     background: #f62811;
+    position: fixed;
+    z-index: 10;
 }
 
-.logo img {
-    width: 170px !important;
-    padding: 10px 0;
+#header .item {
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-.dark-screen {
-    background: rgba(0, 0, 0, 0.6);
-    box-sizing: border-box;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+#nfb-large-logo img {
+    padding-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+.nfb-article-title {
+    margin-top: 5px !important;
+}
+.nfb-article-title .sub.header {
+    padding-top: 10px !important;
+}
+.nfb-article-title + .nfb-article-byline {
+    margin-top: 0;
+}
+
+.nfb-article-subtitle {
+    font-size: 1.15em;
+    font-style: italic;
     padding: 30px 0;
 }
 
-.article-category {
-    margin-bottom: 0 !important;
-}
-.article-title {
-    margin-top: 5px !important;
-}
-.article-title .sub.header {
-    padding-top: 10px !important;
-}
-
-.article-lead {
+.nfb-article-lead {
     font-size: 1.1em;
     text-align: center;
+    padding-top: 50px;
     padding-bottom: 50px;
 }
 
-#article-metadata {
+.nfb-article-metadata {
     font-size: 0.8em;
 }
 
@@ -131,7 +119,25 @@ hr {
 }
 
 .page-content {
-    padding: 50px 0;
+    padding-top: 150px;
+    padding-bottom: 50px;
+}
+
+.nfb-issue-thumb .header {
+    margin-top: 5px !important;
+}
+
+.nfb-footer-issue {
+    margin-bottom: 0 !important;
+}
+
+.nfb-footer-issue +.header {
+    margin-top: 10px;
+}
+
+.nfb-translation-buttons {
+    text-align: center;
+    padding-top: 50px;
 }
 
 .article-thumb {
@@ -156,6 +162,12 @@ hr {
     }
     #header .ui.stackable.mobile-hidden .item {
         width: auto!important;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    #nfb-mobile-logo img {
+        max-width: 200px;
     }
 }
 
@@ -187,6 +199,9 @@ hr {
     }
     #header .mobile-hidden.visible {
         display: flex;
+    }
+    #header .mobile-hidden.menu.visible {
+        display: block;
     }
 }
 
@@ -315,34 +330,32 @@ blockquote cite::before {
     font-size: 0.8em;
 }
 
-.image-credit {
+.nfb-image-credit a {
     float: right;
-}
-
-.image-credit a {
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8em;
+    color: rgba(0, 0, 0, 0.7);
     text-decoration: underline;
 }
 
-.image-credit a:hover {
-    color: #fff;
+.nfb-image-credit a:hover {
+    color: #000;
 }
 
 @media only screen and (max-width: 767px) {
-    #masthead {
-        height: auto !important;
+    .nfb-homepage-box {
+        border-bottom: none !important;
     }
 
-    #masthead .dark-screen {
-        position: static;
+    .nfb-red-column .header {
+        padding-left: 15px;
     }
 
     /* Otherwise it might be too big and cause overflow */
-    h2.article-title.ui.header {
+    h2.nfb-article-title.ui.header {
         font-size: 1.5rem;
     }
 
-    h3.article-title.ui.header {
+    h3.nfb-article-title.ui.header {
         font-size: 1rem;
     }
 
@@ -367,7 +380,7 @@ blockquote cite::before {
     }
 
     .page-content .section {
-        padding: 30px 0;
+        padding: 25px 10px;
     }
 
     .interview-quote {
@@ -433,10 +446,6 @@ blockquote cite::before {
     background: #f62811;
 }
 
-.issue-thumb + .issue-thumb {
-    padding-top: 50px;
-}
-
 .twitter-tweet {
     margin: 0 auto;
 }
@@ -456,5 +465,27 @@ blockquote cite::before {
 }
 
 #top-menu {
+    margin-top: 0;
     margin-bottom: 0;
+}
+
+.nfb-homepage-box {
+    border-bottom: 5px solid #f62811;
+    margin-bottom: 50px;
+}
+
+.nfb-content-box {
+    border: 3px solid #f62811;
+}
+
+.nfb-divider {
+    border-top: 1px solid #f62811;
+}
+
+.nfb-red-column {
+    background-color: #f62811;
+}
+
+.nfb-image-link:hover {
+    filter: brightness(110%);
 }

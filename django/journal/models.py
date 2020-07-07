@@ -13,6 +13,39 @@ from martor.models import MartorField
 from martor.utils import markdownify
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=20)
+    slug = models.SlugField(max_length=20)
+    description = models.TextField()
+    content = MartorField()
+    formatted_content = models.TextField(editable=False)
+    tag_name = models.CharField(
+        max_length=12,
+        help_text="Singular word for what the tags refer to (e.g., theme)"
+    )
+    order_on_homepage = models.PositiveIntegerField(default=0)
+    icon = models.CharField(max_length=10,
+        help_text="Semantic UI icon used for the label on the article page")
+
+    class Meta:
+        verbose_name_plural = 'categories'
+        ordering = ['order_on_homepage']
+
+    def get_articles(self):
+        return self.articles.filter(published=True).order_by('-date')
+
+    def get_absolute_url(self):
+        return reverse('category', args=[self.slug])
+
+    def save(self, *args, **kwargs):
+        # Parse markdown and cache it.
+        self.formatted_content = markdownify(self.content)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50)
@@ -21,8 +54,15 @@ class Tag(models.Model):
         upload_to='tags',
         processors=[ResizeToFill(1920, 450)],
         options={'quality': 100},
+        blank=True,
+        null=True,
     )
-    featured = models.BooleanField(default=False)
+    category = models.ForeignKey(Category,
+        on_delete=models.CASCADE,
+        related_name='tags')
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -45,31 +85,6 @@ class Tag(models.Model):
 
     def get_absolute_url(self):
         return reverse('tag', args=[self.slug])
-
-
-class Category(models.Model):
-    name = models.CharField(max_length=20)
-    slug = models.SlugField(max_length=20)
-    description = models.TextField()
-    content = MartorField()
-    formatted_content = models.TextField(editable=False)
-
-    class Meta:
-        verbose_name_plural = 'categories'
-
-    def get_articles(self):
-        return self.articles.filter(published=True).order_by('-date')
-
-    def get_absolute_url(self):
-        return reverse('category', args=[self.slug])
-
-    def save(self, *args, **kwargs):
-        # Parse markdown and cache it.
-        self.formatted_content = markdownify(self.content)
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.name
 
 
 class Author(models.Model):
@@ -103,13 +118,6 @@ class Issue(models.Model):
     slug = models.SlugField()
     image = ProcessedImageField(
         upload_to='issues',
-        processors=[ResizeToFill(1920, 450)],
-        options={'quality': 100},
-        blank=True,
-        help_text='Cropped to 1920x450. Not all of it will be visible to everyone.'
-    )
-    small_image = ProcessedImageField(
-        upload_to='issues',
         processors=[ResizeToFill(540, 360)],
         options={'quality': 100},
         help_text='Cropped to 540x360'
@@ -120,6 +128,7 @@ class Issue(models.Model):
 
     class Meta:
         get_latest_by = 'date'
+        ordering = ['-date']
 
     def save(self, *args, **kwargs):
         self.formatted_content = markdownify(self.content)
@@ -237,12 +246,12 @@ class Article(models.Model):
 
         super().save(*args, **kwargs)
 
-    # Use h2 or h3 in article thumbnail depending on the length of the title.
+    # Use h3 or h4 in article thumbnail depending on the length of the title.
     def get_title_header(self):
         if len(self.title) > 50:
-            return 'h3'
+            return 'h4'
         else:
-            return 'h2'
+            return 'h3'
 
     def get_related(self):
         # Limited to 2. Currently just gets the latest articles.
