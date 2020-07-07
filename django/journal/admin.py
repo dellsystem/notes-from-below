@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib import admin
+from django.contrib import admin, messages
 
 from reversion_compare.admin import CompareVersionAdmin
 
@@ -58,6 +58,21 @@ class ArticleForm(forms.ModelForm):
         }
 
 
+def make_add_tag_action(tag):
+    def add_tag(modeladmin, request, queryset):
+        for article in queryset:
+            article.tags.add(tag)
+        messages.info(request, "Added tag '{}' to {} article(s)".format(
+            tag.name,
+            queryset.count())
+        )
+
+    add_tag.short_description = "Add tag '{}'".format(tag.name)
+    add_tag.__name__ = 'add_tag_{0}'.format(tag.pk)
+
+    return add_tag
+
+
 class ArticleAdmin(CompareVersionAdmin):
     list_display = ['title', 'list_authors', 'category', 'issue', 'list_tags',
         'order_in_issue', 'date', 'published', 'featured']
@@ -66,12 +81,24 @@ class ArticleAdmin(CompareVersionAdmin):
     prepopulated_fields = {'slug': ('title',)}
     change_form_template = 'admin/edit_article.html'
     form = ArticleForm
+    search_fields = ['title']
 
     def list_tags(self, obj):
         return ', '.join(a.name for a in obj.tags.all())
 
     def list_authors(self, obj):
         return ', '.join(a.name for a in obj.authors.all())
+
+    def get_actions(self, request):
+        actions = super(ArticleAdmin, self).get_actions(request)
+
+        for tag in models.Tag.objects.all():
+            action = make_add_tag_action(tag)
+            actions[action.__name__] = (action,
+                                        action.__name__,
+                                        action.short_description)
+
+        return actions
 
 
 class ArticleTranslationAdmin(CompareVersionAdmin):
