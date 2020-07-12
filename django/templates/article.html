@@ -7,7 +7,7 @@
 
 {% block description %}{% if article.authors.count %}by {{ article.authors.all|join:", " }} // {% endif %}{{ desired_translation.subtitle }}{% endblock %}
 
-{% block image %}{{ article.image_thumbnail.url }}{% endblock %}
+{% block image %}{{ article.image.url }}{% endblock %}
 
 {% block pagetype %}article{% endblock %}
 
@@ -116,7 +116,7 @@
                     </div>
                     <p>This article won't yet show up elsewhere on the
                     website.</p>
-                    <p>Here's what the thumbnail will look like when it is
+                    <p>Here's what the image will look like when it is
                     published:</p>
                     {% if request.user.is_staff %}
                     <a href="{% url 'admin:journal_article_change' article.pk %}"

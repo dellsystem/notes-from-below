@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Public+Sans:400,600&subset=latin);
+
 #header {
     width: 100%;
     color: #fff;
@@ -9,6 +11,11 @@
 #header .item {
     font-weight: bold;
     text-transform: uppercase;
+}
+
+#header .ui.menu, .nfb-red-column .ui.header {
+    font-family: "Public Sans", sans-serif;
+    font-weight: 600;
 }
 
 #nfb-large-logo img {
@@ -91,19 +98,28 @@ hr {
 }
 
 #footer {
-    background: url('/static/img/bottom.png');
+    background: #f62811;
     width: 100%;
-    min-height: 400px;
-    background-repeat: repeat-x;
+    padding: 40px 0;    
     color: #fff;
 }
 
 #footer p {
-    font-size: 0.8em;
+    padding-top: 10px;
+    font-size: 0.9em;
+    padding-bottom: 0;
 }
 
 #footer .input {
-    padding-top: 10px;
+}
+
+#footer a {
+    color: #fff;
+    font-weight: bold;
+}
+
+#footer a:hover {
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .footnote hr {
@@ -140,13 +156,6 @@ hr {
     padding-top: 50px;
 }
 
-.article-thumb {
-    position: relative;
-}
-.article-thumb .dark-screen {
-    padding: 10px;
-}
-
 #hamburger {
     visibility: hidden;
     position: absolute;
@@ -165,9 +174,9 @@ hr {
     }
 }
 
-@media only screen and (max-width: 350px) {
+@media only screen and (max-width: 400px) {
     #nfb-mobile-logo img {
-        max-width: 200px;
+        max-width: 80%;
     }
 }
 
@@ -475,7 +484,13 @@ blockquote cite::before {
 }
 
 .nfb-content-box {
-    border: 3px solid #f62811;
+    border: 2px solid #f62811;
+}
+
+.nfb-category-list {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
 }
 
 .nfb-divider {
@@ -484,6 +499,17 @@ blockquote cite::before {
 
 .nfb-red-column {
     background-color: #f62811;
+}
+
+.nfb-red-column .ui.header {
+    border-bottom: 2px solid #fff;
+    padding-bottom: 10px;
+}
+
+/* for better spacing on the homepage */
+.nfb-article-thumb img, .nfb-issue-thumb img {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .nfb-image-link:hover {

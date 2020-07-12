@@ -4,25 +4,26 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render
 
-from journal.models import Article, Author, Issue, Tag, Category
+from journal.models import Article, Author, Issue, Tag, Category, FeaturedArticle
 from cms.models import Page
 
 
 def index(request):
-    page = Page.objects.get(slug='')
 
     latest_issues = Issue.objects.order_by('-date')
 
     inquiry = Category.objects.get(slug='inquiry')
     theory = Category.objects.get(slug='theory')
     bulletins = Category.objects.get(slug='bulletins')
-    featured_article = Article.objects.filter(featured=True).latest()
+    featured_articles = FeaturedArticle.objects.all()
+    large_features = featured_articles.filter(is_thumb=False)
+    small_features = featured_articles.filter(is_thumb=True)
 
     context = {
         'issues': Issue.objects.filter(published=True).order_by('-number'),
-        'page': page,
         'categories': Category.objects.all(),
-        'featured_article': featured_article,
+        'large_features': large_features,
+        'small_features': small_features,
         'latest_inquiry': inquiry.articles.latest(),
         'latest_bulletin': bulletins.articles.latest(),
         'latest_theory': theory.articles.latest(),

@@ -22,14 +22,34 @@
         </div>
         {% endif %}
         <div class="nfb-content-box">
-        <div class="ui basic segment">
-            <h1 class="ui header">{{ tag.name }}
-                <div class="sub header">{{ tag.description }}</div>
-            </h1>
             {% if tag.image %}
-            <img src="{{ tag.image.url }}" class="ui fluid image" />
+            <div class="ui basic segment">
+                <div class="ui stackable two column grid">
+                    <div class="column">
+                        <div class="section">
+                            <h1 class="ui header">{{ tag.name }}
+                                <a class="ui red label" href="{{ tag.category.get_absolute_url }}">
+                                    {{ tag.category }}
+                                </a>
+                                <div class="sub header">{{ tag.description }}</div>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="column">
+                            <img src="{{ tag.image.url }}" class="ui centered image" />
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                <div class="section">
+                    <h1 class="ui header">{{ tag.name }}
+                        <a class="ui red label" href="{{ tag.category.get_absolute_url }}">
+                            {{ tag.category }}
+                        </a>
+                        <div class="sub header">{{ tag.description }}</div>
+                    </h1>
+                </div>
             {% endif %}
-        </div>
         </div>
         <br /><br />
         <div class="ui stackable three column grid">

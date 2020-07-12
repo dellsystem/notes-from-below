@@ -1,15 +1,15 @@
 <div id="header" class="print-hide">
     <div class="ui container">
         <a href="/" id="nfb-large-logo" class="mobile-hidden">
-            <img src="/static/img/logo.png" class="ui centered image" alt="Notes From Below" />
+            <img src="/static/img/logo-large.png?1" class="ui centered image" alt="Notes From Below" />
         </a>
         <div class="ui inverted stackable secondary menu" id="top-menu">
             <div class="item" id="hamburger-item">
                 <a href="/" class="mobile-only" id="nfb-mobile-logo">
-                    <img src="/static/img/logo.png" alt="Notes From Below" />
+                    <img src="/static/img/logo-large.png" alt="Notes From Below" />
                 </a>
                 <a href="/" id="nfb-mini-logo" class="mobile-hidden hidden">
-                    <img src="/static/img/logo-mini.png" alt="Notes From Below" />
+                    <img src="/static/img/logo-mini.png?1" alt="Notes From Below" />
                 </a>
                 <a href="#" id="hamburger" onclick='toggleHamburger()'>
                     <i class="big content icon"></i>
@@ -22,15 +22,15 @@
                 <a class="item" href="{% url 'issues' %}">Issues</a>
             </div>
             <div class="menu mobile-hidden">
-                <a class="item" href="{% url 'about' %}">About</a>
                 <a class="item" href="{% url 'contribute' %}">Contribute</a>
-                <a class="item" href="https://www.patreon.com/notesfrombelow/overview" target="_blank">Patreon</a>
+                <a class="item" href="{% url 'page' 'support' %}">Support</a>
+                <a class="item" href="{% url 'about' %}">About</a>
             </div>
             <div class="right menu mobile-hidden">
-                <a class="item" href="https://www.facebook.com/notesfrombelow4">
+                <a class="item" href="https://www.facebook.com/notesfrombelow4" target="_blank">
                     <i class="facebook icon"></i>
                 </a>
-                <a class="item" href="https://twitter.com/NotesFrom_Below">
+                <a class="item" href="https://twitter.com/NotesFrom_Below" target="_blank">
                     <i class="twitter icon"></i>
                 </a>
             </div>
@@ -44,7 +44,8 @@
             <form method="get" action="{% url 'archives_main' %}">
                 <div class="item">
                     <div class="ui fluid large right labeled input">
-                        <input type="text" placeholder="Search articles ..."
+                        <input type="text" id="search-input"
+                               placeholder="Search articles ..."
                                autocomplete="off" name="q" autofocus />
                         <button class="ui red right icon button" type="submit">
                             <i class="inverted search icon"></i>

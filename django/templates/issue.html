@@ -45,11 +45,13 @@
             <div class="ui basic segment">
                 <div class="ui stackable two column grid">
                     <div class="column">
-                        <h1 class="ui header">Issue {{ issue.number }}: {{ issue.title }}
-                            <div class="sub header">
-                                {{ issue.date }}
-                            </div>
-                        </h1>
+                        <div class="section">
+                            <h1 class="ui header">Issue {{ issue.number }}: {{ issue.title }}
+                                <div class="sub header">
+                                    {{ issue.date }}
+                                </div>
+                            </h1>
+                        </div>
                     </div>
                     <div class="column">
                     <img src="{{ issue.image.url }}" class="ui centered image" />

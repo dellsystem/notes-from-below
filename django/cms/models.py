@@ -18,6 +18,15 @@ class Page(models.Model):
         help_text='Ignore this. For sitemap usage only'
     )
     published = models.BooleanField(default=True)
+    image = ProcessedImageField(
+        upload_to='pages',
+        processors=[ResizeToFill(540, 360)],
+        format='JPEG',
+        options={'quality': 100},
+        help_text="Resized to 540x360.",
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return self.title

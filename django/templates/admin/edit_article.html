@@ -6,117 +6,115 @@
 
 {% block field_sets %}
 {{ adminform.form.errors }}
-<div class="ui grid">
-    <div class="twelve wide column">
-        <div class="ui segment">
+<div class="ui centered grid" style="clear: both">
+    <div class="four wide column">
+        <div class="ui center aligned segment">
             <div class="ui field">
-                <label>Title</label>
-                <div class="ui huge fluid input">
-                {{ adminform.form.title }}
-                </div>
+                <label>Published?
+                {{ adminform.form.published }}
+                </label>
             </div>
-            <div class="ui field">
-                <label>Subtitle</label>
-                <div class="ui huge fluid input">
-                {{ adminform.form.subtitle }}
-                </div>
-            </div>
-            <div class="ui grid">
-                <div class="twelve wide column">
-                    <div class="ui field">
-                        <label>Image credit URL (optional)</label>
-                        <div class="ui fluid input">
-                            {{ adminform.form.image_credit }}
-                        </div>
+        </div>
+    </div>
+</div>
+<div class="ui segment">
+    <div class="ui stackable form grid">
+        <div class="row">
+            <div class="eleven wide column">
+                <div class="ui field">
+                    <label>Title</label>
+                    <div class="ui huge fluid input">
+                    {{ adminform.form.title }}
                     </div>
                 </div>
-                <div class="four wide column">
-                    <div class="ui field">
-                        <label>Tags</label>
-                        {{ adminform.form.tags }}
+                <div class="ui field">
+                    <label>Subtitle</label>
+                    <div class="ui huge fluid input">
+                    {{ adminform.form.subtitle }}
                     </div>
                 </div>
-                <div class="eight wide column">
-                    <div class="ui field">
-                        <label>Slug</label>
-                        <div class="ui huge searchable fluid input">
-                        {{ adminform.form.slug }}
-                        </div>
-                    </div>
-                </div>
-                <div class="four wide column">
-                    <div class="ui field">
-                        <label>Related 1</label>
-                        {{ adminform.form.related_1 }}
-                    </div>
-                </div>
-                <div class="four wide column">
-                    <div class="ui field">
-                        <label>Related 2</label>
-                        {{ adminform.form.related_2 }}
+                <div class="ui field">
+                    <label>Slug</label>
+                    <div class="ui huge fluid input">
+                    {{ adminform.form.slug }}
                     </div>
                 </div>
             </div>
-            <div class="ui grid">
-                <div class="five wide column">
-                    <div class="ui field">
-                        <label>Authors</label>
-                        {{ adminform.form.authors }}
-                    </div>
+            <div class="four wide column">
+                <div class="ui field">
+                    <label>Image
+                    ({{ adminform.form.image.help_text }})
+                    </label>
+                    {{ adminform.form.image }}
                 </div>
-                <div class="two wide column">
-                    <div class="ui field">
-                        <label>Category</label>
-                        {{ adminform.form.category }}
-                    </div>
-                </div>
-                <div class="two wide column">
-                    <div class="ui field">
-                        <label>Order (ignore)</label>
-                        <div class="ui fluid input">
-                        {{ adminform.form.order_in_issue }}
-                        </div>
-                    </div>
-                </div>
-                <div class="four wide column">
-                    <div class="ui field">
-                        <label>Issue</label>
-                        {{ adminform.form.issue }}
-                    </div>
-                </div>
-                <div class="three wide column">
-                    <div class="ui field">
-                        <label>Date</label>
-                        {{ adminform.form.date }}
+                {% if adminform.form.instance.image %}
+                <img class="ui medium image" src="{{ adminform.form.instance.image.url }}" />
+                {% endif %}
+                <div class="ui field">
+                    <label>Image credit URL (optional)</label>
+                    <div class="ui fluid input">
+                        {{ adminform.form.image_credit }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="four wide column">
-        <div class="ui segment">
-            <div class="ui field">
-                <label>Published?</label>
-                {{ adminform.form.published }}
+</div>
+<div class="ui segment">
+    <div class="ui relaxed stackable form grid">
+        <div class="row">
+            <div class="eight wide column">
+                <div class="ui field">
+                    <label>Authors</label>
+                    {{ adminform.form.authors }}
+                </div>
             </div>
-            <h2 class="ui header">
-                Image
-                <div class="sub header">{{ adminform.form.image.help_text }}</div>
-            </h2>
-            <div class="ui field">
-                {{ adminform.form.image }}
+            <div class="four wide column">
+                <div class="ui field">
+                    <label>Date</label>
+                    {{ adminform.form.date }}
+                </div>
             </div>
-            {% if adminform.form.instance.image_thumbnail %}
-            <img class="ui fluid image" src="{{ adminform.form.instance.image.url }}" />
-            {% endif %}
-            <div class="ui field">
-                <label>Featured (large picture)?</label>
-                {{ adminform.form.featured }}
+            <div class="two wide column">
+                <div class="ui field">
+                    <label>Category</label>
+                    {{ adminform.form.category }}
+                </div>
             </div>
-            <div class="ui field">
-                <label>Image background position (ignore)</label>
-                <div class="ui fluid input">
-                    {{ adminform.form.background_position }}
+        </div>
+        <div class="row">
+            <div class="eight wide column">
+                <div class="ui field">
+                    <label>Tags</label>
+                    {{ adminform.form.tags }}
+                </div>
+            </div>
+            <div class="four wide column">
+                <div class="ui field">
+                    <label>Issue</label>
+                    {{ adminform.form.issue }}
+                </div>
+            </div>
+            <div class="two wide column">
+                <div class="ui field">
+                    <label>Order in issue</label>
+                    <div class="ui fluid input">
+                    {{ adminform.form.order_in_issue }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="equal width row">
+            <div class="eight wide column">
+                <div class="ui field">
+                    <label>Related 1</label>
+                    {{ adminform.form.related_1 }}
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui field">
+                    <label>Related 2</label>
+                    {{ adminform.form.related_2 }}
                 </div>
             </div>
         </div>

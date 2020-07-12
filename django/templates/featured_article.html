@@ -1,28 +1,32 @@
-<div class="ui red segment">
-    <div class="ui grid">
-        <div class="row">
-            <div class="ten wide column">
-                <h2 class="ui header">
-                    <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-                    <div class="sub header">
-                        {% if article.authors.count %}
-                        by {% for author in article.authors.all %}
-                        <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>{% if not forloop.last %}, {% endif %}
-                        {% endfor %} /
-                        {% endif %}
-                        {{ article.date }}
-                    </div>
-                </h2>
-                <h3 class="ui header">
-                    {{ article.subtitle }}
-                </h3>
-            </div>
-            <div class="six wide column">
-                <a href="{{ article.get_absolute_url }}">
-                 <img src="{{ article.image_thumbnail.url }}"
-                 class="ui fluid image nfb-image-link" />
-                </a>
+<div class="nfb-content-box">
+    <div class="ui basic segment">
+        <div class="ui grid">
+            <div class="row">
+                <div class="nine wide column">
+                    <h2 class="ui header">
+                        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                        <div class="sub header">
+                            {% if article.authors.count %}
+                            by {% for author in article.authors.all %}
+                            <strong><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></strong>{% if not forloop.last %}, {% endif %}
+                            {% endfor %} /
+                            {% endif %}
+                            {{ article.date }}
+                        </div>
+                    </h2>
+                    <h3 class="ui header">
+                        {{ article.subtitle }}
+                    </h3>
+                </div>
+                <div class="seven wide column">
+                    <a href="{{ article.get_absolute_url }}">
+                     <img src="{{ article.image.url }}"
+                     class="ui fluid image nfb-image-link" />
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<br />
+<br />

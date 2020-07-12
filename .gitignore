@@ -6,3 +6,4 @@ env/
 /static/
 backups/
 media.tar.gz
+django.log

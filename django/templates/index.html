@@ -7,63 +7,91 @@
 {% block twittercard %}summary{% endblock %}
 {% block image %}/static/img/favicon-180x180.png{% endblock %}
 
-{% block precontent %}
-{% endblock %}
+{% block content %}
+<article class="page-content">
+    <div class="ui container">
+        {% if request.user.is_staff %}
+        <div class="ui center aligned basic segment">
+            <a href="{% url 'admin:journal_featuredarticle_changelist' %}"
+               class="ui blue icon button">
+               <i class="edit icon"></i>
+               Edit featured articles in admin
+            </a>
+        </div>
+        {% endif %}
 
-{% block postcontent %}
-{% include 'featured_article.html' with article=featured_article only %}
-<br /><br />
-{% for category in categories %}
-<div class="nfb-homepage-box">
-    <div class="ui padded stackable grid">
-        <div class="three wide column nfb-red-column">
-            <h3 class="ui inverted header">
-                <a href="{{ category.get_absolute_url }}">{{ category.description|upper }}</a>
-            </h3>
+        {% for feature in large_features %}
+            {% include 'featured_article.html' with article=feature.article only %}
+        {% endfor %}
+        {% if small_features.exists %}
+        <div class="ui three column stackable grid">
+            {% for feature in small_features %}
+            <div class="column">
+                <div class="nfb-content-box">
+                    <div class="ui basic segment">
+                        {% include 'article_thumb.html' with article=feature.article only %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        <div class="five wide column">
-            {% include 'category_latest.html' with category=category only %}
+        {% endif %}
+        <br /><br />
+
+        {% for category in categories %}
+        <div class="nfb-homepage-box">
+            <div class="ui padded stackable grid">
+                <div class="three wide column nfb-red-column">
+                    <h3 class="ui inverted header">
+                        <a href="{{ category.about_page.get_absolute_url }}">{{ category.about_page.title|upper }}</a>
+                    </h3>
+                </div>
+                <div class="five wide column">
+                    {% include 'category_latest.html' with category=category only %}
+                </div>
+                <div class="five wide column">
+                    {% include 'category_browse.html' with category=category only %}
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui header">
+                        <a href="{% url 'archives' category.slug 1 %}">{{ category.archive_link_text }} <i class="angle right icon"></i></a>
+                    </h4>
+                    <hr class="nfb-divider" />
+                </div>
+            </div>
         </div>
-        <div class="five wide column">
-            {% include 'category_browse.html' with category=category only %}
-        </div>
-        <div class="three wide column">
-            <h4 class="ui header">
-                <a href="{% url 'archives' category.slug 1 %}">Archive <i class="angle right icon"></i></a>
-            </h4>
-            <hr class="nfb-divider" />
+        <br />
+        {% endfor %}
+
+        <div class="nfb-homepage-box">
+            <div class="ui padded stackable grid">
+                <div class="three wide column nfb-red-column">
+                    <h3 class="ui inverted header">
+                        <a href="/issues">ISSUES</a>
+                    </h3>
+                </div>
+                <div class="five wide column">
+                    <h4 class="ui header">
+                        Latest issue
+                    </h4>
+                    <hr class="nfb-divider" />
+                    {% include 'issue_thumb.html' with issue=latest_issue only %}
+                </div>
+                <div class="five wide column">
+                    <h4 class="ui header">
+                        Previous issue
+                    </h4>
+                    <hr class="nfb-divider" />
+                    {% include 'issue_thumb.html' with issue=previous_issue only %}
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui header">
+                        <a href="{% url 'issues' %}">Older issues <i class="angle right icon"></i></a>
+                    </h4>
+                    <hr class="nfb-divider" />
+                </div>
+            </div>
         </div>
     </div>
-</div>
-{% endfor %}
-
-<div class="nfb-homepage-box">
-    <div class="ui padded stackable grid">
-        <div class="three wide column nfb-red-column">
-            <h3 class="ui inverted header">
-                <a href="/issues">ISSUES</a>
-            </h3>
-        </div>
-        <div class="five wide column">
-            <h4 class="ui header">
-                Latest issue
-            </h4>
-            <hr class="nfb-divider" />
-            {% include 'issue_thumb.html' with issue=latest_issue only %}
-        </div>
-        <div class="five wide column">
-            <h4 class="ui header">
-                Previous issue
-            </h4>
-            <hr class="nfb-divider" />
-            {% include 'issue_thumb.html' with issue=previous_issue only %}
-        </div>
-        <div class="three wide column">
-            <h4 class="ui header">
-                <a href="{% url 'issues' %}">Older issues <i class="angle right icon"></i></a>
-            </h4>
-            <hr class="nfb-divider" />
-        </div>
-    </div>
-</div>
+</article>
 {% endblock %}

@@ -23,8 +23,10 @@
                 <h2 class="ui header">{{ category.description }}</h2>
                 <hr class="nfb-divider" />
                 {{ category.formatted_content|safe }}
+                <br />
+                <h3>For more details, see <a href="{{ category.about_page.get_absolute_url }}">{{ category.about_page.title }}</a></h3>
             </div>
-                </div>
+        </div>
         <br /><br />
         <div class="ui padded stackable grid">
             <div class="six wide column">
@@ -39,7 +41,7 @@
             </div>
             <div class="four wide column">
                 <h4 class="ui header">
-                    <a href="/archives">Archive <i class="angle right icon"></i></a>
+                    <a href="{% url 'archives' category.slug 1 %}">Archive <i class="angle right icon"></i></a>
                 </h4>
                 <hr class="nfb-divider" />
             </div>

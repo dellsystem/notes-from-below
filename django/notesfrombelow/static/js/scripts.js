@@ -30,7 +30,9 @@ $(window).scroll(function () {
 })
 
 function toggleSearch() {
+    // TODO: use jquery for everything lol
     document.getElementById('search-dropdown').classList.toggle('visible');
+    $('#search-input').focus();
     return false;
 };
 

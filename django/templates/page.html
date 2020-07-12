@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block image %}{{ page.image.url }}{% endblock %}
+{% block image %}{% if page.image %}{{ page.image.url }}{% endif %}{% endblock %}
 
 {% block title %}{{ page.title }}{% endblock %}
 
@@ -23,14 +23,34 @@
         {% endblock %}
         {% if page.content %}
         <div class="nfb-content-box">
-            <div class="section">
-                <h1 class="ui header">
-                    {{ page.title }}
-                   <div class="sub header">
-                        {{ page.subtitle }}
-                   </div>
-                </h1>
+            {% if page.image %}
+            <div class="ui basic segment">
+                <div class="ui stackable two column grid">
+                    <div class="column">
+                        <div class="section">
+                            <h1 class="ui header">
+                                {{ page.title }}
+                                <div class="sub header">
+                                    {{ page.subtitle }}
+                                </div>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="column">
+                            <img src="{{ page.image.url }}" class="ui centered image" />
+                    </div>
+                </div>
             </div>
+            {% else %}
+                <div class="section">
+                    <h1 class="ui header">
+                        {{ page.title }}
+                        <div class="sub header">
+                            {{ page.subtitle }}
+                        </div>
+                    </h1>
+                </div>
+            {% endif %}
         </div>
         <div class="section">
             {{ page.formatted_content|safe }}

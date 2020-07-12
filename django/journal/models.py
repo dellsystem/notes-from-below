@@ -23,9 +23,14 @@ class Category(models.Model):
         max_length=12,
         help_text="Singular word for what the tags refer to (e.g., theme)"
     )
+    about_page = models.ForeignKey('cms.Page', on_delete=models.PROTECT, blank=True, null=True)
     order_on_homepage = models.PositiveIntegerField(default=0)
     icon = models.CharField(max_length=10,
         help_text="Semantic UI icon used for the label on the article page")
+    archive_link_text = models.CharField(
+        max_length=20,
+        help_text="The text shown on the homepage for linking to this archive"
+    )
 
     class Meta:
         verbose_name_plural = 'categories'
@@ -52,10 +57,11 @@ class Tag(models.Model):
     description = models.TextField()
     image = ProcessedImageField(
         upload_to='tags',
-        processors=[ResizeToFill(1920, 450)],
+        processors=[ResizeToFill(540, 360)],
         options={'quality': 100},
         blank=True,
         null=True,
+        help_text="Resized to 540x360",
     )
     category = models.ForeignKey(Category,
         on_delete=models.CASCADE,
@@ -68,7 +74,11 @@ class Tag(models.Model):
         return self.name
 
     def get_articles(self):
-        return self.articles.filter(published=True).order_by('-date')
+        # only show articles whose category matches the tag category
+        return self.articles.filter(
+            category=self.category,
+            published=True
+        ).order_by('-date')
 
     def get_latest_article(self, existing_articles=None):
         articles = self.articles.filter(published=True)
@@ -111,8 +121,7 @@ class Author(models.Model):
 
 
 class Issue(models.Model):
-    number = models.CharField(unique=True, max_length=3,
-        help_text="Either an integer (e.g., 1) or a decimal (e.g., 4.1)")
+    number = models.PositiveSmallIntegerField(unique=True)
     title =  models.CharField(max_length=50)
     date = models.DateField(help_text='Day ignored')
     slug = models.SlugField()
@@ -174,18 +183,11 @@ class Article(models.Model):
     order_in_issue = models.PositiveIntegerField(default=0)
     image = ProcessedImageField(
         upload_to='articles',
-        processors=[ResizeToFill(1920, 1080)],
-        format='JPEG',
-        options={'quality': 100},
-        help_text="Resized to 1920x1080. Not all of it will be visible."
-    )
-    image_thumbnail = ImageSpecField(
-        source='image',
         processors=[ResizeToFill(540, 360)],
         format='JPEG',
-        options={'quality': 90}
+        options={'quality': 100},
+        help_text="Resized to 540x360."
     )
-    background_position = models.CharField(max_length=50, blank=True)
     image_credit = models.URLField(blank=True)
     related_1 = models.ForeignKey("self", related_name='related_1_articles',
         on_delete=models.CASCADE, blank=True, null=True)
@@ -193,10 +195,9 @@ class Article(models.Model):
         on_delete=models.CASCADE, blank=True, null=True)
     last_modified = models.DateField(auto_now=True)
     published = models.BooleanField(default=False)
-    featured = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['order_in_issue']
+        ordering = ['-date', 'order_in_issue']
         get_latest_by = 'date'
 
     def __str__(self):
@@ -261,6 +262,29 @@ class Article(models.Model):
         if self.related_2:
             related.append(self.related_2)
         return related
+
+
+class FeaturedArticle(models.Model):
+    """For featured articles on the homepage. Can be full width or thumbnail."""
+    article = models.OneToOneField(
+        Article,
+        related_name="featured",
+        on_delete=models.CASCADE,
+        primary_key=True
+    )
+    is_thumb = models.BooleanField(
+        help_text="Check this if you want the box to be small, rather than taking up the whole container"
+    )
+    order_on_homepage = models.PositiveIntegerField(
+        unique=True,
+        help_text="For determining the order of articles on the homepage. 1, 2, 3, etc. Note that large (non-thumb) articles will always be shown first."
+    )
+    
+    def __str__(self):
+        return self.article.title
+
+    class Meta:
+        ordering = ['order_on_homepage']
 
 
 class ArticleTranslation(models.Model):
