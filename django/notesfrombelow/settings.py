@@ -224,7 +224,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/home/dellsystem/Projects/notes-from-below/django.log',
+            'filename': os.path.join(BASE_DIR, 'django.log'),
         },
         'mail_admins': {
             'level': 'ERROR',
@@ -251,3 +251,4 @@ ADMINS = [
     ('Wendy', 'ilostwaldo@gmail.com'),
 ]
 SERVER_EMAIL = 'editors@notesfrombelow.org'
+FILE_UPLOAD_PERMISSIONS=0o640
