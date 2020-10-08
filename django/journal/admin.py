@@ -53,6 +53,13 @@ class ArticleForm(forms.ModelForm):
         }
 
 
+def publish(modeladmin, request, queryset):
+    queryset.update(published=True)
+    messages.info(request, "Published {} article(s)".format(
+        queryset.count())
+    )
+
+
 def remove_tags(modeladmin, request, queryset):
     for article in queryset:
         article.tags.remove()
@@ -78,7 +85,7 @@ def make_add_tag_action(tag):
 
 
 class ArticleAdmin(CompareVersionAdmin):
-    list_display = ['display_title', 'date', 'show_image', 'list_authors', 'category', 'list_tags', 'display_issue', 'published', 'is_featured']
+    list_display = ['display_title', 'date', 'show_image', 'display_tags', 'published', 'is_featured']
     list_filter = ['category', 'tags', 'issue']
     prepopulated_fields = {'slug': ('title',)}
     change_form_template = 'admin/edit_article.html'
@@ -88,19 +95,29 @@ class ArticleAdmin(CompareVersionAdmin):
     autocomplete_fields = ['related_1', 'related_2', 'issue', 'tags', 'authors']
 
     def display_title(self, obj):
+        if obj.authors.count():
+            authors = ', '.join(a.name for a in obj.authors.all())
+        else:
+            authors = 'anonymous'
+
         to_return = (
-            '<h3 class="ui header"><a href="{u}">{t}</a><div class="sub header">{s}</div></h3>'.format(
-                u=reverse('editor:journal_article_change', args=[obj.id]),
-                t=obj.title,
-                s=obj.subtitle or '<em>No subtitle</em>'
+            '<h3 class="ui header"><a href="{edit}">{title}</a><div class="sub header">{subtitle}</div></h3><span>by {authors}</span><br><code><a href="{view}">{slug}</a></code>'.format(
+                edit=reverse('editor:journal_article_change', args=[obj.id]),
+                title=obj.title,
+                subtitle=obj.subtitle or '<em>No subtitle</em>',
+                authors=authors,
+                view=obj.get_absolute_url(),
+                slug=obj.slug,
             )
         )
         return mark_safe(to_return)
-    display_title.short_description = 'Title and subtitle'
+    display_title.short_description = 'Article details'
 
-    def display_issue(self, obj):
+    def display_tags(self, obj):
+        html = []
+
         if obj.issue:
-            return mark_safe(
+            html.append(
                 '<a href="{u}">Issue {n}: {i} (#{o})</a>'.format(
                     u=reverse('editor:journal_issue_change', args=[obj.issue.id]),
                     n=obj.issue.number,
@@ -108,7 +125,26 @@ class ArticleAdmin(CompareVersionAdmin):
                     o=obj.order_in_issue
                 )
             )
-    display_issue.short_description = 'Issue'
+
+        if obj.category:
+            html.append(
+                '<a href="{u}"><strong>{c}</strong></a>'.format(
+                    u=reverse('editor:journal_category_change', args=[obj.category.id]),
+                    c=obj.category
+                )
+            )
+
+        for tag in obj.tags.all():
+            html.append(
+                '<div class="ui {c} label">{t}</div>'.format(
+                    # highlight tags of the same category as the article
+                    c='red' if tag.category and tag.category.pk == obj.category.pk else '',
+                    t=tag.name
+                )
+            )
+
+        return mark_safe('<br />'.join(html))
+    display_tags.short_description = 'Issue, category, and tags'
 
     def show_image(self, obj):
         to_return = '<img src="{}" class="ui medium image" />'.format(
@@ -116,21 +152,6 @@ class ArticleAdmin(CompareVersionAdmin):
         )
         return mark_safe(to_return)
     show_image.short_description = 'Image'
-
-    def list_tags(self, obj):
-        return mark_safe(
-            ''.join(
-                '<div class="ui {c} label">{t}</div>'.format(
-                    # highlight tags of the same category as the article
-                    c='red' if tag.category.pk == obj.category.pk else '',
-                    t=tag.name
-                ) for tag in obj.tags.all())
-        )
-    list_tags.short_description = 'Tag(s)'
-
-    def list_authors(self, obj):
-        return ', '.join(a.name for a in obj.authors.all())
-    list_authors.short_description = 'Author(s)'
 
     def is_featured(self, obj):
         return obj.featured is not None
@@ -140,6 +161,7 @@ class ArticleAdmin(CompareVersionAdmin):
     def get_actions(self, request):
         actions = super(ArticleAdmin, self).get_actions(request)
         # Make an action to clear all tags
+        actions['publish'] = (publish, 'publish', 'Publish')
         actions['remove_tags'] = (remove_tags, 'remove_tags', 'Remove all tags')
 
         # Make an action for adding each tag
