@@ -5,7 +5,7 @@ chardet==3.0.4
 cryptography==2.3
 Django==2.0.12
 django-appconf==1.0.2
-django-debug-toolbar==1.9.1
+django-debug-toolbar==1.11.1
 django-imagekit==4.0.2
 django-reversion==2.0.13
 -e git+https://github.com/jedie/django-reversion-compare.git@a0abed6454708b5c85c4173768589dc951d2e768#egg=django_reversion_compare
