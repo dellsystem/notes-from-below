@@ -36,6 +36,9 @@ class Category(models.Model):
         verbose_name_plural = 'categories'
         ordering = ['order_on_homepage']
 
+    def get_latest_article(self):
+        return self.articles.filter(published=True).latest()
+
     def get_articles(self):
         return self.articles.filter(published=True).order_by('-date')
 
