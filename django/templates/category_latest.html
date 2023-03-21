@@ -2,4 +2,4 @@
     Latest {{ category.slug }}
 </h4>
 <hr class="nfb-divider" />
-{% include 'article_thumb.html' with article=category.articles.latest only %}
+{% include 'article_thumb.html' with article=category.get_latest_article only %}

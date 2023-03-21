@@ -515,3 +515,7 @@ blockquote cite::before {
 .nfb-image-link:hover {
     filter: brightness(110%);
 }
+
+.featured-subtitle {
+    font-size: 1.5em;
+}

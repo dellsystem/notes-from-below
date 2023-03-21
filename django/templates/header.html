@@ -1,15 +1,15 @@
 <div id="header" class="print-hide">
     <div class="ui container">
         <a href="/" id="nfb-large-logo" class="mobile-hidden">
-            <img src="/static/img/logo-large.png?1" class="ui centered image" alt="Notes From Below" />
+            <img src="/static/img/logo-large.png?4" class="ui centered image" alt="Notes From Below" />
         </a>
         <div class="ui inverted stackable secondary menu" id="top-menu">
             <div class="item" id="hamburger-item">
                 <a href="/" class="mobile-only" id="nfb-mobile-logo">
-                    <img src="/static/img/logo-large.png" alt="Notes From Below" />
+                    <img src="/static/img/logo-large.png?4" alt="Notes From Below" />
                 </a>
                 <a href="/" id="nfb-mini-logo" class="mobile-hidden hidden">
-                    <img src="/static/img/logo-mini.png?1" alt="Notes From Below" />
+                    <img src="/static/img/logo-mini.png?3" alt="Notes From Below" />
                 </a>
                 <a href="#" id="hamburger" onclick='toggleHamburger()'>
                     <i class="big content icon"></i>
@@ -22,8 +22,8 @@
                 <a class="item" href="{% url 'issues' %}">Issues</a>
             </div>
             <div class="menu mobile-hidden">
-                <a class="item" href="{% url 'contribute' %}">Contribute</a>
-                <a class="item" href="{% url 'page' 'support' %}">Support</a>
+                <a class="item" href="{% url 'page' 'shop' %}">Shop</a>
+                <a class="item" href="{% url 'page' 'supporter' %}">Support</a>
                 <a class="item" href="{% url 'about' %}">About</a>
             </div>
             <div class="right menu mobile-hidden">

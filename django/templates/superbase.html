@@ -10,19 +10,20 @@
 
     <title>{% block fulltitle %}{% block title %}{% endblock %} // Notes From Below{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="/static/css/semantic.min.css" />
-    <link rel="stylesheet" type="text/css" href="/static/css/styles.css?12" />
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css?13" />
     <link rel="alternate" type="application/rss+xml" title="Notes From Below" href="/rss/"/>
     {% include 'favicon.html' %}
     {% block meta %}
     {% endblock %}
-    <script async
-    src="https://www.googletagmanager.com/gtag/js?id=UA-107718477-1"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1FHTFR0D3J"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'UA-107718477-1');
+      gtag('config', 'G-1FHTFR0D3J');
     </script>
 </head>
 <body>

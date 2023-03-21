@@ -36,6 +36,9 @@ class Category(models.Model):
         verbose_name_plural = 'categories'
         ordering = ['order_on_homepage']
 
+    def get_latest_article(self):
+        return self.articles.filter(published=True).latest()
+
     def get_articles(self):
         return self.articles.filter(published=True).order_by('-date')
 
@@ -63,9 +66,10 @@ class Tag(models.Model):
         null=True,
         help_text="Resized to 540x360",
     )
-    category = models.ForeignKey(Category,
+    category = models.ForeignKey(
+        Category,
         on_delete=models.CASCADE,
-        related_name='tags')
+        related_name='tags', null=True)
 
     class Meta:
         ordering = ['name']
@@ -168,7 +172,7 @@ class Article(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
         related_name='articles')
     title = models.CharField(max_length=255)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     authors = models.ManyToManyField(Author, related_name='articles',
         blank=True)
     tags = models.ManyToManyField(Tag, related_name='articles', blank=True)

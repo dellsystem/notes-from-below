@@ -1,6 +1,6 @@
 <div class="nfb-content-box">
     <div class="ui basic segment">
-        <div class="ui grid">
+        <div class="ui stackable grid">
             <div class="row">
                 <div class="nine wide column">
                     <h2 class="ui header">
@@ -14,9 +14,9 @@
                             {{ article.date }}
                         </div>
                     </h2>
-                    <h3 class="ui header">
+		    <div class="featured-subtitle">
                         {{ article.subtitle }}
-                    </h3>
+                    </div>
                 </div>
                 <div class="seven wide column">
                     <a href="{{ article.get_absolute_url }}">

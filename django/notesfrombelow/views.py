@@ -9,8 +9,8 @@ from cms.models import Page
 
 
 def index(request):
-
-    latest_issues = Issue.objects.order_by('-date')
+    issues = Issue.objects.filter(published=True)
+    latest_issues = issues.order_by('-date')
 
     inquiry = Category.objects.get(slug='inquiry')
     theory = Category.objects.get(slug='theory')
@@ -20,13 +20,10 @@ def index(request):
     small_features = featured_articles.filter(is_thumb=True)
 
     context = {
-        'issues': Issue.objects.filter(published=True).order_by('-number'),
+        'issues': issues.order_by('-number'),
         'categories': Category.objects.all(),
         'large_features': large_features,
         'small_features': small_features,
-        'latest_inquiry': inquiry.articles.latest(),
-        'latest_bulletin': bulletins.articles.latest(),
-        'latest_theory': theory.articles.latest(),
         'themes': theory.tags.all(),
         'bulletin_publications': bulletins.tags.all(),
         'inquiry_sectors': inquiry.tags.all(),
