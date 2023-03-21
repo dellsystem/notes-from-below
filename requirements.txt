@@ -1,11 +1,11 @@
 asn1crypto==0.24.0
 bcrypt==3.1.4
-certifi==2017.11.5
+certifi==2022.12.7
 chardet==3.0.4
-cryptography==2.3
-Django==2.0.12
+cryptography==3.2
+Django==2.2.24
 django-appconf==1.0.2
-django-debug-toolbar==1.9.1
+django-debug-toolbar==1.11.1
 django-imagekit==4.0.2
 django-reversion==2.0.13
 -e git+https://github.com/jedie/django-reversion-compare.git@a0abed6454708b5c85c4173768589dc951d2e768#egg=django_reversion_compare
@@ -15,16 +15,16 @@ idna==2.6
 Markdown==3.1.1
 martor==1.4.0
 mock==3.0.5
-paramiko==2.4.2
+paramiko==2.10.1
 pdf2image==0.1.11
 pilkit==2.0
-Pillow==6.2.0
-psycopg2==2.7.3.2
+Pillow==9.3.0
+#psycopg2==2.7.3.2
 pyasn1==0.4.2
 pycparser==2.18
 PyNaCl==1.2.1
 pytz==2017.3
-requests==2.22.0
+requests==2.28.0
 six==1.11.0
 sqlparse==0.2.4
-urllib3==1.24.2
+urllib3==1.26.15
