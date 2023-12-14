@@ -1,6 +1,6 @@
 {% extends 'superbase.html' %}
 
-{% block title %}{{ issue.title }} (#{{ issue.number }}){% endblock %}
+{% block title %}{{ issue.title }} ({% if issue.is_book %}Book{% else %}#{{ issue.number }}{% endif %}){% endblock %}
 
 {% block body %}
 <article class="page-content">

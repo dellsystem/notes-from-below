@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ issue.title }} (#{{ issue.number }}) - Prepare for publication{% endblock %}
+{% block title %}{{ issue.title }} ({% if issue.is_book %}Book{% else %}#{{
+issue.number }}{% endif %}) - Prepare for publication{% endblock %}
 
 {% block content %}
 <div class="page-content">
@@ -8,7 +9,8 @@
         <div class="nfb-content-box">
             <div class="section">
                 <h1 class="ui header">
-                    Publish issue #{{ issue.number }}: {{ issue.title }}
+                    Publish {% if issue.is_book %}book{% else %}issue #{{ issue.number }}{% endif %}:
+                    {{ issue.title }}
                     <div class="sub header">
                         {% with article_count=issue.get_articles.count %}
                         {{ article_count }} article{{ article_count|pluralize }}

@@ -3,7 +3,7 @@
         <img src="{{ issue.image.url }}" alt="{{ issue.title }}" class="ui fluid image nfb-image-link"/>
     </a>
     <h3 class="ui centered header">
-        {{ issue.number }}: {{ issue.title }}
+        {% if issue.is_book %}Book{% else %}{{ issue.number }}{% endif %}: {{ issue.title }}
         <div class="sub header">
             {{ issue.date|date:"F Y" }}
         </div>
