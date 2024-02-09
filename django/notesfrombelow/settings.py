@@ -214,6 +214,7 @@ LANGUAGES = (
     ('it', 'Italiano'),
     ('de', 'Deutsch'),
     ('pt', 'Português'),
+    ('bn', 'Bangla'),
 )
 
 
