@@ -9,6 +9,7 @@ from cms.models import Page
 
 
 def index(request):
+    # TODO: split issues up into issues and books (when we have more)
     issues = Issue.objects.filter(published=True)
     latest_issues = issues.order_by('-date')
 

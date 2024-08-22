@@ -103,6 +103,20 @@ class IssueListView(generic.ListView):
     model = Issue
     template_name = 'issues.html'
 
+    def get_queryset(self):
+        """For the main issues page we only show non-book issues. This is a
+        little annoying logically but we're currently using the Issue model to
+        hold both regular issues and books so it'll have to do for now."""
+        return Issue.objects.exclude(is_book=True)
+
+
+class BookListView(generic.ListView):
+    model = Issue
+    template_name = 'books.html'
+
+    def get_queryset(self):
+        return Issue.objects.filter(is_book=True)
+
 
 class IssuePdfView(generic.DetailView):
     model = Issue

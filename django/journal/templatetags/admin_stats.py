@@ -209,7 +209,7 @@ def show_issues():
                 colour=colour,
                 title=issue.title,
                 date=date_display,
-                number=issue.number,
+                number='Book' if issue.is_book else issue.number,
                 url=reverse('editor:journal_issue_change', args=[issue.pk]),
             )
         else:

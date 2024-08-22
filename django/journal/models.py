@@ -125,7 +125,11 @@ class Author(models.Model):
 
 
 class Issue(models.Model):
-    number = models.PositiveSmallIntegerField(unique=True)
+    # TODO: validation on number & is_book (number needed if is_book is False)
+    number = models.PositiveSmallIntegerField(unique=True, blank=True,
+        null=True,
+        help_text="Set this for regular issues. Leave it blank for books.")
+    is_book = models.BooleanField(default=False)
     title =  models.CharField(max_length=50)
     date = models.DateField(help_text='Day ignored')
     slug = models.SlugField()

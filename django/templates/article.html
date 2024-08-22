@@ -44,7 +44,8 @@
                         Featured in
                         <strong>
                         <a href="{{ article.issue.get_absolute_url }}">
-                            {{ article.issue.title }} (#{{ article.issue.number }})
+                            {{ article.issue.title }}
+                            ({% if article.issue.is_book %}Book{% else %}#{{ article.issue.number }}{% endif %})
                         </a>
                         </strong>
                         {% endif %}
@@ -96,7 +97,8 @@
                     in
                     <strong>
                     <a href="{{ article.issue.get_absolute_url }}">
-                        {{ article.issue.title }} (#{{ article.issue.number }})
+                        {{ article.issue.title }}
+                        ({% if article.issue.is_book %}Book{% else %}#{{ article.issue.number }}{% endif %})
                     </a>
                     </strong>
                     {% endif %}
@@ -198,7 +200,8 @@
                 <h2>
                     From
                     <a href="{{ article.issue.get_absolute_url }}">
-                        {{ article.issue.title }} (issue #{{ article.issue.number }})
+                        {{ article.issue.title }}
+                        ({% if article.issue.is_book %}Book{% else %}#{{ article.issue.number }}{% endif %})
                     </a>
                 </h2>
             </div>
