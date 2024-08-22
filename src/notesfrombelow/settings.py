@@ -28,9 +28,12 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
 ]
+CSRF_TRUSTED_ORIGINS = []
+
 allowed_host = os.environ.get('ALLOWED_HOST')
 if allowed_host:
     ALLOWED_HOSTS.append(allowed_host)
+    CSRF_TRUSTED_ORIGINS.append('http://{}'.format(allowed_host))
 
 
 # Application definition
