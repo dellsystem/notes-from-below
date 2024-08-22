@@ -6,6 +6,35 @@
 
 {% block content %}
 <div class="ui container">
+    {% if user.is_superuser %}
+        <div class="ui segment">
+            <h2 class="ui center aligned header">Recent changes</h2>
+            {% load log %}
+            {% get_admin_log 10 as admin_log %}
+            <ul class="actionlist">
+            {% for entry in admin_log %}
+            <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                {{ entry.user }} {% if entry.is_addition %}added{% elif entry.is_change %}changed{% elif entry.is_deletion %}deleted{% endif %}
+                {% if entry.content_type %}
+                    {% filter capfirst %}{{ entry.content_type.name }}{% endfilter %}:
+                {% else %}
+                    Unknown content
+                {% endif %}
+                <br>
+                <span class="visually-hidden">{% if entry.is_addition %}Added:{% elif entry.is_change %}Changed:{% elif entry.is_deletion %}Deleted:{% endif %}</span>
+                {% if entry.is_deletion or not entry.get_admin_url %}
+                    <strong>{{ entry.object_repr }}</strong>
+                {% else %}
+                    <strong><a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a></strong>
+                {% endif %}
+                (<span title="{{ entry.action_time }}">{{ entry.action_time|timesince }}</span> ago)
+                <br>
+            </li>
+            {% endfor %}
+            </ul>
+        </div>
+        <br />
+    {% endif %}
     <div class="ui segment">
         <h1 class="ui aligned header">
             Standalone article management
