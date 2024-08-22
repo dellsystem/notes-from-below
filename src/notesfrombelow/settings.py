@@ -218,6 +218,9 @@ TRANSLATION_LANGUAGES = (
     ('de', 'Deutsch'),
     ('pt', 'Português'),
     ('bn', 'Bangla'),
+    ('ro', 'Romanian'),
+    ('ar', 'Arabic'),
+    ('ur', 'Urdu'),
 )
 
 
