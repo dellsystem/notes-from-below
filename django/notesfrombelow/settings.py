@@ -207,7 +207,7 @@ MARTOR_MARKDOWN_BASE_MENTION_URL = 'https://python.web.id/author/' # default (ch
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 
-LANGUAGES = (
+TRANSLATION_LANGUAGES = (
     ('es', 'Español'),
     ('fr', 'Français'),
     ('pl', 'Polski'),
@@ -253,3 +253,6 @@ ADMINS = [
 ]
 SERVER_EMAIL = 'editors@notesfrombelow.org'
 FILE_UPLOAD_PERMISSIONS=0o640
+
+# New requirement starting Django 3.2
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

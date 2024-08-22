@@ -294,7 +294,7 @@ class FeaturedArticle(models.Model):
 class ArticleTranslation(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE,
         related_name='translations')
-    language = models.CharField(max_length=2, choices=settings.LANGUAGES)
+    language = models.CharField(max_length=2, choices=settings.TRANSLATION_LANGUAGES)
     title = models.CharField(max_length=255)
     subtitle = models.TextField()
     content = MartorField()
