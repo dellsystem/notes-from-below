@@ -254,12 +254,12 @@ ALLOWED_HTML_TAGS = [
     "a", "abbr", "b", "blockquote", "br", "cite", "code", "command", "dd",
     "del", "div", "dl", "dt", "em", "fieldset", "h1", "h2", "h3", "h4", "h5",
     "h6", "hr", "i", "iframe", "img", "input", "ins", "kbd", "label", "legend",
-    "li", "ol", "optgroup", "option", "p", "pre", "script", "section", "small",
+    "li", "object", "ol", "optgroup", "option", "p", "pre", "script", "section", "small",
     "span", "stripe-pricing-table", "strong", "sub", "sup", "svg", "table",
     "tbody", "td", "tfoot", "th", "thead", "tr", "u", "ul"
 ]
 ALLOWED_HTML_ATTRIBUTES = [
-    "alt", "async", "class", "color", "colspan", "datetime",
+    "alt", "async", "class", "color", "colspan", "datetime", "data",
     "height", "href", "id", "name", "pricing-table-id",
     "publishable-key", "reversed", "rowspan",
     "scope", "src", "style", "title", "type", "width",
