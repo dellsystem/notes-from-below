@@ -13,3 +13,5 @@ class Command(BaseCommand):
             author.save()
         for article in Article.objects.all():
             article.save()
+        for translation in ArticleTranslation.objects.all():
+            translation.save()
