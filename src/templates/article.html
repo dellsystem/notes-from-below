@@ -65,7 +65,7 @@
                         {% endfor %}
                     </div>
                     <div class="nfb-article-subtitle">
-                        <p>{{ desired_translation.subtitle }}</p>
+                        {{ desired_translation.formatted_subtitle|safe }}
                     </div>
                     {% include 'article_toolbar.html' with title=desired_translation.title|urlencode url=request.build_absolute_uri|urlencode only %}
                 </div>
@@ -105,7 +105,7 @@
                 </div>
             </h1>
             <div class="ui basic segment center aligned">
-                <p>{{ desired_translation.subtitle }}</p>
+                {{ desired_translation.formatted_subtitle|safe }}
             </div>
             <br />
         </div>

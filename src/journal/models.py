@@ -181,6 +181,8 @@ class Article(models.Model):
         blank=True)
     tags = models.ManyToManyField(Tag, related_name='articles', blank=True)
     subtitle = models.TextField()
+    # Handle basic Markdown formatting in the subtitle (eg italics)
+    formatted_subtitle = models.TextField(editable=False)
     content = MartorField()
     formatted_content = models.TextField(editable=False)
     # Store the formatted_content field with all tags removed (for related)
@@ -227,6 +229,7 @@ class Article(models.Model):
 
     def save(self, *args, **kwargs):
         # Parse markdown and cache it.
+        self.formatted_subtitle = markdownify(self.subtitle)
         self.formatted_content = markdownify(self.content)
         self.unformatted_content = strip_tags(self.formatted_content)
         words = self.unformatted_content.split()
@@ -323,6 +326,7 @@ class ArticleTranslation(models.Model):
     )
     title = models.CharField(max_length=255)
     subtitle = models.TextField()
+    formatted_subtitle = models.TextField(editable=False)
     content = MartorField()
     formatted_content = models.TextField(editable=False)
     # Store the formatted_content field with all tags removed (for description)
@@ -346,6 +350,7 @@ class ArticleTranslation(models.Model):
 
     def save(self, *args, **kwargs):
         # Parse markdown and cache it.
+        self.formatted_subtitle = markdownify(self.subtitle)
         self.formatted_content = markdownify(self.content)
         self.unformatted_content = strip_tags(self.formatted_content)
         super().save(*args, **kwargs)
