@@ -249,6 +249,7 @@ FILE_UPLOAD_PERMISSIONS=0o640
 # New requirement starting Django 3.2
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
+# Need the below for Martor to handle all of our extensions + custom HTML code
 ALLOWED_HTML_TAGS = [
     "a", "abbr", "b", "blockquote", "br", "cite", "code", "command", "dd",
     "del", "div", "dl", "dt", "em", "fieldset", "h1", "h2", "h3", "h4", "h5",
@@ -256,4 +257,10 @@ ALLOWED_HTML_TAGS = [
     "li", "ol", "optgroup", "option", "p", "pre", "script", "section", "small",
     "span", "stripe-pricing-table", "strong", "sub", "sup", "svg", "table",
     "tbody", "td", "tfoot", "th", "thead", "tr", "u", "ul"
+]
+ALLOWED_HTML_ATTRIBUTES = [
+    "alt", "async", "class", "color", "colspan", "datetime",
+    "height", "href", "id", "name", "pricing-table-id",
+    "publishable-key", "reversed", "rowspan",
+    "scope", "src", "style", "title", "type", "width",
 ]
