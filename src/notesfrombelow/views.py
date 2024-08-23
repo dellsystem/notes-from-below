@@ -75,6 +75,8 @@ def archives(request, page=1, category='all'):
         all_articles = Article.objects.filter(published=True).filter(
             Q(title__icontains=query) | Q(subtitle__icontains=query)
         )
+        if category != 'all':
+            all_articles = all_articles.filter(category__slug=category)
 
         # If there are tag or authors containing this query, display them.
         tags = Tag.objects.filter(name__icontains=query)

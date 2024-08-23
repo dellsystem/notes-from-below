@@ -17,13 +17,13 @@
                     {% if not forloop.first %}
                     <div class="or"></div>
                     {% endif %}
-                    <a href="{% url 'archives' filter 1 %}" class="ui {% if filter == category %}red{% endif %} button"> {{ filter|title }}</a>
+                    <a href="{% url 'archives' filter 1 %}{% if query %}?q={{ query }}{% endif %}" class="ui {% if filter == category %}red{% endif %} button"> {{ filter|title }}</a>
                     {% endfor %}
                 </div>
             </div>
             <div class="six wide center aligned column">
                 {% if total_articles %}
-                {% include "pagination.html" with items=articles category=category only %}
+                {% include "pagination.html" with items=articles category=category query=query only %}
                 {% endif %}
             </div>
             <div class="five wide column">
@@ -78,7 +78,7 @@
         {% if total_articles %}
         <div class="ui middle aligned stackable grid">
             <div class="sixteen wide center aligned column">
-                {% include "pagination.html" with items=articles category=category only %}
+                {% include "pagination.html" with items=articles category=category query=query only %}
             </div>
         </div>
         {% endif %}
