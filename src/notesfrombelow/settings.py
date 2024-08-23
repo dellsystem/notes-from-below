@@ -248,3 +248,12 @@ FILE_UPLOAD_PERMISSIONS=0o640
 
 # New requirement starting Django 3.2
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+ALLOWED_HTML_TAGS = [
+    "a", "abbr", "b", "blockquote", "br", "cite", "code", "command", "dd",
+    "del", "div", "dl", "dt", "em", "fieldset", "h1", "h2", "h3", "h4", "h5",
+    "h6", "hr", "i", "iframe", "img", "input", "ins", "kbd", "label", "legend",
+    "li", "ol", "optgroup", "option", "p", "pre", "section", "small", "span",
+    "strong", "sub", "sup", "table", "tbody", "td", "tfoot", "th", "thead",
+    "tr", "u", "ul"
+]
