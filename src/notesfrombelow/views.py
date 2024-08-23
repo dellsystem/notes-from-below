@@ -90,7 +90,7 @@ def archives(request, page=1, category='all'):
         tags = Tag.objects.none()
         authors = Author.objects.none()
 
-    paginator = Paginator(all_articles.order_by('-date'), 10)
+    paginator = Paginator(all_articles.order_by('-date'), 9)
     articles = paginator.get_page(page)
 
     context = {
