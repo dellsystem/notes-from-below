@@ -1,6 +1,7 @@
 import re
 
 import markdown
+import xml.etree.ElementTree as etree
 
 
 INTERVIEW_RE = r'^~(?P<author>[A-Z]{1,3})(?P<number>[1-5]) '
@@ -15,7 +16,7 @@ class InterviewPattern(markdown.inlinepatterns.Pattern):
         """
         author = m.group('author')
         number = m.group('number')
-        el = markdown.util.etree.Element('span')
+        el = etree.Element('span')
         el_class = 'interview-quote author-' + number
         el.set('class', el_class)
         el.text = author
@@ -23,8 +24,9 @@ class InterviewPattern(markdown.inlinepatterns.Pattern):
 
 
 class InterviewExtension(markdown.Extension):
-    def extendMarkdown(self, md, md_globals):
-        md.inlinePatterns['interview'] = InterviewPattern(INTERVIEW_RE, md)
+    def extendMarkdown(self, md):
+        # A recent Markdown update changed the syntax for registering new inline patterns. I'm only guessing here. The last parameter is a priority number I guess
+        md.inlinePatterns.register(InterviewPattern(INTERVIEW_RE, self), 'interview', 175)
 
 
 def makeExtension(*args, **kwargs):

@@ -40,7 +40,11 @@ class TestEmbed(MarkdownTestCase):
                 ),
                 self.dedent(
                     """<p>
-<div><object class="non-mobile-only" data="/media/pdfs/uploads/url.pdf" height="800px" type="application/pdf" width="100%"><iframe height="800px" src="/media/pdfs/uploads/url.pdf" width="100%">Please download the PDF</iframe></object><img class="mobile-only" src="/media/pdfs/uploads/url.pdf.png"><div class="print-only">Don't print this page, print the PDF itself!</div>
+<div>
+<object class="non-mobile-only" data="/media/pdfs/uploads/url.pdf" height="800px" type="application/pdf" width="100%">
+<iframe height="800px" src="/media/pdfs/uploads/url.pdf" width="100%">Please download the PDF</iframe>
+</object>
+<img class="mobile-only" src="/media/pdfs/uploads/url.pdf.png"><div class="print-only">Don't print this page, print the PDF itself!</div>
 </div>
 </p>"""
                 ),
