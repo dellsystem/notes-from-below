@@ -22,8 +22,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'tmp')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+postgres_password = os.environ.get('POSTGRES_PASSWORD')
+if postgres_password:
+    DEBUG = False
+else:
+    DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -96,7 +99,6 @@ WSGI_APPLICATION = 'notesfrombelow.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {}
-postgres_password = os.environ.get('POSTGRES_PASSWORD')
 if postgres_password:
     db = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
