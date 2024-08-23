@@ -179,8 +179,12 @@ class FeaturedArticleAdmin(CompareVersionAdmin):
 
 
 class ArticleTranslationAdmin(CompareVersionAdmin):
-    list_display = ['article', 'title', 'slug', 'language']
+    list_display = ['article', 'title', 'slug', 'translation_language']
     prepopulated_fields = {'slug': ('title',)}
+
+
+class TranslationLanguageAdmin(admin.ModelAdmin):
+    list_display = ['name', 'code']
 
 
 editor_site.register(models.Issue, IssueAdmin)
@@ -194,6 +198,7 @@ editor_site.register(models.Tag, TagAdmin)
 admin.site.register(models.Issue, IssueAdmin)
 admin.site.register(models.Article, ArticleAdmin)
 admin.site.register(models.ArticleTranslation, ArticleTranslationAdmin)
+admin.site.register(models.TranslationLanguage, TranslationLanguageAdmin)
 admin.site.register(models.FeaturedArticle, FeaturedArticleAdmin)
 admin.site.register(models.Author, AuthorAdmin)
 admin.site.register(models.Category, CategoryAdmin)

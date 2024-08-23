@@ -212,10 +212,11 @@ class Article(models.Model):
         return self.title
 
     @property
-    def language(self):
+    def get_language_code(self):
         return 'en'
 
-    def get_language_display(self):
+    @property
+    def get_language_name(self):
         return 'English'
 
     def get_absolute_url(self):
@@ -295,10 +296,31 @@ class FeaturedArticle(models.Model):
         ordering = ['order_on_homepage']
 
 
+class TranslationLanguage(models.Model):
+    code = models.CharField(
+        max_length=2,
+        primary_key=True,
+        help_text='A two-letter code for the language from ISO 639. e.g., en, fr.'
+    )
+    name = models.CharField(
+        max_length=50,
+        help_text='The name of the language as it appears in that language.'
+    )
+
+    def __str__(self):
+        return self.name
+
+
 class ArticleTranslation(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE,
-        related_name='translations')
-    language = models.CharField(max_length=2, choices=settings.TRANSLATION_LANGUAGES)
+    article = models.ForeignKey(
+        Article,
+        on_delete=models.CASCADE,
+        related_name='translations'
+    )
+    translation_language = models.ForeignKey(
+        TranslationLanguage,
+        on_delete=models.PROTECT
+    )
     title = models.CharField(max_length=255)
     subtitle = models.TextField()
     content = MartorField()
@@ -310,10 +332,17 @@ class ArticleTranslation(models.Model):
     last_modified = models.DateField(auto_now=True)
 
     class Meta:
-        unique_together = ('article', 'language')
+        unique_together = ('article', 'translation_language')
 
     def __str__(self):
-        return "{}—{}".format(self.article.title, self.get_language_display())
+        return "{}—{}".format(self.article.title, self.translation_language.name)
+
+    # The two below are useful for the template (for English)
+    def get_language_code(self):
+        return self.translation_language.code
+
+    def get_language_name(self):
+        return self.translation_language.name
 
     def save(self, *args, **kwargs):
         # Parse markdown and cache it.

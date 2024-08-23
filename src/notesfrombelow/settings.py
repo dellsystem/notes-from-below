@@ -210,20 +210,6 @@ MARTOR_MARKDOWN_BASE_MENTION_URL = 'https://python.web.id/author/' # default (ch
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 
-TRANSLATION_LANGUAGES = (
-    ('es', 'Español'),
-    ('fr', 'Français'),
-    ('pl', 'Polski'),
-    ('it', 'Italiano'),
-    ('de', 'Deutsch'),
-    ('pt', 'Português'),
-    ('bn', 'Bangla'),
-    ('ro', 'Romanian'),
-    ('ar', 'Arabic'),
-    ('ur', 'Urdu'),
-)
-
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

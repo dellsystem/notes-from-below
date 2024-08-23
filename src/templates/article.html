@@ -140,8 +140,8 @@
                 <div class="ui buttons">
                     {% for translation in translations %}
                     <a href="{{ translation.get_absolute_url }}"
-                       class="ui {% if translation.language == desired_translation.language %}black{% endif %} button">
-                        {{ translation.get_language_display }}
+                       class="ui {% if translation.get_language_code == desired_translation.get_language_code %}black{% endif %} button">
+                        {{ translation.get_language_name }}
                     </a>
                     {% if not forloop.last %}
                     <div class="or" data-text="/"></div>
@@ -153,8 +153,8 @@
                 <div class="ui vertical buttons">
                     {% for translation in translations %}
                     <a href="{{ translation.get_absolute_url }}"
-                       class="ui {% if translation.language == desired_translation.language %}black{% endif %} button">
-                        {{ translation.get_language_display }}
+                       class="ui {% if translation.get_language_code == desired_translation.get_language_code %}black{% endif %} button">
+                        {{ translation.get_language_name }}
                     </a>
                     {% endfor %}
                 </div>
