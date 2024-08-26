@@ -166,9 +166,23 @@
                 {{ desired_translation.formatted_content|safe }}
             </p>
         </div>
+        <hr />
+        {% if article.issue %}
+        <div class="section">
+            <div class="ui center aligned basic segment">
+                <h3>
+                    Featured in
+                    <a href="{{ article.issue.get_absolute_url }}">
+                        {{ article.issue.title }}
+                        ({% if article.issue.is_book %}Book{% else %}#{{ article.issue.number }}{% endif %})
+                    </a>
+                </h3>
+            </div>
+        </div>
+        <hr />
+        {% endif %}
         {% with num_authors=article.authors.count %}
         {% if num_authors %}
-        <hr />
         <div class="section">
             <h3 class="section-header">author{{ num_authors|pluralize }}</h3>
             {% for author in article.authors.all %}
@@ -177,11 +191,19 @@
         </div>
         {% endif %}
         {% endwith %}
+        <hr />
+        <div class="section">
+            <h2 class="section-header">Subscribe to Notes from Below</h2>
+            <p>Subscribe now to Notes from Below, and get our print issues sent to your front door three times a year. For every subscriber, we’re also able to print a load of free copies to hand out in workplaces, neighbourhoods, prisons and picket lines. Can you subscribe now and support us in spreading Marxist ideas in the workplace?</p>
+            <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+            <stripe-pricing-table pricing-table-id="prctbl_1MZelNJqCZesHuI0L3mdmyze"
+publishable-key="pk_live_51IBkcIJqCZesHuI03Zb0byIzCxTAfeUQ1Ei2y92J1xpKKRPg881CByT1NDVaQ1U50btyIYKRCeXaxJJgwDRTCpuU00aDdVUskS"></stripe-pricing-table>
+        </div>
         {% with related=article.get_related %}
         {% if related %}
         <hr class="print-hide" />
         <div class="section print-hide">
-            <h3 class="section-header">read next</h3>
+            <h3 class="section-header">Read next</h3>
             <div class="ui two column stackable grid">
             {% for related_article in related %}
             <div class="column">
@@ -192,21 +214,6 @@
         </div>
         {% endif %}
         {% endwith %}
-        {% if article.issue %}
-        <hr />
-        <div class="section">
-            <h3 class="section-header">issue</h3>
-            <div class="ui center aligned basic segment">
-                <h2>
-                    From
-                    <a href="{{ article.issue.get_absolute_url }}">
-                        {{ article.issue.title }}
-                        ({% if article.issue.is_book %}Book{% else %}#{{ article.issue.number }}{% endif %})
-                    </a>
-                </h2>
-            </div>
-        </div>
-        {% endif %}
     </div>
 </article>
 {% endblock %}
