@@ -3,6 +3,7 @@ function toggleHamburger() {
     rightMenus[0].classList.toggle('visible');
     rightMenus[1].classList.toggle('visible');
     rightMenus[2].classList.toggle('visible');
+    document.querySelector('#search-dropdown').classList.toggle('visible')
     return false;
 };
 
