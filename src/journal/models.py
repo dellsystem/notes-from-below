@@ -1,7 +1,3 @@
-import collections
-import math
-import operator
-
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
@@ -11,6 +7,8 @@ from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill
 from martor.models import MartorField
 from martor.utils import markdownify
+
+from journal.utils import find_similar_articles
 
 
 class Category(models.Model):
@@ -232,30 +230,16 @@ class Article(models.Model):
         self.formatted_subtitle = markdownify(self.subtitle)
         self.formatted_content = markdownify(self.content)
         self.unformatted_content = strip_tags(self.formatted_content)
-        words = self.unformatted_content.split()
 
-        # Find the two most similar articles based on cosine similarity. Only
-        # do this if they're missing!
+        # If we're missing a related article, find the two most similar
+        # articles based on cosine similarity.
         if not self.related_1 or not self.related_2:
-            this_counter = collections.Counter(words)
-            articles = []
-            for article in Article.objects.exclude(slug=self.slug):
-                other_counter = collections.Counter(article.unformatted_content.split())
-                intersection = set(this_counter.keys()) & set(other_counter.keys())
-                numerator = sum([this_counter[x] * other_counter[x] for x in intersection])
-
-                this_sum = sum([v**2 for v in this_counter.values()])
-                other_sum = sum([v**2 for v in this_counter.values()])
-                denominator = math.sqrt(this_sum) * math.sqrt(other_sum)
-
-                cosine = numerator / denominator if denominator else 0.0
-                articles.append((cosine, article))
-            articles.sort(key=operator.itemgetter(0), reverse=True)
-
-            if len(articles) > 1:
-                self.related_1 = articles[0][1]
-            if len(articles) > 1:
-                self.related_2 = articles[1][1]
+            other_articles = Article.objects.exclude(pk=self.pk)
+            related_1, related_2 = find_similar_articles(self.unformatted_content, other_articles)
+            if not self.related_1:
+                self.related_1 = related_1
+            if not self.related_2:
+                self.related_2 = related_2
 
         super().save(*args, **kwargs)
 
