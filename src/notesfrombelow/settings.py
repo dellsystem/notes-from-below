@@ -33,10 +33,11 @@ ALLOWED_HOSTS = [
 ]
 CSRF_TRUSTED_ORIGINS = []
 
-allowed_host = os.environ.get('ALLOWED_HOST')
-if allowed_host:
-    ALLOWED_HOSTS.append(allowed_host)
-    CSRF_TRUSTED_ORIGINS.append('https://{}'.format(allowed_host))
+allowed_hosts = os.environ.get('ALLOWED_HOSTS')
+if allowed_hosts:
+    for host in allowed_hosts.split(','):
+        ALLOWED_HOSTS.append(host)
+        CSRF_TRUSTED_ORIGINS.append('https://{}'.format(host))
 
 
 # Application definition
