@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block image %}{{ issue.image.url }}{% endblock %}
+
+{% block twittercard %}summary{% endblock %}
+
+{% block title %}{{ issue.name }}{% endblock %}
+{% block description %}{{ issue.description }}{% endblock %}
+{% block date %}{{ issue.get_date|date:"Y-m-d" }}{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="ui container">
+        {% if request.user.is_staff %}
+        <div class="ui center aligned basic segment">
+            <a href="{% url 'admin:journal_issue_changelist' %}"
+               class="ui blue icon button">
+               <i class="edit icon"></i>
+               Edit in admin
+            </a>
+        </div>
+        {% endif %}
+        <div class="nfb-content-box">
+            <div class="section">
+                <h1 class="ui header">
+                    Books
+                </h1>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="ui stackable three column grid">
+            {% for issue in object_list %}
+            <div class="column">
+                {% include 'issue_thumb.html' with issue=issue only %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
