@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.utils.html import strip_tags
 
 from imagekit.models import ImageSpecField, ProcessedImageField
-from imagekit.processors import ResizeToFill
+from imagekit.processors import ResizeToFit, ResizeToFill
 from martor.models import MartorField
 from martor.utils import markdownify
 
@@ -136,7 +136,7 @@ class Issue(models.Model):
     image = ProcessedImageField(
         upload_to='issues',
         options={'quality': 100},
-        processors=[ResizeToFill(width=500, upscale=False)],
+        processors=[ResizeToFit(width=500, upscale=False)],
         help_text="Cropped to 500 pixels wide (no height specified)"
     )
     content = MartorField()
