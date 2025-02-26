@@ -1,9 +1,0 @@
-<h4 class="ui header">
-    By {{ category.tag_name }}
-</h4>
-<hr class="nfb-divider" />
-<div class="ui mini list nfb-category-list">
-{% for tag in category.tags.all %}
-<div class="item"><a href="{{ tag.get_absolute_url }}">{{ tag }}</a></div>
-{% endfor %}
-</div>

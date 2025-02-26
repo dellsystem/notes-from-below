@@ -12,7 +12,7 @@
         {% if request.user.is_staff %}
         <div class="ui center aligned basic segment">
             <a href="{% url 'admin:journal_category_change' category.pk %}"
-               class="ui blue icon button">
+               class="ui basic icon button">
                <i class="edit icon"></i>
                Edit in admin
             </a>
@@ -28,23 +28,30 @@
             </div>
         </div>
         <br /><br />
-        <div class="ui padded stackable grid">
-            <div class="six wide column">
-                <h4 class="ui header">
-                    Latest {{ category.slug }}
-                </h4>
-                <hr class="nfb-divider" />
-                {% include 'article_thumb.html' with article=category.articles.latest only %}
+        <h4 class="ui header">
+            Latest {{ category.slug }}
+        </h4>
+        <hr class="nfb-divider" />
+        <div class="ui stackable three column grid">
+            {% for article in category.get_latest_articles %}
+            <div class="column">
+                {% include 'article_thumb.html' with article=article only %}
             </div>
-            <div class="six wide column">
-                {% include 'category_browse.html' with category=category only %}
-            </div>
-            <div class="four wide column">
-                <h4 class="ui header">
-                    <a href="{% url 'archives' category.slug 1 %}">Archive <i class="angle right icon"></i></a>
-                </h4>
-                <hr class="nfb-divider" />
-            </div>
+            {% endfor %}
+        </div>
+        <br />
+        <div class="ui basic center aligned segment">
+            <a href="{% url 'archives' category.slug 2 %}">View older <i class="angle right icon"></i></a>
+        </div>
+        <br />
+        <h4 class="ui header">
+             Browse by {{ category.tag_name }}
+        </h4>
+        <hr class="nfb-divider" />
+        <div class="ui mini list nfb-category-list">
+        {% for tag in category.tags.all %}
+        <div class="item"><a href="{{ tag.get_absolute_url }}">{{ tag }}</a></div>
+        {% endfor %}
         </div>
     </div>
 </div>

@@ -163,6 +163,8 @@ STATICFILES_DIRS = [
 ]
 
 # Global martor settings
+MARTOR_THEME = 'semantic'
+
 # Input: string boolean, `true/false`
 MARTOR_ENABLE_CONFIGS = {
     'imgur': 'true',     # to enable/disable imgur/custom uploader.

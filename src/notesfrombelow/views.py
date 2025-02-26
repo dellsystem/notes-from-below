@@ -4,32 +4,18 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render
 
-from journal.models import Article, Author, Issue, Tag, Category, FeaturedArticle
+from journal.models import Article, Author, Issue, Tag, Category
 from cms.models import Page
 
 
 def index(request):
-    # TODO: split issues up into issues and books (when we have more)
-    issues = Issue.objects.filter(published=True)
-    latest_issues = issues.order_by('-date')
-
-    inquiry = Category.objects.get(slug='inquiry')
-    theory = Category.objects.get(slug='theory')
-    bulletins = Category.objects.get(slug='bulletins')
-    featured_articles = FeaturedArticle.objects.all()
-    large_features = featured_articles.filter(is_thumb=False)
-    small_features = featured_articles.filter(is_thumb=True)
+    issues = Issue.objects.filter(
+        published=True,
+        number__isnull=False
+    ).order_by('-number')[:6]
 
     context = {
-        'issues': issues.order_by('-number'),
-        'categories': Category.objects.all(),
-        'large_features': large_features,
-        'small_features': small_features,
-        'themes': theory.tags.all(),
-        'bulletin_publications': bulletins.tags.all(),
-        'inquiry_sectors': inquiry.tags.all(),
-        'latest_issue': latest_issues[0],
-        'previous_issue': latest_issues[1],
+        'issues': issues,
     }
 
     return render(request, 'index.html', context)
@@ -103,6 +89,7 @@ def archives(request, page=1, category='all'):
         'authors': authors,
         'filters': filters,
         'category': category,
+        'categories': Category.objects.all(),
     }
 
     return render(request, 'archives.html', context)

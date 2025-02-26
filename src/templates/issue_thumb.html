@@ -1,11 +1,5 @@
 <div class="nfb-issue-thumb">
     <a href="{{ issue.get_absolute_url }}">
-        <img src="{{ issue.image.url }}" alt="{{ issue.title }}" class="ui fluid image nfb-image-link"/>
+        <img src="{{ issue.image.url }}" alt="{{ issue.title }}" title="Issue {{ issue.number }}: {{ issue.title }} ({{ issue.date|date:"F Y" }})" class="ui fluid image nfb-image-link"/>
     </a>
-    <h3 class="ui centered header">
-        {% if issue.is_book %}Book{% else %}{{ issue.number }}{% endif %}: {{ issue.title }}
-        <div class="sub header">
-            {{ issue.date|date:"F Y" }}
-        </div>
-    </h3>
 </div>

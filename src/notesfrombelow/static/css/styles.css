@@ -2,30 +2,40 @@
 
 #header {
     width: 100%;
-    color: #fff;
-    background: #f62811;
-    position: fixed;
-    z-index: 10;
+    background: #fff;
 }
 
 #header .item {
     font-weight: bold;
-    text-transform: uppercase;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 1.1em;
 }
 
-#header .ui.menu, .nfb-red-column .ui.header {
-    font-family: "Public Sans", sans-serif;
+#logo {
     font-weight: 600;
+    font-size: 2.0em;
+    line-height: 2.0em;
+    padding-top: 20px;
+    text-align: center;
 }
 
-#nfb-large-logo img {
-    padding-top: 20px;
+#logo a {
+    color: #000;
+}
+
+#logo img {
+    vertical-align: text-bottom;
+}
+
+#menu {
+    padding-top: 10px;
+    padding-bottom: 25px;
 }
 
 .hidden {
     display: none;
 }
-
 
 .nfb-article-title {
     margin-top: 5px !important;
@@ -80,6 +90,11 @@ hr {
     text-align: center;
 }
 
+#index {
+   width: 900px;
+   margin: 0 auto;
+}
+
 .page-content ul, .page-content ol {
     line-height: 1.5em;
 }
@@ -98,28 +113,23 @@ hr {
 }
 
 #footer {
-    background: #f62811;
     width: 100%;
-    padding: 40px 0;    
-    color: #fff;
+    padding: 50px 0;    
 }
 
 #footer p {
     padding-top: 10px;
-    font-size: 0.9em;
+    font-size: 1.3em;
     padding-bottom: 0;
 }
 
-#footer .input {
-}
-
 #footer a {
-    color: #fff;
+    color: #000;
     font-weight: bold;
 }
 
 #footer a:hover {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(0, 0, 0, 0.8);
 }
 
 .footnote hr {
@@ -132,11 +142,6 @@ hr {
 
 .footnote .highlighted {
     background-color: #fdd7d3;
-}
-
-.page-content {
-    padding-top: 150px;
-    padding-bottom: 50px;
 }
 
 .nfb-issue-thumb .header {
@@ -159,7 +164,17 @@ hr {
 #hamburger {
     visibility: hidden;
     position: absolute;
-    right: 10px;
+    right: 1px;
+    top: -60px; /* i don't like this either trust me */
+    font-size: 0.7em;
+    color: black;
+}
+
+@media only screen and (min-width: 1200px) {
+    #menu {
+        width: 900px;
+        margin: 0 auto;
+    }
 }
 
 @media only screen and (max-width: 1200px) and (min-width: 767px)  {
@@ -174,12 +189,6 @@ hr {
     }
 }
 
-@media only screen and (max-width: 400px) {
-    #nfb-mobile-logo img {
-        max-width: 80%;
-    }
-}
-
 .mobile-only {
     display: none;
 }
@@ -187,6 +196,9 @@ hr {
 @media only screen and (max-width: 1200px) {
     #masthead.screen {
         display: none;
+    }
+    #logo img {
+        max-width: 40px;
     }
     .mobile-only {
         display: block;
@@ -211,6 +223,10 @@ hr {
     }
     #header .mobile-hidden.menu.visible {
         display: block;
+    }
+    #logo {
+        font-size: 1.5em;
+        line-height: 1.5em;
     }
 }
 
@@ -239,7 +255,6 @@ hr {
         margin: 0 !important;
         margin-bottom: 20mm !important;
     }
-
 
     .article-category {
         font-size: 0.8em;
@@ -376,10 +391,6 @@ blockquote cite::before {
         text-align: center;
     }
 
-    #footer {
-        background: #f62811;
-    }
-
     #footer h2.ui.header {
         font-size: 1.3rem;
     }
@@ -459,32 +470,8 @@ blockquote cite::before {
     margin: 0 auto;
 }
 
-#search-dropdown form {
-    width: 100%;
-}
-
-#search-dropdown {
-    margin-top: 0;
-    padding: 10px 0;
-    display: none;
-}
-
-#search-dropdown.visible {
-    display: block;
-}
-
-#top-menu {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.nfb-homepage-box {
-    border-bottom: 5px solid #f62811;
-    margin-bottom: 50px;
-}
-
 .nfb-content-box {
-    border: 2px solid #f62811;
+    border: 2px solid #111;
 }
 
 .nfb-category-list {
@@ -494,11 +481,11 @@ blockquote cite::before {
 }
 
 .nfb-divider {
-    border-top: 1px solid #f62811;
+    border-top: 1px solid #111;
 }
 
 .nfb-red-column {
-    background-color: #f62811;
+    background-color: #111;
 }
 
 .nfb-red-column .ui.header {

@@ -24,18 +24,18 @@ issue.number }}{% endif %}){% endblock %}
         {% if request.user.is_staff %}
         <div class="ui center aligned basic segment">
             <a href="{% url 'admin:journal_issue_change' issue.pk %}"
-               class="ui blue icon button">
+               class="ui basic icon button">
                <i class="edit icon"></i>
                Edit in admin
             </a>
             <a href="{% url 'admin:journal_article_add' %}?issue={{ issue.pk }}"
-               class="ui blue basic icon button">
+               class="ui basic icon button">
                <i class="plus icon"></i>
                Add a new article
             </a>
             {% if not issue.published %}
             <a href="{% url 'issue_publish' issue.slug %}"
-               class="ui green button">
+               class="ui basic icon button">
                <i class="checkmark icon"></i>
                Prepare for publication
             </a>

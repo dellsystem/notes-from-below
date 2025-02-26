@@ -85,7 +85,7 @@ def make_add_tag_action(tag):
 
 
 class ArticleAdmin(CompareVersionAdmin):
-    list_display = ['display_title', 'date', 'show_image', 'display_tags', 'published', 'is_featured']
+    list_display = ['display_title', 'date', 'show_image', 'display_tags', 'published']
     list_filter = ['category', 'tags', 'issue']
     prepopulated_fields = {'slug': ('title',)}
     change_form_template = 'admin/edit_article.html'
@@ -153,11 +153,6 @@ class ArticleAdmin(CompareVersionAdmin):
         return mark_safe(to_return)
     show_image.short_description = 'Image'
 
-    def is_featured(self, obj):
-        return obj.featured is not None
-    is_featured.short_description = 'Featured?'
-    is_featured.boolean = True
-
     def get_actions(self, request):
         actions = super(ArticleAdmin, self).get_actions(request)
         # Make an action to clear all tags
@@ -174,10 +169,6 @@ class ArticleAdmin(CompareVersionAdmin):
         return actions
 
 
-class FeaturedArticleAdmin(CompareVersionAdmin):
-    list_display = ['article', 'order_on_homepage', 'is_thumb']
-
-
 class ArticleTranslationAdmin(CompareVersionAdmin):
     list_display = ['article', 'title', 'slug', 'translation_language']
     prepopulated_fields = {'slug': ('title',)}
@@ -190,7 +181,6 @@ class TranslationLanguageAdmin(admin.ModelAdmin):
 editor_site.register(models.Issue, IssueAdmin)
 editor_site.register(models.Article, ArticleAdmin)
 editor_site.register(models.ArticleTranslation, ArticleTranslationAdmin)
-editor_site.register(models.FeaturedArticle, FeaturedArticleAdmin)
 editor_site.register(models.Author, AuthorAdmin)
 editor_site.register(models.Category, CategoryAdmin)
 editor_site.register(models.Tag, TagAdmin)
@@ -199,7 +189,6 @@ admin.site.register(models.Issue, IssueAdmin)
 admin.site.register(models.Article, ArticleAdmin)
 admin.site.register(models.ArticleTranslation, ArticleTranslationAdmin)
 admin.site.register(models.TranslationLanguage, TranslationLanguageAdmin)
-admin.site.register(models.FeaturedArticle, FeaturedArticleAdmin)
 admin.site.register(models.Author, AuthorAdmin)
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.Tag, TagAdmin)

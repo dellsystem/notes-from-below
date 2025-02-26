@@ -18,7 +18,7 @@
         {% if request.user.is_staff %}
         <div class="ui center aligned basic segment">
             <a href="{% url 'admin:blog_blogpost_change' blogpost.pk %}"
-               class="ui blue icon button">
+               class="ui basic icon button">
                <i class="edit icon"></i>
                Edit in admin
             </a>
@@ -69,7 +69,7 @@
                     published:</p>
                     {% if request.user.is_staff %}
                     <a href="{% url 'admin:blog_blogpost_change' blogpost.pk %}"
-                       class="ui blue icon button">
+                       class="ui basic icon button">
                        <i class="edit icon"></i>
                        Edit in admin
                     </a>

@@ -23,8 +23,10 @@ class Category(models.Model):
     )
     about_page = models.ForeignKey('cms.Page', on_delete=models.PROTECT, blank=True, null=True)
     order_on_homepage = models.PositiveIntegerField(default=0)
-    icon = models.CharField(max_length=10,
-        help_text="Semantic UI icon used for the label on the article page")
+    icon = models.CharField(
+        max_length=10,
+        help_text="Semantic UI icon used for the label on the article page"
+    )
     archive_link_text = models.CharField(
         max_length=20,
         help_text="The text shown on the homepage for linking to this archive"
@@ -34,8 +36,8 @@ class Category(models.Model):
         verbose_name_plural = 'categories'
         ordering = ['order_on_homepage']
 
-    def get_latest_article(self):
-        return self.articles.filter(published=True).latest()
+    def get_latest_articles(self):
+        return self.get_articles()[:9]
 
     def get_articles(self):
         return self.articles.filter(published=True).order_by('-date')
@@ -133,9 +135,9 @@ class Issue(models.Model):
     slug = models.SlugField()
     image = ProcessedImageField(
         upload_to='issues',
-        processors=[ResizeToFill(540, 360)],
         options={'quality': 100},
-        help_text='Cropped to 540x360'
+        processors=[ResizeToFill(width=500, upscale=False)],
+        help_text="Cropped to 500 pixels wide (no height specified)"
     )
     content = MartorField()
     formatted_content = models.TextField(editable=False)
@@ -258,29 +260,6 @@ class Article(models.Model):
         if self.related_2:
             related.append(self.related_2)
         return related
-
-
-class FeaturedArticle(models.Model):
-    """For featured articles on the homepage. Can be full width or thumbnail."""
-    article = models.OneToOneField(
-        Article,
-        related_name="featured",
-        on_delete=models.CASCADE,
-        primary_key=True
-    )
-    is_thumb = models.BooleanField(
-        help_text="Check this if you want the box to be small, rather than taking up the whole container"
-    )
-    order_on_homepage = models.PositiveIntegerField(
-        unique=True,
-        help_text="For determining the order of articles on the homepage. 1, 2, 3, etc. Note that large (non-thumb) articles will always be shown first."
-    )
-    
-    def __str__(self):
-        return self.article.title
-
-    class Meta:
-        ordering = ['order_on_homepage']
 
 
 class TranslationLanguage(models.Model):

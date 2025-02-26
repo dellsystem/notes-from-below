@@ -82,6 +82,24 @@
             </div>
         </div>
         {% endif %}
+        <br />
+        <br />
+        <br />
+        <div class="ui three column stackable grid">
+            {% for category in categories %}
+            <div class="column">
+                <h4 class="ui header">
+                    {{ category.name }} - Browse by {{ category.tag_name }}
+                </h4>
+                <hr class="nfb-divider" />
+                <div class="ui mini list nfb-category-list">
+                    {% for tag in category.tags.all %}
+                    <div class="item"><a href="{{ tag.get_absolute_url }}">{{ tag }}</a></div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}
