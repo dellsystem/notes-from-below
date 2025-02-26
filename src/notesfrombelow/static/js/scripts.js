@@ -1,9 +1,8 @@
 function toggleHamburger() {
-    var rightMenus = document.querySelectorAll('.menu.mobile-hidden');
-    rightMenus[0].classList.toggle('visible');
-    rightMenus[1].classList.toggle('visible');
-    rightMenus[2].classList.toggle('visible');
-    document.querySelector('#search-dropdown').classList.toggle('visible')
+    var menuItems = document.querySelectorAll('.item.mobile-hidden');
+    for (var i = 0; i < menuItems.length; i++) {
+        menuItems[i].classList.toggle('visible');
+    }
     return false;
 };
 

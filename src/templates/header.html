@@ -3,20 +3,18 @@
         <div id="logo">
               <a href="/">Notes from Below <img src="/static/img/logo.png" /></a>
         </div>
-        <div class="ui centered stackable text menu" id="menu">
+        <div class="ui stackable six item text menu" id="menu">
             <div class="item" id="hamburger-item">
                 <a href="#" id="hamburger" onclick='toggleHamburger()'>
                     <i class="big content icon"></i>
                 </a>
             </div>
-            <div class="menu mobile-hidden" id="menu">
-                <a class="item" href="{% url 'category' 'bulletins' %}">Bulletins</a>
-                <a class="item" href="{% url 'books' %}">Books</a>
-                <a class="item" href="{% url 'archives' 'all' 1 %}">Archives</a>
-                <a class="item" href="{% url 'page' 'podcast' %}">Podcast</a>
-                <a class="item" href="https://notesfrombelowshop.bigcartel.com">Shop</a>
-                <a class="item" href="{% url 'about' %}">About</a>
-            </div>
+            <a class="item mobile-hidden" href="{% url 'category' 'bulletins' %}">Bulletins</a>
+            <a class="item mobile-hidden" href="{% url 'books' %}">Books</a>
+            <a class="item mobile-hidden" href="{% url 'archives' 'all' 1 %}">Archives</a>
+            <a class="item mobile-hidden" href="{% url 'page' 'podcast' %}">Podcast</a>
+            <a class="item mobile-hidden" href="https://notesfrombelowshop.bigcartel.com">Shop</a>
+            <a class="item mobile-hidden" href="{% url 'about' %}">About</a>
         </div>
     </div>
 </div>

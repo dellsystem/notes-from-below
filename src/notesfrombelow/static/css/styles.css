@@ -90,11 +90,6 @@ hr {
     text-align: center;
 }
 
-#index {
-   width: 900px;
-   margin: 0 auto;
-}
-
 .page-content ul, .page-content ol {
     line-height: 1.5em;
 }
@@ -161,20 +156,17 @@ hr {
     padding-top: 50px;
 }
 
-#hamburger {
+#hamburger-item {
+    width: 60px !important;
     visibility: hidden;
     position: absolute;
-    right: 1px;
-    top: -60px; /* i don't like this either trust me */
-    font-size: 0.7em;
-    color: black;
+    left: 0;
+    top: 25px; /* i don't like this either trust me */
 }
 
-@media only screen and (min-width: 1200px) {
-    #menu {
-        width: 900px;
-        margin: 0 auto;
-    }
+#hamburger {
+    font-size: 0.7em;
+    color: black;
 }
 
 @media only screen and (max-width: 1200px) and (min-width: 767px)  {
@@ -186,6 +178,12 @@ hr {
     }
     #header .ui.stackable.mobile-hidden .item {
         width: auto!important;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .ui.container {
+        width: 1000px !important;
     }
 }
 
