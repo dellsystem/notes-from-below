@@ -21,8 +21,8 @@ class ArticleTestCase(TestCase):
             date=date(2024, 8, 22),
             category=category,
         )
-        self.assertEquals(article.formatted_subtitle, '<p><strong>subtitle</strong></p>')
-        self.assertEquals(article.formatted_content, '<p><span class="interview-quote author-1">A</span>Quote<br>\n~B2 Quote2</p>')
+        self.assertEqual(article.formatted_subtitle, '<p><strong>subtitle</strong></p>')
+        self.assertEqual(article.formatted_content, '<p><span class="interview-quote author-1">A</span>Quote<br>\n~B2 Quote2</p>')
 
     def test_find_similar_articles(self):
         article_1 = mock.Mock(unformatted_content='this is about cars', name='1')
@@ -36,7 +36,7 @@ class ArticleTestCase(TestCase):
             article_1, article_2, article_3, article_4, article_5, article_6, article_7
         ]
 
-        self.assertEquals(find_similar_articles('about cars', articles), (article_2, article_1), 'cars')
-        self.assertEquals(find_similar_articles('about boats', articles), (article_4, article_3), 'boats')
-        self.assertEquals(find_similar_articles('nothing', articles), (article_5, article_6), 'nothing')
-        self.assertEquals(find_similar_articles('blah', articles), (article_6, article_5), 'blah')
+        self.assertEqual(find_similar_articles('about cars', articles), (article_2, article_1), 'cars')
+        self.assertEqual(find_similar_articles('about boats', articles), (article_4, article_3), 'boats')
+        self.assertEqual(find_similar_articles('nothing', articles), (article_5, article_6), 'nothing')
+        self.assertEqual(find_similar_articles('blah', articles), (article_6, article_5), 'blah')
