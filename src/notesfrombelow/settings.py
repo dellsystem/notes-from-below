@@ -163,7 +163,7 @@ STATICFILES_DIRS = [
 ]
 
 # Global martor settings
-MARTOR_THEME = 'semantic'
+#MARTOR_THEME = 'semantic'
 
 # Input: string boolean, `true/false`
 MARTOR_ENABLE_CONFIGS = {
