@@ -2,7 +2,7 @@
     {% if items.has_previous %}
     <a class="item"
        title="First"
-       href="{% url 'archives' category 1 %}{% if query %}?q={{ query }}{% endif %}">
+       href="{% url 'articles' category 1 %}{% if query %}?q={{ query }}{% endif %}">
     {% else %}
     <a class="disabled item">
     {% endif %}
@@ -11,7 +11,7 @@
     {% if items.has_previous %}
     <a class="item"
        title="Previous"
-       href="{% url 'archives' category items.previous_page_number %}{% if query %}?q={{ query }}{% endif %}">
+       href="{% url 'articles' category items.previous_page_number %}{% if query %}?q={{ query }}{% endif %}">
     {% else %}
     <a class="disabled item">
     {% endif %}
@@ -24,7 +24,7 @@
     {% if items.has_next %}
     <a class="item"
        title="Next"
-       href="{% url 'archives' category items.next_page_number %}{% if query %}?q={{ query }}{% endif %}">
+       href="{% url 'articles' category items.next_page_number %}{% if query %}?q={{ query }}{% endif %}">
     {% else %}
     <a class="disabled item">
     {% endif %}
@@ -33,7 +33,7 @@
     {% if items.has_next %}
     <a class="item"
        title="Last"
-       href="{% url 'archives' category items.paginator.num_pages %}{% if query %}?q={{ query }}{% endif %}">
+       href="{% url 'articles' category items.paginator.num_pages %}{% if query %}?q={{ query }}{% endif %}">
     {% else %}
     <a class="disabled item">
     {% endif %}

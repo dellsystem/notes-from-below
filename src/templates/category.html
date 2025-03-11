@@ -20,8 +20,8 @@
         {% endif %}
         <div class="nfb-content-box">
             <div class="section">
-                <h2 class="ui header">{{ category.description }}</h2>
-                <hr class="nfb-divider" />
+                <h1 class="ui header">{{ category.description }}</h1>
+                <br />
                 {{ category.formatted_content|safe }}
                 <br />
                 <h3>For more details, see <a href="{{ category.about_page.get_absolute_url }}">{{ category.about_page.title }}</a></h3>
@@ -41,7 +41,7 @@
         </div>
         <br />
         <div class="ui basic center aligned segment">
-            <a href="{% url 'archives' category.slug 2 %}">View older <i class="angle right icon"></i></a>
+            <a href="{% url 'articles' category.slug 2 %}">View older <i class="angle right icon"></i></a>
         </div>
         <br />
         <h4 class="ui header">

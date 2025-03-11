@@ -2,34 +2,35 @@
 
 {% block twittercard %}summary{% endblock %}
 
-{% block title %}Archives{% endblock %}
+{% block title %}Articles{% endblock %}
 {% block description %}All {{ articles.count }} articles published on Notes From Below{% endblock %}
 {% block longdescription %}All {{ articles.count }} articles published on Notes From Below{% endblock %}
 
 {% block content %}
 <div class="page-content">
     <div class="ui container">
-        <h1 class="ui header">Archives</h1>
-        <div class="ui middle aligned stackable grid">
-            <div class="five wide column">
-                <div class="ui tiny buttons">
-                    {% for filter in filters %}
-                    {% if not forloop.first %}
-                    <div class="or"></div>
-                    {% endif %}
-                    <a href="{% url 'archives' filter 1 %}{% if query %}?q={{ query }}{% endif %}" class="ui {% if filter == category %}red{% endif %} button"> {{ filter|title }}</a>
+        <div class="nfb-content-box">
+          <h1 class="ui header">Articles{% if category != 'all' %} &mdash; {{ category|title }}{% else %}{% endif %}</h1>
+        </div>
+        <br /><br />
+        <div class="ui three column stackable grid">
+            {% for category in categories %}
+            <div class="column">
+                <h4 class="ui header">
+                    {{ category.name }} &mdash; Browse by {{ category.tag_name }}
+                </h4>
+                <hr class="nfb-divider" />
+                <div class="ui mini list nfb-category-list">
+                    {% for tag in category.tags.all %}
+                    <div class="item"><a href="{{ tag.get_absolute_url }}">{{ tag }}</a></div>
                     {% endfor %}
                 </div>
             </div>
-            <div class="six wide center aligned column">
-                {% if total_articles %}
-                {% include "pagination.html" with items=articles category=category query=query only %}
-                {% endif %}
-            </div>
-            <div class="five wide column">
-                {% include "search.html" %}
-            </div>
+            {% endfor %}
         </div>
+        <br />
+        {% include "search.html" %}
+        <br />
         {% if query %}
         <div class="ui message">
             <div class="header">
@@ -85,21 +86,6 @@
         <br />
         <br />
         <br />
-        <div class="ui three column stackable grid">
-            {% for category in categories %}
-            <div class="column">
-                <h4 class="ui header">
-                    {{ category.name }} - Browse by {{ category.tag_name }}
-                </h4>
-                <hr class="nfb-divider" />
-                <div class="ui mini list nfb-category-list">
-                    {% for tag in category.tags.all %}
-                    <div class="item"><a href="{{ tag.get_absolute_url }}">{{ tag }}</a></div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endfor %}
-        </div>
     </div>
 </div>
 {% endblock %}

@@ -109,11 +109,15 @@ hr {
 
 #footer {
     width: 100%;
-    padding: 50px 0;    
+    padding: 50px 0;
+}
+
+#footer .segment {
+    border-top: 3px solid #f62811;
 }
 
 #footer p {
-    padding-top: 10px;
+    padding-top: 20px;
     font-size: 1.3em;
     padding-bottom: 0;
 }
@@ -364,14 +368,6 @@ blockquote cite::before {
 }
 
 @media only screen and (max-width: 767px) {
-    .nfb-homepage-box {
-        border-bottom: none !important;
-    }
-
-    .nfb-red-column .header {
-        padding-left: 15px;
-    }
-
     /* Otherwise it might be too big and cause overflow */
     h2.nfb-article-title.ui.header {
         font-size: 1.5rem;
@@ -468,8 +464,9 @@ blockquote cite::before {
     margin: 0 auto;
 }
 
-.nfb-content-box {
-    border: 2px solid #111;
+.nfb-content-box h1.ui.header {
+    border-bottom: 3px solid #f62811;
+    padding-bottom: 20px;
 }
 
 .nfb-category-list {
@@ -480,15 +477,6 @@ blockquote cite::before {
 
 .nfb-divider {
     border-top: 1px solid #111;
-}
-
-.nfb-red-column {
-    background-color: #111;
-}
-
-.nfb-red-column .ui.header {
-    border-bottom: 2px solid #fff;
-    padding-bottom: 10px;
 }
 
 /* for better spacing on the homepage */

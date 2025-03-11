@@ -13,9 +13,13 @@ def index(request):
         published=True,
         number__isnull=False
     ).order_by('-number')[:6]
+    articles = Article.objects.filter(
+        published=True
+    ).order_by('-date')[:3]
 
     context = {
         'issues': issues,
+        'articles': articles,
     }
 
     return render(request, 'index.html', context)
@@ -48,7 +52,7 @@ def contribute(request):
     return render(request, 'contribute.html', context)
 
 
-def archives(request, page=1, category='all'):
+def articles_list(request, page=1, category='all'):
     # If the provided category doesn't match any existing slugs, set to 'all'
     filters = ['all']
     for category_slug in Category.objects.values_list('slug', flat=True):
@@ -92,4 +96,4 @@ def archives(request, page=1, category='all'):
         'categories': Category.objects.all(),
     }
 
-    return render(request, 'archives.html', context)
+    return render(request, 'articles.html', context)

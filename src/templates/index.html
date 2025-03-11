@@ -10,6 +10,15 @@
 {% block content %}
 <article class="page-content">
     <div class="ui container">
+        <h3 class="ui header">Latest articles</h3>
+        <div class="ui padded stackable three column grid">
+            {% for article in articles %}
+                <div class="column">
+                    {% include 'article_thumb.html' with article=article only %}
+                </div>
+            {% endfor %}
+        </div>
+        <h3 class="ui header">Latest issues</h3>
         <div class="ui padded stackable three column grid">
             {% for issue in issues %}
                 <div class="column">
