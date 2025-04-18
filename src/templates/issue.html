@@ -2,8 +2,7 @@
 
 {% block image %}{{ issue.image.url }}{% endblock %}
 
-{% block title %}{{ issue.title }} ({% if issue.is_book %}Book{% else %}#{{
-issue.number }}{% endif %}){% endblock %}
+{% block title %}{{ issue.title }} ({% if issue.is_book %}Book{% else %}#{{ issue.number }}{% endif %}){% endblock %}
 {% block description %}The {{ issue.date|date:"F Y" }} issue of Notes From Below{% endblock %}
 {% block date %}{{ issue.date|date:"Y-m-d" }}{% endblock %}
 
