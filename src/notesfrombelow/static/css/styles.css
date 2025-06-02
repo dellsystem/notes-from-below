@@ -37,16 +37,6 @@
     display: none;
 }
 
-.nfb-article-title {
-    margin-top: 5px !important;
-}
-.nfb-article-title .sub.header {
-    padding-top: 10px !important;
-}
-.nfb-article-title + .nfb-article-byline {
-    margin-top: 0;
-}
-
 .nfb-article-subtitle {
     font-size: 1.15em;
     font-style: italic;
@@ -369,12 +359,8 @@ blockquote cite::before {
 
 @media only screen and (max-width: 767px) {
     /* Otherwise it might be too big and cause overflow */
-    h2.nfb-article-title.ui.header {
+    #nfb-article-title {
         font-size: 1.5rem;
-    }
-
-    h3.nfb-article-title.ui.header {
-        font-size: 1rem;
     }
 
     .page-content {
@@ -491,4 +477,15 @@ blockquote cite::before {
 
 .featured-subtitle {
     font-size: 1.5em;
+}
+
+/* full bleed red for now */
+#article-title {
+    padding: 30px 0;
+    margin-bottom: 30px;
+    text-align: right;
+    color: white;
+    background: #f62811;
+    box-shadow: 0 0 0 100vmax #f62811;
+    clip-path: inset(0 -100vmax);
 }

@@ -33,11 +33,11 @@
                 </a>
             </div>
             {% endif %}
+            <h1 id="article-title" class="ui header">
+                {{ desired_translation.title }}
+            </h1>
             <div class="ui stackable grid">
                 <div class="eight wide column">
-                    <h1 class="ui header nfb-article-title">
-                        {{ desired_translation.title }}
-                    </h1>
                     <h3 class="ui header nfb-article-byline">
                     {% if article.authors.count %}
                     by {% for author in article.authors.all %}
