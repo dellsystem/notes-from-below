@@ -70,6 +70,7 @@ class TestEmbed(MarkdownTestCase):
         with mock.patch('uploads.models.ImageUpload') as image_upload_mock:
             mock_upload = mock.Mock()
             mock_upload.file.url = '/media/images/uploads/bye.png'
+            mock_upload.alt = 'Alt'
             mock_querylist = mock.Mock()
             mock_querylist.first.return_value = mock_upload
             image_upload_mock.objects.filter.return_value = mock_querylist
@@ -82,7 +83,7 @@ class TestEmbed(MarkdownTestCase):
                 self.dedent(
                     """
                     <p>
-                    <div class="uploaded-image"><span></span><img src="/media/images/uploads/bye.png"></div>
+                    <div class="uploaded-image"><span></span><img alt="Alt" src="/media/images/uploads/bye.png"></div>
                     </p>
                     """
                 ),
@@ -93,6 +94,7 @@ class TestEmbed(MarkdownTestCase):
         with mock.patch('uploads.models.ImageUpload') as image_upload_mock:
             mock_upload = mock.Mock()
             mock_upload.file.url = '/media/images/uploads/bye.png'
+            mock_upload.alt = 'Alt'
             mock_querylist = mock.Mock()
             mock_querylist.first.return_value = mock_upload
             image_upload_mock.objects.filter.return_value = mock_querylist
@@ -105,7 +107,7 @@ class TestEmbed(MarkdownTestCase):
                 self.dedent(
                     """
                     <p>
-                    <div class="uploaded-image"><span>Bye</span><img src="/media/images/uploads/bye.png"></div>
+                    <div class="uploaded-image"><span>Bye</span><img alt="Alt" src="/media/images/uploads/bye.png"></div>
                     </p>
                     """
                 ),
@@ -116,8 +118,10 @@ class TestEmbed(MarkdownTestCase):
         with mock.patch('uploads.models.ImageUpload') as image_upload_mock:
             mock_upload_1 = mock.Mock()
             mock_upload_1.file.url = '/media/images/uploads/hello.png'
+            mock_upload_1.alt = 'Alt1'
             mock_upload_2 = mock.Mock()
             mock_upload_2.file.url = '/media/images/uploads/bye.png'
+            mock_upload_2.alt = 'Alt2'
             mock_querylist = mock.Mock()
             mock_querylist.first.side_effect = [mock_upload_1, mock_upload_2]
             image_upload_mock.objects.filter.return_value = mock_querylist
@@ -130,7 +134,7 @@ class TestEmbed(MarkdownTestCase):
                 self.dedent(
                     """
                     <p>
-                    <div class="uploaded-images"><img src="/media/images/uploads/hello.png"><img src="/media/images/uploads/bye.png"></div>
+                    <div class="uploaded-images"><img alt="Alt1" src="/media/images/uploads/hello.png"><img alt="Alt2" src="/media/images/uploads/bye.png"></div>
                     </p>
                     """
                 ),
@@ -141,10 +145,13 @@ class TestEmbed(MarkdownTestCase):
         with mock.patch('uploads.models.ImageUpload') as image_upload_mock:
             mock_upload_1 = mock.Mock()
             mock_upload_1.file.url = '/media/images/uploads/one.png'
+            mock_upload_1.alt = 'Alt1'
             mock_upload_2 = mock.Mock()
             mock_upload_2.file.url = '/media/images/uploads/two.png'
+            mock_upload_2.alt = 'Alt2'
             mock_upload_3 = mock.Mock()
             mock_upload_3.file.url = '/media/images/uploads/three.png'
+            mock_upload_3.alt = 'Alt3'
             mock_querylist = mock.Mock()
             mock_querylist.first.side_effect = [
                 mock_upload_1, mock_upload_2, mock_upload_3
@@ -159,7 +166,7 @@ class TestEmbed(MarkdownTestCase):
                 self.dedent(
                     """
                     <p>
-                    <div class="uploaded-image"><img src="/media/images/uploads/one.png"><img src="/media/images/uploads/two.png"><img src="/media/images/uploads/three.png"></div>
+                    <div class="uploaded-image"><img alt="Alt1" src="/media/images/uploads/one.png"><img alt="Alt2" src="/media/images/uploads/two.png"><img alt="Alt3" src="/media/images/uploads/three.png"></div>
                     </p>
                     """
                 ),
