@@ -16,6 +16,15 @@
     <div class="ui container">
         <div class="print-hide">
             {% if request.user.is_staff %}
+            {% if not article.image_alt %}
+            <div class="ui tiny icon warning message">
+                <i class="image icon"></i>
+                <div class="content">
+                    <div class="header">Missing image alt text</div>
+                    For accessibility reasons, every article image should have a description for a screen reader.
+                </div>
+            </div>
+            {% endif %}
             <div class="ui center aligned basic segment">
                 <a href="{% url 'admin:journal_article_change' article.pk %}"
                    class="ui basic icon button">
@@ -75,7 +84,7 @@
                         <a href="{{ article.image_credit }}">Image credit</a>
                     </div>
                     {% endif %}
-                    <img src="{{ article.image.url }}" class="ui big floated right image" />
+                    <img src="{{ article.image.url }}" alt="{{ article.image_alt }}" title="{{ article.image_alt }}" class="ui big floated right image" />
                 </div>
             </div>
         </div>

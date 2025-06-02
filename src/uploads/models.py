@@ -13,6 +13,11 @@ class ImageUpload(models.Model):
         upload_to='images',
         processors=[ResizeToFit(width=1115, upscale=False)],
     )
+    alt = models.CharField(max_length=255, blank=True,
+        help_text="A description of the image, for accessibility (optional)")
+
+    def __str__(self):
+        return "Image: {title}".format(title=self.title)
 
 
 class PdfUpload(models.Model):
@@ -21,7 +26,7 @@ class PdfUpload(models.Model):
     file = models.FileField(upload_to='pdfs')
 
     def __str__(self):
-        return self.title
+        return "PDF: {title}".format(title=self.title)
 
     def save(self, *args, **kwargs):
         super(PdfUpload, self).save(*args, **kwargs)

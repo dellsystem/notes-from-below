@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.forms import TextInput
 from django.utils.html import mark_safe
 
 from reversion_compare.admin import CompareVersionAdmin
@@ -8,22 +9,23 @@ from .models import *
 
 
 class ImageUploadAdmin(CompareVersionAdmin):
-    list_display = ['display_title', 'get_dimensions', 'show_image']
+    list_display = ['display_title', 'slug', 'alt', 'show_image']
     prepopulated_fields ={'slug': ('title',),}
+    search_fields = ['title', 'alt']
+    readonly_fields = ['show_image']
+    # I just want the alt field to be wider but it's easiest to widen them all
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size': 100})}
+    }
 
     def display_title(self, obj):
-        to_return = '<h1 class="ui header">{title}<div class="sub header">{slug}</div></h1>'.format(
+        to_return = '{title} ({width} x {height})'.format(
             title=obj.title,
-            slug=obj.slug,
-        )
-        return mark_safe(to_return)
-    display_title.short_description = 'Image details'
-
-    def get_dimensions(self, obj):
-        return '{width} x {height}'.format(
             width=obj.file.width,
             height=obj.file.height,
         )
+        return mark_safe(to_return)
+    display_title.short_description = 'Image details'
 
     def show_image(self, obj):
         to_return = '<img src="{}" class="ui small image" />'.format(

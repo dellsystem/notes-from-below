@@ -1,7 +1,9 @@
 <div class="nfb-article-thumb">
     <a href="{{ article.get_absolute_url }}">
         <img src="{{ article.image.url }}"
-             class="ui fluid image nfb-image-link" />
+             class="ui fluid image nfb-image-link"
+             alt="{{ article.image_alt }}"
+             title="{{ article.image_alt }}" />
     </a>
     {% with header=article.get_title_header %}
     <{{ header }} class="ui header nfb-article-title">

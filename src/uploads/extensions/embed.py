@@ -52,6 +52,7 @@ class EmbedPattern(markdown.inlinepatterns.Pattern):
                 span_el.text = caption
                 image_el = etree.SubElement(div_el, 'img')
                 image_el.set('src', image_upload.file.url)
+                image_el.set('alt', image_upload.alt)
                 return div_el
             else:
                 return 'INVALID FILE: ' + slug
@@ -88,8 +89,10 @@ class DoubleEmbedPattern(markdown.inlinepatterns.Pattern):
             div_el.set('class' , 'uploaded-images')
             image_el_1 = etree.SubElement(div_el, 'img')
             image_el_1.set('src', image_1.file.url)
+            image_el_1.set('alt', image_1.alt)
             image_el_2 = etree.SubElement(div_el, 'img')
             image_el_2.set('src', image_2.file.url)
+            image_el_2.set('alt', image_2.alt)
             return div_el
         else:
             invalid_slugs = []
@@ -117,6 +120,7 @@ class ImageEmbedPattern(markdown.inlinepatterns.Pattern):
 
             image_el = etree.SubElement(div_el, 'img')
             image_el.set('src', image.file.url)
+            image_el.set('alt', image.alt)
 
         return div_el
 

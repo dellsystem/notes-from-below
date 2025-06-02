@@ -196,8 +196,10 @@ class Article(models.Model):
         processors=[ResizeToFill(540, 360)],
         format='JPEG',
         options={'quality': 100},
-        help_text="Resized to 540x360."
+        help_text="Resized to 540x360"
     )
+    image_alt = models.CharField(max_length=255, blank=True,
+        help_text="A description of the image, for accessibility (optional)")
     image_credit = models.URLField(blank=True)
     related_1 = models.ForeignKey("self", related_name='related_1_articles',
         on_delete=models.CASCADE, blank=True, null=True)
@@ -246,6 +248,8 @@ class Article(models.Model):
         super().save(*args, **kwargs)
 
     # Use h3 or h4 in article thumbnail depending on the length of the title.
+    # Okay this is so genuinely evil from a semantic standpoint that I must have
+    # completely erased it from my head that I did this. I'll leave it for now.
     def get_title_header(self):
         if len(self.title) > 50:
             return 'h4'

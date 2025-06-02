@@ -4,25 +4,12 @@
 {% block extrastyle %}
 {% endblock %}
 
-
-
 {% block field_sets %}
 {{ adminform.form.errors }}
-<div class="ui centered grid" style="clear: both">
-    <div class="four wide column">
-        <div class="ui center aligned segment">
-            <div class="ui field">
-                <label>Published?
-                {{ adminform.form.published }}
-                </label>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="ui segment">
     <div class="ui stackable form grid">
         <div class="row">
-            <div class="eleven wide column">
+            <div class="eight wide column">
                 <div class="ui field">
                     <label>Title</label>
                     <div class="ui huge fluid input">
@@ -41,8 +28,13 @@
                     {{ adminform.form.slug }}
                     </div>
                 </div>
+                <div class="ui field">
+                    <label>Published?
+                    {{ adminform.form.published }}
+                    </label>
+                </div>
             </div>
-            <div class="four wide column">
+            <div class="eight wide column">
                 <div class="ui field">
                     <label>Image
                     ({{ adminform.form.image.help_text }})
@@ -56,6 +48,12 @@
                     <label>Image credit URL (optional)</label>
                     <div class="ui fluid input">
                         {{ adminform.form.image_credit }}
+                    </div>
+                </div>
+                <div class="ui field">
+                    <label>Image description for screen readers (optional) &mdash; <a href="https://accessibility.huit.harvard.edu/describe-content-images">more info here</a></label>
+                    <div class="ui fluid input">
+                        {{ adminform.form.image_alt }}
                     </div>
                 </div>
             </div>
