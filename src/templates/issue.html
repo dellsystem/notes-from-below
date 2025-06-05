@@ -2,8 +2,8 @@
 
 {% block image %}{{ issue.image.url }}{% endblock %}
 
-{% block title %}{{ issue.title }} ({% if issue.is_book %}Book{% else %}#{{ issue.number }}{% endif %}){% endblock %}
-{% block description %}The {{ issue.date|date:"F Y" }} issue of Notes From Below{% endblock %}
+{% block title %}{{ issue.title }}{% if not issue.is_book %} (Issue #{{ issue.number }}){% endif %}{% endblock %}
+{% block description %}{% if issue.is_book %}A book published by Notes From Below{% else %}The {{ issue.date|date:"F Y" }} issue of Notes From Below{% endif %}{% endblock %}
 {% block date %}{{ issue.date|date:"Y-m-d" }}{% endblock %}
 
 {% block content %}
@@ -14,9 +14,9 @@
             <div class="header">
                 Not published
             </div>
-            <p>This issue hasn't yet been published, so it won't be
+            <p>This issue/book hasn't yet been published, so it won't be
             linked anywhere on the website.</p>
-            <p>All the articles associated with this issue (whether
+            <p>All the articles associated with this issue/book (whether
             they've been published or not) are listed below.</p>
         </div>
         {% endif %}
